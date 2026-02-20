@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Detail - Fatih Al Jabar H.M.</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Manrope", "sans-serif"],
+              signature: ["Sacramento", "cursive"],
+            },
+            colors: {
+              dark: {
+                bg: "#080808",
+                card: "#121212",
+                border: "#222222",
+                text: "#EAEAEA",
+                muted: "#888888",
+              },
+              accent: {
+                yellow: "#FFD700",
+                blue: "#3b82f6",
+              },
+            },
+            animation: {
+              float: "float 3s ease-in-out infinite",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0)" },
+                "50%": { transform: "translateY(-5px)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #080808;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #222;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #333;
+      }
+
+      /* Cursors */
+      .cursor-arrow-circle {
+        cursor:
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='18' fill='%23444444' fill-opacity='0.9' stroke='%23666' stroke-width='1'/%3E%3Cpath d='M14 26L26 14M26 14H16M26 14V24' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+            12 12,
+          pointer;
+      }
+      .cursor-gray-dot {
+        cursor:
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='10' fill='%23666666' fill-opacity='0.8' stroke='none'/%3E%3C/svg%3E")
+            16 16,
+          auto;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-dark-bg text-dark-text font-sans antialiased selection:bg-white selection:text-black"
+  >
+    <div
+      class="max-w-[1300px] mx-auto min-h-screen flex flex-col lg:flex-row border-x border-white/5 shadow-2xl bg-[#0a0a0a]"
+    >
+      <aside
+        class="lg:w-[380px] lg:h-screen lg:sticky lg:top-0 p-8 lg:p-10 flex flex-col justify-between z-40 bg-[#0a0a0a] lg:border-r border-dark-border"
+      >
+        <div class="flex flex-col items-center w-full">
+          <div class="mb-6">
+            <div
+              class="w-24 h-24 rounded-full overflow-hidden border-2 border-dark-border shadow-2xl"
+            >
+              <img
+                src="/img/1.jpg"
+                alt="Profile"
+                class="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+          <h1
+            class="text-2xl font-bold mb-2 flex items-center gap-2 text-white"
+          >
+            Fatih Al Jabar H.M.
+            <i class="ph-fill ph-seal-check text-accent-blue text-xl"></i>
+          </h1>
+          <div class="flex items-center gap-3 mt-6">
+            <div
+              class="bg-[#151515] p-1 rounded-full flex items-center border border-white/5"
+            >
+              <button
+                class="w-8 h-8 rounded-full bg-accent-yellow text-black flex items-center justify-center font-bold text-[10px] shadow-lg transition-all"
+              >
+                EN
+              </button>
+              <button
+                class="w-8 h-8 rounded-full text-[#666] hover:text-white flex items-center justify-center font-bold text-[10px] transition-all"
+              >
+                ID
+              </button>
+            </div>
+            <div
+              class="bg-[#151515] p-1 rounded-full flex items-center border border-white/5"
+            >
+              <button
+                class="w-8 h-8 rounded-full text-[#666] hover:text-white flex items-center justify-center transition-all"
+              >
+                <i class="ph ph-sun text-base"></i>
+              </button>
+              <button
+                class="w-8 h-8 rounded-full bg-[#333] text-white flex items-center justify-center shadow-lg transition-all"
+              >
+                <i class="ph-fill ph-moon text-base"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="h-[1px] bg-white/5 w-full my-8"></div>
+
+          <div class="w-full">
+            <div
+              class="text-[11px] font-bold text-[#555] tracking-widest mb-4 uppercase"
+            >
+              Contact
+            </div>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="mailto:hey@fatih.com"
+                  class="w-fit cursor-arrow-circle flex items-center gap-4 text-sm text-[#EAEAEA] hover:text-[#999] transition-colors py-1 group"
+                >
+                  <div class="w-5 flex justify-center">
+                    <i
+                      class="ph ph-envelope-simple text-xl text-[#666] group-hover:text-[#999] transition-colors"
+                    ></i>
+                  </div>
+                  <span class="tracking-wide">hey@fatih.com</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://fatih.com"
+                  target="_blank"
+                  class="w-fit cursor-arrow-circle flex items-center gap-4 text-sm text-[#EAEAEA] hover:text-[#999] transition-colors py-1 group"
+                >
+                  <div class="w-5 flex justify-center">
+                    <i
+                      class="ph ph-globe text-xl text-[#666] group-hover:text-[#999] transition-colors"
+                    ></i>
+                  </div>
+                  <span class="tracking-wide">fatihaljabar.com</span>
+                </a>
+              </li>
+              <li>
+                <div
+                  class="w-fit cursor-arrow-circle flex items-center gap-4 text-sm text-[#EAEAEA] hover:text-[#999] transition-colors py-1 group"
+                >
+                  <div class="w-5 flex justify-center">
+                    <i
+                      class="ph ph-device-mobile text-xl text-[#666] group-hover:text-[#999] transition-colors"
+                    ></i>
+                  </div>
+                  <span class="tracking-wide">+62 812-3456-7890</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="h-[1px] bg-white/5 w-full my-8"></div>
+
+          <div class="w-full">
+            <div
+              class="text-[11px] font-bold text-[#555] tracking-widest mb-4 uppercase"
+            >
+              Languages
+            </div>
+            <div class="flex gap-6">
+              <div class="flex items-center gap-2 text-sm text-[#ddd]">
+                <span class="text-lg">🇬🇧</span> English
+              </div>
+              <div class="flex items-center gap-2 text-sm text-[#ddd]">
+                <span class="text-lg">🇮🇩</span> Indonesia
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="mt-auto pt-6 flex justify-between items-center border-t border-white/5 w-full"
+        >
+          <a
+            href="#"
+            class="cursor-arrow-circle text-[#666] hover:text-white transition-colors duration-300"
+            ><i class="ph-fill ph-x-logo text-2xl"></i
+          ></a>
+          <a
+            href="#"
+            class="cursor-arrow-circle text-[#666] hover:text-white transition-colors duration-300"
+            ><i class="ph-fill ph-instagram-logo text-2xl"></i
+          ></a>
+          <a
+            href="#"
+            class="cursor-arrow-circle text-[#666] hover:text-white transition-colors duration-300"
+            ><i class="ph-fill ph-linkedin-logo text-2xl"></i
+          ></a>
+          <a
+            href="#"
+            class="cursor-arrow-circle text-[#666] hover:text-white transition-colors duration-300"
+            ><i class="ph-fill ph-github-logo text-2xl"></i
+          ></a>
+          <a
+            href="#"
+            class="cursor-arrow-circle text-[#666] hover:text-white transition-colors duration-300"
+            ><i class="ph-fill ph-tiktok-logo text-2xl"></i
+          ></a>
+          <a
+            href="mailto:hey@fatih.com"
+            class="cursor-arrow-circle text-[#666] hover:text-white transition-colors duration-300"
+            ><i class="ph-fill ph-envelope text-2xl"></i
+          ></a>
+        </div>
+      </aside>
+
+      <main class="flex-1 w-full p-8 lg:p-20 pb-40 cursor-gray-dot">
+        <a
+          href="projects.html"
+          class="inline-flex items-center gap-2 text-[#888] hover:text-white transition-colors mb-8 group font-medium text-sm"
+        >
+          <i
+            class="ph-bold ph-arrow-left text-lg group-hover:-translate-x-1 transition-transform duration-300"
+          ></i>
+          Back
+        </a>
+
+        <h2
+          class="text-3xl lg:text-4xl font-bold text-white mb-6 leading-tight"
+        >
+          Presence Internal System
+        </h2>
+
+        <p class="text-[#888] leading-loose text-lg mb-10 max-w-4xl">
+          The Presence Internal System is a custom-built attendance tracking
+          backend developed for internal use at Parto ID. Built using Golang,
+          this system provides secure and efficient API endpoints to handle
+          employee check-ins, complete with photo verification and timestamp
+          logging.
+        </p>
+
+        <div
+          class="border-t border-dashed border-[#333] w-full py-6 mb-8 flex items-center gap-4"
+        >
+          <span class="text-white font-bold text-sm">Tech Stack :</span>
+          <div class="flex gap-3">
+            <div
+              class="w-8 h-8 rounded-full bg-[#00ADD8]/10 flex items-center justify-center border border-[#00ADD8]/20"
+              title="Go"
+            >
+              <span class="text-[10px] font-bold text-[#00ADD8]">GO</span>
+            </div>
+            <div
+              class="w-8 h-8 rounded-full bg-[#2496ED]/10 flex items-center justify-center border border-[#2496ED]/20"
+              title="Docker"
+            >
+              <i class="ph-fill ph-cube text-[#2496ED]"></i>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="w-full rounded-2xl overflow-hidden border border-white/5 bg-[#0d2d2a] relative group shadow-2xl"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1200&auto=format&fit=crop"
+            alt="Presence System Mockup"
+            class="w-full h-auto min-h-[400px] object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
+          />
+
+          <div
+            class="absolute inset-0 flex flex-col items-center justify-center text-center p-10 bg-black/20 pointer-events-none"
+          >
+            <h3 class="text-4xl font-bold text-white drop-shadow-lg mb-8">
+              Presensi Internal System
+            </h3>
+            <div
+              class="w-[200px] h-[400px] bg-black/80 rounded-[2rem] border-4 border-gray-800 shadow-2xl flex items-center justify-center overflow-hidden"
+            >
+              <div class="text-white text-xs opacity-50">App Screen</div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div
+      class="fixed bottom-8 left-0 lg:left-[380px] right-0 z-50 flex justify-center pointer-events-none"
+    >
+      <nav
+        class="flex items-center gap-1.5 bg-[#121212]/90 backdrop-blur-xl border border-white/10 px-2 py-1.5 rounded-full shadow-2xl pointer-events-auto"
+      >
+        <a
+          href="#home"
+          class="group relative p-2.5 text-[#888] transition-all duration-300 hover:text-white hover:ring-white/20 hover:bg-transparent"
+        >
+          <i class="ph-fill ph-house text-xl"></i>
+          <span
+            class="absolute bottom-[125%] left-1/2 -translate-x-1/2 bg-[#1a1a1a] text-white px-2.5 py-1 rounded-md text-[11px] font-medium border border-white/10 shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:-translate-y-1 transition-all duration-200 pointer-events-none"
+            >Home</span
+          >
+        </a>
+
+        <a
+          href="about.html"
+          class="group relative p-2.5 text-[#888] transition-all duration-300 hover:text-white hover:ring-white/20 hover:bg-transparent"
+        >
+          <i class="ph ph-user text-xl"></i>
+          <span
+            class="absolute bottom-[125%] left-1/2 -translate-x-1/2 bg-[#1a1a1a] text-white px-2.5 py-1 rounded-md text-[11px] font-medium border border-white/10 shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:-translate-y-1 transition-all duration-200 pointer-events-none"
+            >About</span
+          >
+        </a>
+
+        <a
+          href="achievement.html"
+          class="group relative p-2.5 text-[#888] transition-all duration-300 hover:text-white hover:ring-white/20 hover:bg-transparent"
+        >
+          <i class="ph-fill ph-certificate text-xl"></i>
+          <span
+            class="absolute bottom-[125%] left-1/2 -translate-x-1/2 bg-[#1a1a1a] text-white px-2.5 py-1 rounded-md text-[11px] font-medium border border-white/10 shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:-translate-y-1 transition-all duration-200 pointer-events-none"
+            >Achievements</span
+          >
+        </a>
+
+        <a
+          href="projects.html"
+          class="group relative p-2.5 text-white ring-white/20 bg-transparent transition-all duration-300"
+        >
+          <i class="ph ph-folder text-xl"></i>
+          <span
+            class="absolute bottom-[125%] left-1/2 -translate-x-1/2 bg-[#1a1a1a] text-white px-2.5 py-1 rounded-md text-[11px] font-medium border border-white/10 shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:-translate-y-1 transition-all duration-200 pointer-events-none"
+            >Projects</span
+          >
+        </a>
+
+        <a
+          href="contact.html"
+          class="group relative p-2.5 text-[#888] transition-all duration-300 hover:text-white hover:ring-white/20 hover:bg-transparent"
+        >
+          <i class="ph-fill ph-envelope-simple text-xl"></i>
+          <span
+            class="absolute bottom-[125%] left-1/2 -translate-x-1/2 bg-[#1a1a1a] text-white px-2.5 py-1 rounded-md text-[11px] font-medium border border-white/10 shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:-translate-y-1 transition-all duration-200 pointer-events-none"
+            >Contact</span
+          >
+        </a>
+
+        <div class="w-[1px] h-4 bg-white/10 mx-0.5"></div>
+
+        <button
+          class="group relative p-2.5 text-[#888] transition-all duration-300 hover:text-white hover:ring-white/20 hover:bg-transparent"
+        >
+          <i
+            class="ph ph-heart text-xl group-hover:text-red-500 transition-colors"
+          ></i>
+          <span
+            class="absolute bottom-[125%] left-1/2 -translate-x-1/2 bg-[#1a1a1a] text-white px-2.5 py-1 rounded-md text-[11px] font-medium border border-white/10 shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:-translate-y-1 transition-all duration-200 pointer-events-none"
+            >Support</span
+          >
+        </button>
+      </nav>
+    </div>
+  </body>
+</html>

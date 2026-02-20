@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Achievements - Fatih Al Jabar H.M.</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Manrope", "sans-serif"],
+              signature: ["Sacramento", "cursive"],
+            },
+            colors: {
+              dark: {
+                bg: "#080808",
+                card: "#121212",
+                border: "#222222",
+                text: "#EAEAEA",
+                muted: "#888888",
+              },
+              accent: {
+                yellow: "#FFD700",
+                blue: "#3b82f6",
+              },
+            },
+            animation: {
+              float: "float 3s ease-in-out infinite",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0)" },
+                "50%": { transform: "translateY(-5px)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #080808;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #222;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #333;
+      }
+
+      /* Cursors */
+      .cursor-arrow-circle {
+        cursor:
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='18' fill='%23444444' fill-opacity='0.9' stroke='%23666' stroke-width='1'/%3E%3Cpath d='M14 26L26 14M26 14H16M26 14V24' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+            12 12,
+          pointer;
+      }
+      .cursor-gray-dot {
+        cursor:
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='10' fill='%23666666' fill-opacity='0.8' stroke='none'/%3E%3C/svg%3E")
+            16 16,
+          auto;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-dark-bg text-dark-text font-sans antialiased selection:bg-white selection:text-black"
+  >
+    <div
+      class="max-w-[1300px] mx-auto min-h-screen flex flex-col lg:flex-row border-x border-white/5 shadow-2xl bg-[#0a0a0a]"
+    >
+      <aside
+        class="lg:w-[380px] lg:h-screen lg:sticky lg:top-0 p-8 lg:p-10 flex flex-col justify-between z-40 bg-[#0a0a0a] lg:border-r border-dark-border"
+      >
+        <div class="flex flex-col items-center w-full">
+          <div class="mb-6">
+            <div
+              class="w-24 h-24 rounded-full overflow-hidden border-2 border-dark-border shadow-2xl"
+            >
+              <img
+                src="/img/1.jpg"
+                alt="Profile"
+                class="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+          <h1
+            class="text-2xl font-bold mb-2 flex items-center gap-2 text-white"
+          >
+            Fatih Al Jabar H.M.
+            <i class="ph-fill ph-seal-check text-accent-blue text-xl"></i>
+          </h1>
+          <div class="flex items-center gap-3 mt-6">
+            <div
+              class="bg-[#151515] p-1 rounded-full flex items-center border border-white/5"
+            >
+              <button
+                class="w-8 h-8 rounded-full bg-accent-yellow text-black flex items-center justify-center font-bold text-[10px] shadow-lg transition-all"
+              >
+                EN
+              </button>
+              <button
+                class="w-8 h-8 rounded-full text-[#666] hover:text-white flex items-center justify-center font-bold text-[10px] transition-all"
+              >
+                ID
+              </button>
+            </div>
+            <div
+              class="bg-[#151515] p-1 rounded-full flex items-center border border-white/5"
+            >
+              <button
+                class="w-8 h-8 rounded-full text-[#666] hover:text-white flex items-center justify-center transition-all"
+              >
+                <i class="ph ph-sun text-base"></i>
+              </button>
+              <button
+                class="w-8 h-8 rounded-full bg-[#333] text-white flex items-center justify-center shadow-lg transition-all"
+              >
+                <i class="ph-fill ph-moon text-base"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="h-[1px] bg-white/5 w-full my-8"></div>
+
+          <div class="w-full">
+            <div
+              class="text-[11px] font-bold text-[#555] tracking-widest mb-4 uppercase"
+            >
+              Contact
+            </div>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="mailto:hey@fatih.com"
+                  class="w-fit cursor-arrow-circle flex items-center gap-4 text-sm text-[#EAEAEA] hover:text-[#999] transition-colors py-1 group"
+                >
+                  <div class="w-5 flex justify-center">
+                    <i
+                      class="ph ph-envelope-simple text-xl text-[#666] group-hover:text-[#999] transition-colors"
+                    ></i>
+                  </div>
+                  <span class="tracking-wide">hey@fatih.com</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://fatih.com"
+                  target="_blank"
+                  class="w-fit cursor-arrow-circle flex items-center gap-4 text-sm text-[#EAEAEA] hover:text-[#999] transition-colors py-1 group"
+                >
+                  <div class="w-5 flex justify-center">
+                    <i
+                      class="ph ph-globe text-xl text-[#666] group-hover:text-[#999] transition-colors"
+                    ></i>
+                  </div>
+                  <span class="tracking-wide">fatihaljabar.com</span>
+                </a>
+              </li>
+              <li>
+                <div
+                  class="w-fit cursor-arrow-circle flex items-center gap-4 text-sm text-[#EAEAEA] hover:text-[#999] transition-colors py-1 group"
+                >
+                  <div class="w-5 flex justify-center">
+                    <i
+                      class="ph ph-device-mobile text-xl text-[#666] group-hover:text-[#999] transition-colors"
+                    ></i>
+                  </div>
+                  <span class="tracking-wide">+62 812-3456-7890</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="h-[1px] bg-white/5 w-full my-8"></div>
+
+          <div class="w-full">
+            <div
+              class="text-[11px] font-bold text-[#555] tracking-widest mb-4 uppercase"
+            >
+              Languages
+            </div>
+            <div class="flex gap-6">
+              <div class="flex items-center gap-2 text-sm text-[#ddd]">
+                <span class="text-lg">🇬🇧</span> English
+              </div>
+              <div class="flex items-center gap-2 text-sm text-[#ddd]">
+                <span class="text-lg">🇮🇩</span> Indonesia
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="mt-auto pt-6 flex justify-between items-center border-t border-white/5 w-full"
+        >
+          <a
+            href="#"
+            class="cursor-arrow-circle text-[#666] hover:text-white transition-colors duration-300"
+            ><i class="ph-fill ph-x-logo text-2xl"></i
+          ></a>
+          <a
+            href="#"
+            class="cursor-arrow-circle text-[#666] hover:text-white transition-colors duration-300"
+            ><i class="ph-fill ph-instagram-logo text-2xl"></i
+          ></a>
+          <a
+            href="#"
+            class="cursor-arrow-circle text-[#666] hover:text-white transition-colors duration-300"
+            ><i class="ph-fill ph-linkedin-logo text-2xl"></i
+          ></a>
+          <a
+            href="#"
+            class="cursor-arrow-circle text-[#666] hover:text-white transition-colors duration-300"
+            ><i class="ph-fill ph-github-logo text-2xl"></i
+          ></a>
+          <a
+            href="#"
+            class="cursor-arrow-circle text-[#666] hover:text-white transition-colors duration-300"
+            ><i class="ph-fill ph-tiktok-logo text-2xl"></i
+          ></a>
+          <a
+            href="mailto:hey@fatih.com"
+            class="cursor-arrow-circle text-[#666] hover:text-white transition-colors duration-300"
+            ><i class="ph-fill ph-envelope text-2xl"></i
+          ></a>
+        </div>
+      </aside>
+
+      <main class="flex-1 w-full p-8 lg:p-20 pb-40 cursor-gray-dot">
+        <div class="mb-10">
+          <h2 class="text-4xl font-bold mb-4 text-white">Achievements</h2>
+          <p class="text-[#888] text-sm max-w-2xl leading-relaxed">
+            A curated collection of certificates and badges I've earned
+            throughout my professional and academic journey.
+          </p>
+        </div>
+
+        <div
+          class="h-[1px] border-t border-dashed border-[#333] w-full mb-10"
+        ></div>
+
+        <div class="flex flex-col md:flex-row gap-4 mb-8">
+          <div class="flex-1 relative group">
+            <i
+              class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-[#666] group-focus-within:text-white transition-colors"
+            ></i>
+            <input
+              type="text"
+              placeholder="Search..."
+              class="w-full bg-[#151515] border border-white/10 rounded-xl py-3 pl-11 pr-4 text-sm text-white placeholder-[#555] focus:outline-none focus:border-white/20 focus:bg-[#1a1a1a] transition-all"
+            />
+          </div>
+
+          <div class="flex gap-4">
+            <div class="relative group min-w-[160px]">
+              <select
+                class="w-full bg-[#151515] border border-white/10 rounded-xl py-3 pl-4 pr-10 text-sm text-[#888] focus:outline-none focus:border-white/20 focus:text-white appearance-none cursor-pointer"
+              >
+                <option>Filter by Type</option>
+                <option>Professional</option>
+                <option>Academic</option>
+              </select>
+              <i
+                class="ph ph-caret-up-down absolute right-4 top-1/2 -translate-y-1/2 text-[#666] pointer-events-none"
+              ></i>
+            </div>
+            <div class="relative group min-w-[160px]">
+              <select
+                class="w-full bg-[#151515] border border-white/10 rounded-xl py-3 pl-4 pr-10 text-sm text-[#888] focus:outline-none focus:border-white/20 focus:text-white appearance-none cursor-pointer"
+              >
+                <option>Filter by Category</option>
+                <option>Backend</option>
+                <option>Frontend</option>
+                <option>Mobile</option>
+              </select>
+              <i
+                class="ph ph-caret-up-down absolute right-4 top-1/2 -translate-y-1/2 text-[#666] pointer-events-none"
+              ></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-sm text-[#666] mb-8 font-mono">Total: 4</div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div
+            class="group relative flex flex-col bg-[#121212] border border-white/5 rounded-2xl overflow-hidden hover:border-accent-blue/30 hover:-translate-y-1 hover:shadow-2xl hover:shadow-accent-blue/5 transition-all duration-300"
+          >
+            <div
+              class="relative w-full aspect-[16/10] bg-[#0a0a0a] overflow-hidden"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1590608897129-79da98d15969?q=80&w=600&auto=format&fit=crop"
+                alt="Certificate 1"
+                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+              />
+
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-[#121212] via-transparent to-transparent opacity-80"
+              ></div>
+
+              <div
+                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-[2px] bg-black/40"
+              >
+                <button
+                  class="flex items-center gap-2 text-white font-semibold text-sm border border-white/20 bg-white/10 px-5 py-2.5 rounded-full hover:bg-white hover:text-black transition-all transform translate-y-4 group-hover:translate-y-0 duration-300"
+                >
+                  View Credential <i class="ph-bold ph-arrow-up-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="p-6 flex flex-col flex-1 relative">
+              <div class="flex justify-between items-start mb-3">
+                <div
+                  class="text-[10px] text-accent-blue font-mono bg-accent-blue/10 border border-accent-blue/20 px-2 py-0.5 rounded uppercase tracking-wide"
+                >
+                  196/EKS/2025
+                </div>
+                <span
+                  class="text-[10px] text-[#666] font-mono flex items-center gap-1 bg-[#1a1a1a] px-2 py-0.5 rounded border border-white/5"
+                  ><i class="ph-fill ph-calendar-blank"></i> July 2025</span
+                >
+              </div>
+
+              <h3
+                class="text-white font-bold text-lg mb-2 leading-snug line-clamp-2 group-hover:text-accent-blue transition-colors"
+              >
+                Backend Developer Internship - Parto.id
+              </h3>
+
+              <div class="flex items-center gap-2 text-[#888] text-xs mb-6">
+                <i class="ph-fill ph-seal-check text-[#555]"></i>
+                <span>Affan Technology Indonesia</span>
+              </div>
+
+              <div
+                class="mt-auto pt-4 flex flex-wrap gap-2 border-t border-white/5"
+              >
+                <span
+                  class="text-[10px] font-medium bg-[#1a1a1a] text-[#999] px-2.5 py-1 rounded-lg border border-white/10 group-hover:border-white/20 transition-colors"
+                  >Professional</span
+                >
+                <span
+                  class="text-[10px] font-medium bg-[#1a1a1a] text-[#999] px-2.5 py-1 rounded-lg border border-white/10 group-hover:border-white/20 transition-colors"
+                  >Backend</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="group relative flex flex-col bg-[#121212] border border-white/5 rounded-2xl overflow-hidden hover:border-accent-blue/30 hover:-translate-y-1 hover:shadow-2xl hover:shadow-accent-blue/5 transition-all duration-300"
+          >
+            <div
+              class="relative w-full aspect-[16/10] bg-[#0a0a0a] overflow-hidden"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1590608897129-79da98d15969?q=80&w=600&auto=format&fit=crop"
+                alt="Certificate 2"
+                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-[#121212] via-transparent to-transparent opacity-80"
+              ></div>
+              <div
+                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-[2px] bg-black/40"
+              >
+                <button
+                  class="flex items-center gap-2 text-white font-semibold text-sm border border-white/20 bg-white/10 px-5 py-2.5 rounded-full hover:bg-white hover:text-black transition-all transform translate-y-4 group-hover:translate-y-0 duration-300"
+                >
+                  View Credential <i class="ph-bold ph-arrow-up-right"></i>
+                </button>
+              </div>
+            </div>
+            <div class="p-6 flex flex-col flex-1 relative">
+              <div class="flex justify-between items-start mb-3">
+                <div
+                  class="text-[10px] text-accent-blue font-mono bg-accent-blue/10 border border-accent-blue/20 px-2 py-0.5 rounded uppercase tracking-wide"
+                >
+                  BWA-WEB-2025
+                </div>
+                <span
+                  class="text-[10px] text-[#666] font-mono flex items-center gap-1 bg-[#1a1a1a] px-2 py-0.5 rounded border border-white/5"
+                  ><i class="ph-fill ph-calendar-blank"></i> Sept 2025</span
+                >
+              </div>
+
+              <h3
+                class="text-white font-bold text-lg mb-2 leading-snug line-clamp-2 group-hover:text-accent-blue transition-colors"
+              >
+                E-book Petunjuk Pro: Freelance Web Developer
+              </h3>
+
+              <div class="flex items-center gap-2 text-[#888] text-xs mb-6">
+                <i class="ph-fill ph-seal-check text-[#555]"></i>
+                <span>Build With Angga</span>
+              </div>
+
+              <div
+                class="mt-auto pt-4 flex flex-wrap gap-2 border-t border-white/5"
+              >
+                <span
+                  class="text-[10px] font-medium bg-[#1a1a1a] text-[#999] px-2.5 py-1 rounded-lg border border-white/10 group-hover:border-white/20 transition-colors"
+                  >Course</span
+                >
+                <span
+                  class="text-[10px] font-medium bg-[#1a1a1a] text-[#999] px-2.5 py-1 rounded-lg border border-white/10 group-hover:border-white/20 transition-colors"
+                  >Freelance</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="group relative flex flex-col bg-[#121212] border border-white/5 rounded-2xl overflow-hidden hover:border-accent-blue/30 hover:-translate-y-1 hover:shadow-2xl hover:shadow-accent-blue/5 transition-all duration-300"
+          >
+            <div
+              class="relative w-full aspect-[16/10] bg-[#0a0a0a] overflow-hidden"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1590608897129-79da98d15969?q=80&w=600&auto=format&fit=crop"
+                alt="Certificate 3"
+                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-[#121212] via-transparent to-transparent opacity-80"
+              ></div>
+              <div
+                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-[2px] bg-black/40"
+              >
+                <button
+                  class="flex items-center gap-2 text-white font-semibold text-sm border border-white/20 bg-white/10 px-5 py-2.5 rounded-full hover:bg-white hover:text-black transition-all transform translate-y-4 group-hover:translate-y-0 duration-300"
+                >
+                  View Credential <i class="ph-bold ph-arrow-up-right"></i>
+                </button>
+              </div>
+            </div>
+            <div class="p-6 flex flex-col flex-1 relative">
+              <div class="flex justify-between items-start mb-3">
+                <div
+                  class="text-[10px] text-accent-blue font-mono bg-accent-blue/10 border border-accent-blue/20 px-2 py-0.5 rounded uppercase tracking-wide"
+                >
+                  81P2LGL38ZOY
+                </div>
+                <span
+                  class="text-[10px] text-[#666] font-mono flex items-center gap-1 bg-[#1a1a1a] px-2 py-0.5 rounded border border-white/5"
+                  ><i class="ph-fill ph-calendar-blank"></i> Jan 2025</span
+                >
+              </div>
+
+              <h3
+                class="text-white font-bold text-lg mb-2 leading-snug line-clamp-2 group-hover:text-accent-blue transition-colors"
+              >
+                Belajar Membuat Aplikasi Android dengan Jetpack Compose
+              </h3>
+
+              <div class="flex items-center gap-2 text-[#888] text-xs mb-6">
+                <i class="ph-fill ph-seal-check text-[#555]"></i>
+                <span>Dicoding Indonesia</span>
+              </div>
+
+              <div
+                class="mt-auto pt-4 flex flex-wrap gap-2 border-t border-white/5"
+              >
+                <span
+                  class="text-[10px] font-medium bg-[#1a1a1a] text-[#999] px-2.5 py-1 rounded-lg border border-white/10 group-hover:border-white/20 transition-colors"
+                  >Course</span
+                >
+                <span
+                  class="text-[10px] font-medium bg-[#1a1a1a] text-[#999] px-2.5 py-1 rounded-lg border border-white/10 group-hover:border-white/20 transition-colors"
+                  >Mobile</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="group relative flex flex-col bg-[#121212] border border-white/5 rounded-2xl overflow-hidden hover:border-accent-blue/30 hover:-translate-y-1 hover:shadow-2xl hover:shadow-accent-blue/5 transition-all duration-300"
+          >
+            <div
+              class="relative w-full aspect-[16/10] bg-[#0a0a0a] overflow-hidden"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1590608897129-79da98d15969?q=80&w=600&auto=format&fit=crop"
+                alt="Certificate 4"
+                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-[#121212] via-transparent to-transparent opacity-80"
+              ></div>
+              <div
+                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-[2px] bg-black/40"
+              >
+                <button
+                  class="flex items-center gap-2 text-white font-semibold text-sm border border-white/20 bg-white/10 px-5 py-2.5 rounded-full hover:bg-white hover:text-black transition-all transform translate-y-4 group-hover:translate-y-0 duration-300"
+                >
+                  View Credential <i class="ph-bold ph-arrow-up-right"></i>
+                </button>
+              </div>
+            </div>
+            <div class="p-6 flex flex-col flex-1 relative">
+              <div class="flex justify-between items-start mb-3">
+                <div
+                  class="text-[10px] text-accent-blue font-mono bg-accent-blue/10 border border-accent-blue/20 px-2 py-0.5 rounded uppercase tracking-wide"
+                >
+                  BGK/GRAD/XXIV
+                </div>
+                <span
+                  class="text-[10px] text-[#666] font-mono flex items-center gap-1 bg-[#1a1a1a] px-2 py-0.5 rounded border border-white/5"
+                  ><i class="ph-fill ph-calendar-blank"></i> Jan 2025</span
+                >
+              </div>
+
+              <h3
+                class="text-white font-bold text-lg mb-2 leading-snug line-clamp-2 group-hover:text-accent-blue transition-colors"
+              >
+                Certificate of Completion - Mobile Development
+              </h3>
+
+              <div class="flex items-center gap-2 text-[#888] text-xs mb-6">
+                <i class="ph-fill ph-seal-check text-[#555]"></i>
+                <span>Bangkit Academy 2024</span>
+              </div>
+
+              <div
+                class="mt-auto pt-4 flex flex-wrap gap-2 border-t border-white/5"
+              >
+                <span
+                  class="text-[10px] font-medium bg-[#1a1a1a] text-[#999] px-2.5 py-1 rounded-lg border border-white/10 group-hover:border-white/20 transition-colors"
+                  >Bootcamp</span
+                >
+                <span
+                  class="text-[10px] font-medium bg-[#1a1a1a] text-[#999] px-2.5 py-1 rounded-lg border border-white/10 group-hover:border-white/20 transition-colors"
+                  >Mobile</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div
+      class="fixed bottom-8 left-0 lg:left-[380px] right-0 z-50 flex justify-center pointer-events-none"
+    >
+      <nav
+        class="flex items-center gap-1.5 bg-[#121212]/90 backdrop-blur-xl border border-white/10 px-2 py-1.5 rounded-full shadow-2xl pointer-events-auto"
+      >
+        <a
+          href="index.html∏"
+          class="group relative p-2.5 text-[#888] transition-all duration-300 hover:text-white hover:ring-white/20 hover:bg-transparent"
+        >
+          <i class="ph-fill ph-house text-xl"></i>
+          <span
+            class="absolute bottom-[125%] left-1/2 -translate-x-1/2 bg-[#1a1a1a] text-white px-2.5 py-1 rounded-md text-[11px] font-medium border border-white/10 shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:-translate-y-1 transition-all duration-200 pointer-events-none"
+            >Home</span
+          >
+        </a>
+
+        <a
+          href="about.html"
+          class="group relative p-2.5 text-[#888] transition-all duration-300 hover:text-white hover:ring-white/20 hover:bg-transparent"
+        >
+          <i class="ph ph-user text-xl"></i>
+          <span
+            class="absolute bottom-[125%] left-1/2 -translate-x-1/2 bg-[#1a1a1a] text-white px-2.5 py-1 rounded-md text-[11px] font-medium border border-white/10 shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:-translate-y-1 transition-all duration-200 pointer-events-none"
+            >About</span
+          >
+        </a>
+
+        <a
+          href="achievement.html"
+          class="group relative p-2.5 text-white ring-white/20 bg-transparent transition-all duration-300"
+        >
+          <i class="ph-fill ph-certificate text-xl"></i>
+          <span
+            class="absolute bottom-[125%] left-1/2 -translate-x-1/2 bg-[#1a1a1a] text-white px-2.5 py-1 rounded-md text-[11px] font-medium border border-white/10 shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:-translate-y-1 transition-all duration-200 pointer-events-none"
+            >Achievements</span
+          >
+        </a>
+
+        <a
+          href="projects.html"
+          class="group relative p-2.5 text-[#888] transition-all duration-300 hover:text-white hover:ring-white/20 hover:bg-transparent"
+        >
+          <i class="ph ph-folder text-xl"></i>
+          <span
+            class="absolute bottom-[125%] left-1/2 -translate-x-1/2 bg-[#1a1a1a] text-white px-2.5 py-1 rounded-md text-[11px] font-medium border border-white/10 shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:-translate-y-1 transition-all duration-200 pointer-events-none"
+            >Projects</span
+          >
+        </a>
+
+        <a
+          href="contact.html"
+          class="group relative p-2.5 text-[#888] transition-all duration-300 hover:text-white hover:ring-white/20 hover:bg-transparent"
+        >
+          <i class="ph-fill ph-envelope-simple text-xl"></i>
+          <span
+            class="absolute bottom-[125%] left-1/2 -translate-x-1/2 bg-[#1a1a1a] text-white px-2.5 py-1 rounded-md text-[11px] font-medium border border-white/10 shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:-translate-y-1 transition-all duration-200 pointer-events-none"
+            >Contact</span
+          >
+        </a>
+
+        <div class="w-[1px] h-4 bg-white/10 mx-0.5"></div>
+
+        <button
+          class="group relative p-2.5 text-[#888] transition-all duration-300 hover:text-white hover:ring-white/20 hover:bg-transparent"
+        >
+          <i
+            class="ph ph-heart text-xl group-hover:text-red-500 transition-colors"
+          ></i>
+          <span
+            class="absolute bottom-[125%] left-1/2 -translate-x-1/2 bg-[#1a1a1a] text-white px-2.5 py-1 rounded-md text-[11px] font-medium border border-white/10 shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:-translate-y-1 transition-all duration-200 pointer-events-none"
+            >Support</span
+          >
+        </button>
+      </nav>
+    </div>
+  </body>
+</html>

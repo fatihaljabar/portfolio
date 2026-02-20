@@ -1,0 +1,142 @@
+{
+  "nav": {
+    "home": "Beranda",
+    "about": "Tentang",
+    "achievements": "Pencapaian",
+    "projects": "Proyek",
+    "contact": "Kontak",
+    "support": "Dukungan"
+  },
+  "home": {
+    "intro": "Perkenalan",
+    "greeting": "Hai, saya Fatih Al Jabar H.M.",
+    "based_in": "Bertempat di Sidoarjo, Indonesia 🇮🇩",
+    "remote": "Remote",
+    "description": "Seorang Software Engineer dan spesialis Front-End yang berdedikasi untuk membangun solusi digital yang berdampak. Saya mengkhususkan diri dalam mengembangkan platform web yang skalabel menggunakan teknologi modern, terutama {techStack}. Fokus saya adalah menciptakan arsitektur perangkat lunak yang terstruktur dengan baik, mudah dirawat, dan selaras dengan tujuan bisnis.",
+    "tech_stack_list": "React, Tailwind CSS, dan TypeScript"
+  },
+  "about": {
+    "title": "Tentang",
+    "subtitle": "Perkenalan singkat tentang saya.",
+    "content": "Saya Fatih Al Jabar H.M., seorang Software Engineer berbasis di {location} yang berdedikasi untuk membangun solusi digital yang berdampak. Saya mengkhususkan diri dalam mengembangkan platform web dan aplikasi mobile menggunakan teknologi modern, termasuk Next.js, TypeScript, dan pengembangan Android native. Fokus utama saya adalah menciptakan arsitektur perangkat lunak yang tidak hanya berfungsi, tetapi juga terstruktur dengan baik, mudah dirawat, dan skalabel untuk memenuhi kebutuhan bisnis. Saya percaya bahwa kode berkualitas tinggi harus berjalan beriringan dengan efisiensi sistem dan kejelasan logis. Saya menggabungkan keahlian teknis dengan komunikasi proaktif, berpikir kritis, dan manajemen waktu yang efektif. Saya berkembang dalam lingkungan kolaboratif dan memanfaatkan keterampilan kepemimpinan untuk memastikan setiap proyek memberikan hasil optimal dan dampak nyata.",
+    "location": "Sidoarjo",
+    "best_regards": "Salam hangat,",
+    "career": {
+      "title": "Karir",
+      "subtitle": "Perjalanan profesional saya.",
+      "position": "Front-End dan Back-End Developer",
+      "company": "Dicoding Indonesia",
+      "duration": "Sep 2024 — Des 2024",
+      "length": "4 Bulan",
+      "employment_type": "Paruh waktu",
+      "location": "Remote",
+      "show_details": "Lihat detail",
+      "hide_details": "Sembunyikan detail",
+      "responsibilities": {
+        "title": "Tanggung Jawab",
+        "item_1": "Berkolaborasi dalam tim beranggotakan 4 orang untuk mengembangkan {project}, platform manajemen tiket konser berbasis web.",
+        "item_2": "Merancang dan mengimplementasikan antarmuka pengguna Front-End yang responsif menggunakan {tech1} dan {tech2}.",
+        "item_3": "Mengembangkan RESTful APIs dan mengelola logika sisi server menggunakan {tech}.",
+        "item_4": "Mengimplementasikan fitur seperti pencarian tiket, sistem pemesanan, autentikasi pengguna, dan manajemen data.",
+        "item_5": "Mengelola kontrol versi dan kolaborasi tim menggunakan Git dan GitHub."
+      },
+      "learned": {
+        "title": "Yang Saya Pelajari",
+        "item_1": "Menguasai fundamental web (HTML, CSS, JS) dan konsep lanjutan seperti Manipulasi DOM & Async JS.",
+        "item_2": "Mendapatkan pengalaman praktis dalam membangun RESTful APIs yang skalabel dan desain skema database.",
+        "item_3": "Meningkatkan soft skills: Manajemen Waktu, Komunikasi Efektif, dan Pola Pikir Pertumbuhan."
+      },
+      "impact": {
+        "title": "Dampak",
+        "item_1": "Menerima penghargaan {award} untuk S-TIX.",
+        "item_2": "Berhasil meluncurkan platform yang dapat diakses di {link}.",
+        "item_3": "Menerima umpan balik positif dari mentor mengenai desain UI/UX dan fungsionalitas."
+      }
+    },
+    "education": {
+      "title": "Pendidikan",
+      "subtitle": "Perjalanan pendidikan saya.",
+      "university": "Universitas 17 Agustus 1945 Surabaya",
+      "degree": "Sarjana Teknik • Teknik Informatika (S.Kom)",
+      "gpa": "IPK: 3.63/4.00",
+      "period": "2021 - 2026",
+      "location": "Surabaya, Indonesia 🇮🇩"
+    }
+  },
+  "achievements": {
+    "title": "Pencapaian",
+    "subtitle": "Kolesi sertifikat dan lencana yang saya peroleh selama perjalanan profesional dan akademis saya.",
+    "search_placeholder": "Cari...",
+    "filter_type": "Filter berdasarkan Tipe",
+    "filter_category": "Filter berdasarkan Kategori",
+    "total": "Total: {count}",
+    "view_credential": "Lihat Kredensial",
+    "filters": {
+      "all": "Semua",
+      "professional": "Profesional",
+      "academic": "Akademis",
+      "course": "Kursus",
+      "bootcamp": "Bootcamp",
+      "certification": "Sertifikasi"
+    },
+    "categories": {
+      "all": "Semua Kategori",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "mobile": "Mobile",
+      "devops": "DevOps",
+      "design": "Desain"
+    }
+  },
+  "projects": {
+    "title": "Proyek",
+    "subtitle": "Showcase proyek pribadi dan open-source yang telah saya bangun atau kontribusi.",
+    "featured": "Unggulan",
+    "view_project": "Lihat Proyek"
+  },
+  "project_detail": {
+    "back": "Kembali",
+    "tech_stack": "Teknologi"
+  },
+  "contact": {
+    "title": "Kontak",
+    "subtitle": "Mari terhubung. Saya selalu terbuka untuk diskusi tentang proyek baru, ide kreatif, atau kesempatan untuk menjadi bagian dari visi Anda.",
+    "social_media": "Temukan saya di media sosial",
+    "send_message": "Atau kirim pesan",
+    "project_inquiry_title": "Pertanyaan Proyek?",
+    "project_inquiry_desc": "Hubungi melalui email untuk pertanyaan bisnis, kolaborasi, atau hanya untuk menyapa. Saya akan membalas secepat mungkin.",
+    "send_email": "Kirim Email",
+    "instagram_title": "Ikuti Perjalanan Saya",
+    "instagram_desc": "Update harian & kehidupan.",
+    "go_to_instagram": "Ke Instagram",
+    "linkedin_title": "Mari Terhubung",
+    "linkedin_desc": "Jaringan profesional.",
+    "go_to_linkedin": "Ke Linkedin",
+    "tiktok_title": "Gabung Keseruan",
+    "tiktok_desc": "Konten edukasi singkat.",
+    "go_to_tiktok": "Ke TikTok",
+    "github_title": "Jelajahi Kode",
+    "github_desc": "Kontribusi open source.",
+    "go_to_github": "Ke Github",
+    "form": {
+      "name_label": "Nama",
+      "name_placeholder": "John Doe",
+      "email_label": "Email",
+      "email_placeholder": "john@example.com",
+      "message_label": "Pesan",
+      "message_placeholder": "Hai Fatih, saya ingin berdiskusi tentang...",
+      "submit": "Kirim Pesan",
+      "success": "Pesan berhasil dikirim! Saya akan segera menghubungi Anda.",
+      "error": "Gagal mengirim pesan. Silakan coba lagi."
+    }
+  },
+  "sidebar": {
+    "contact": "Kontak",
+    "languages": "Bahasa"
+  },
+  "common": {
+    "loading": "Memuat...",
+    "error": "Terjadi kesalahan",
+    "not_found": "Tidak Ditemukan"
+  }
+}

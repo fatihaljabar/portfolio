@@ -1,0 +1,111 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ========================================
+// PROJECT MODELS
+// ========================================
+
+model Project {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  description String
+  content     String   @db.Text
+  imageUrl    String?
+  isFeatured  Boolean  @default(false)
+  githubUrl   String?
+  demoUrl     String?
+  techStack   String[]
+  category    String?
+  publishedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([slug])
+  @@index([isFeatured])
+  @@index([category])
+}
+
+// ========================================
+// ACHIEVEMENT MODELS
+// ========================================
+
+model Achievement {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  title        String
+  description  String?
+  issuer       String
+  certificateNumber String?
+  credentialUrl String?
+  imageUrl     String?
+  issuedDate   DateTime
+  type         AchievementType
+  category     String?
+  publishedAt  DateTime @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([slug])
+  @@index([type])
+  @@index([category])
+}
+
+enum AchievementType {
+  PROFESSIONAL
+  ACADEMIC
+  COURSE
+  BOOTCAMP
+  CERTIFICATION
+}
+
+// ========================================
+// MESSAGE MODELS (Contact Form)
+// ========================================
+
+model Message {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String   @db.Text
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+// ========================================
+// LOVE FEATURE MODELS (No Auth)
+// ========================================
+
+model Love {
+  id        String   @id @default(cuid())
+  ipAddress String   // Using IP address as identifier (no auth)
+  userAgent String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([ipAddress])
+  @@index([ipAddress])
+}
+
+// Analytics for love clicks
+model LoveAnalytics {
+  id        String   @id @default(cuid())
+  ipAddress String
+  userAgent String?
+  referrer  String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}

@@ -1,0 +1,142 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "achievements": "Achievements",
+    "projects": "Projects",
+    "contact": "Contact",
+    "support": "Support"
+  },
+  "home": {
+    "intro": "Intro",
+    "greeting": "Hi, I'm Fatih Al Jabar H.M.",
+    "based_in": "Based in Sidoarjo, Indonesia 🇮🇩",
+    "remote": "Remote",
+    "description": "A Software Engineer and Front-End specialist dedicated to building impactful digital solutions. I specialize in developing scalable web platforms using a modern tech stack, primarily {techStack}. My focus is on crafting software architecture that is well-structured, maintainable, and aligned with business goals.",
+    "tech_stack_list": "React, Tailwind CSS, and TypeScript"
+  },
+  "about": {
+    "title": "About",
+    "subtitle": "A brief introduction to who I am.",
+    "content": "I'm Fatih Al Jabar H.M., a {location}-based Software Engineer dedicated to building impactful digital solutions. I specialize in developing web platforms and mobile applications using a modern tech stack, including Next.js, TypeScript, and native Android development. My primary focus is crafting software architecture that doesn't just work but is well-structured, maintainable, and scalable to meet business needs. I believe that high-quality code must go hand-in-hand with system efficiency and logical clarity. I blend technical expertise with proactive communication, critical thinking, and effective time management. I thrive in collaborative environments and leverage leadership skills to ensure every project delivers optimal results and a real-world impact.",
+    "location": "Sidoarjo-based",
+    "best_regards": "Best regards,",
+    "career": {
+      "title": "Career",
+      "subtitle": "My professional journey.",
+      "position": "Front-End and Back-End Developer",
+      "company": "Dicoding Indonesia",
+      "duration": "Sep 2024 — Dec 2024",
+      "length": "4 Months",
+      "employment_type": "Part-time",
+      "location": "Remote",
+      "show_details": "Show details",
+      "hide_details": "Hide details",
+      "responsibilities": {
+        "title": "Responsibilities",
+        "item_1": "Collaborated in a team of 4 to develop {project}, a web-based concert ticket management platform.",
+        "item_2": "Designed and implemented a responsive Front-End user interface using {tech1} and {tech2}.",
+        "item_3": "Developed RESTful APIs and managed server-side logic using {tech}.",
+        "item_4": "Implemented features such as ticket search, booking system, user authentication, and data management.",
+        "item_5": "Managed version control and team collaboration using Git and GitHub."
+      },
+      "learned": {
+        "title": "What I Learned",
+        "item_1": "Mastered web fundamentals (HTML, CSS, JS) and advanced concepts like DOM Manipulation & Async JS.",
+        "item_2": "Gained hands-on experience in building scalable RESTful APIs and database schema design.",
+        "item_3": "Enhanced soft skills: Time Management, Effective Communication, and Growth Mindset."
+      },
+      "impact": {
+        "title": "Impact",
+        "item_1": "Awarded {award} for S-TIX.",
+        "item_2": "Successfully launched the platform accessible at {link}.",
+        "item_3": "Received positive feedback from mentors regarding UI/UX design and functionality."
+      }
+    },
+    "education": {
+      "title": "Education",
+      "subtitle": "My educational journey.",
+      "university": "Universitas 17 Agustus 1945 Surabaya",
+      "degree": "Bachelor's degree • Informatics Engineering (S.Kom)",
+      "gpa": "GPA: 3.63/4.00",
+      "period": "2021 - 2026",
+      "location": "Surabaya, Indonesia 🇮🇩"
+    }
+  },
+  "achievements": {
+    "title": "Achievements",
+    "subtitle": "A curated collection of certificates and badges I've earned throughout my professional and academic journey.",
+    "search_placeholder": "Search...",
+    "filter_type": "Filter by Type",
+    "filter_category": "Filter by Category",
+    "total": "Total: {count}",
+    "view_credential": "View Credential",
+    "filters": {
+      "all": "All",
+      "professional": "Professional",
+      "academic": "Academic",
+      "course": "Course",
+      "bootcamp": "Bootcamp",
+      "certification": "Certification"
+    },
+    "categories": {
+      "all": "All Categories",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "mobile": "Mobile",
+      "devops": "DevOps",
+      "design": "Design"
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "A showcase of both private and open-source projects I've built or contributed to.",
+    "featured": "Featured",
+    "view_project": "View Project"
+  },
+  "project_detail": {
+    "back": "Back",
+    "tech_stack": "Tech Stack"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Let's get in touch. I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.",
+    "social_media": "Find me on social media",
+    "send_message": "Or send me a message",
+    "project_inquiry_title": "Project Inquiry?",
+    "project_inquiry_desc": "Reach out via email for business inquiries, collaborations, or just to say hello. I'll get back to you as soon as possible.",
+    "send_email": "Send Email",
+    "instagram_title": "Follow My Journey",
+    "instagram_desc": "Daily updates & life.",
+    "go_to_instagram": "Go to Instagram",
+    "linkedin_title": "Let's Connect",
+    "linkedin_desc": "Professional network.",
+    "go_to_linkedin": "Go to Linkedin",
+    "tiktok_title": "Join the Fun",
+    "tiktok_desc": "Short educational content.",
+    "go_to_tiktok": "Go to TikTok",
+    "github_title": "Explore the Code",
+    "github_desc": "Open source contributions.",
+    "go_to_github": "Go to Github",
+    "form": {
+      "name_label": "Name",
+      "name_placeholder": "John Doe",
+      "email_label": "Email",
+      "email_placeholder": "john@example.com",
+      "message_label": "Message",
+      "message_placeholder": "Hi Fatih, I'd like to talk about...",
+      "submit": "Send Message",
+      "success": "Message sent successfully! I'll get back to you soon.",
+      "error": "Failed to send message. Please try again."
+    }
+  },
+  "sidebar": {
+    "contact": "Contact",
+    "languages": "Languages"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "not_found": "Not Found"
+  }
+}
