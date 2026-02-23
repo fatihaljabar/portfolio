@@ -21,7 +21,7 @@ import { toggleLove, hasLoved, getLoveCount } from '@/lib/actions/love';
 
 interface NavItem {
   href: string;
-  icon: React.ComponentType<{ className?: string; size?: number }>;
+  icon: any;
   label: string;
 }
 
@@ -78,7 +78,7 @@ export function FloatingNav() {
 
   return (
     <div className="fixed bottom-8 left-0 lg:left-[380px] right-0 z-50 flex justify-center pointer-events-none">
-      <nav className="flex items-center gap-1.5 bg-[#121212]/90 backdrop-blur-xl border border-white/10 px-2 py-1.5 rounded-full shadow-2xl pointer-events-auto">
+      <nav className="flex items-center gap-1.5 bg-gray-100/90 dark:bg-[#121212]/90 backdrop-blur-xl border border-gray-300 dark:border-white/10 px-2 py-1.5 rounded-full shadow-2xl pointer-events-auto">
         {navItems.map((item) => {
           const Icon = item.icon;
           const active = isActive(item.href);
@@ -88,25 +88,25 @@ export function FloatingNav() {
               href={item.href}
               className={`group relative p-2.5 transition-all duration-300 ${
                 active
-                  ? 'text-white ring-white/20 bg-transparent'
-                  : 'text-[#888] hover:text-white hover:ring-white/20 hover:bg-transparent'
+                  ? 'text-gray-900 dark:text-white ring-gray-400/20 dark:ring-white/20 bg-transparent'
+                  : 'text-gray-500 dark:text-[#888] hover:text-gray-900 dark:hover:text-white hover:ring-gray-400/20 dark:hover:ring-white/20 hover:bg-transparent'
               }`}
             >
               <Icon className="text-xl" size={20} />
-              <span className="absolute bottom-[125%] left-1/2 -translate-x-1/2 bg-[#1a1a1a] text-white px-2.5 py-1 rounded-md text-[11px] font-medium border border-white/10 shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:-translate-y-1 transition-all duration-200 pointer-events-none">
+              <span className="absolute bottom-[125%] left-1/2 -translate-x-1/2 bg-gray-200 dark:bg-[#1a1a1a] text-gray-900 dark:text-white px-2.5 py-1 rounded-md text-[11px] font-medium border border-gray-300 dark:border-white/10 shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:-translate-y-1 transition-all duration-200 pointer-events-none">
                 {item.label}
               </span>
             </Link>
           );
         })}
 
-        <div className="w-[1px] h-4 bg-white/10 mx-0.5"></div>
+        <div className="w-[1px] h-4 bg-gray-300 dark:bg-white/10 mx-0.5"></div>
 
         {/* Love/Support Button */}
         <button
           onClick={handleLoveClick}
           disabled={isLoading}
-          className="group relative p-2.5 text-[#888] transition-all duration-300 hover:text-white hover:ring-white/20 hover:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+          className="group relative p-2.5 text-gray-500 dark:text-[#888] transition-all duration-300 hover:text-gray-900 dark:hover:text-white hover:ring-gray-400/20 dark:hover:ring-white/20 hover:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed"
           aria-label={`${t('support')} (${loveCount})`}
         >
           <div className="relative">
@@ -121,7 +121,7 @@ export function FloatingNav() {
               </span>
             )}
           </div>
-          <span className="absolute bottom-[125%] left-1/2 -translate-x-1/2 bg-[#1a1a1a] text-white px-2.5 py-1 rounded-md text-[11px] font-medium border border-white/10 shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:-translate-y-1 transition-all duration-200 pointer-events-none">
+          <span className="absolute bottom-[125%] left-1/2 -translate-x-1/2 bg-gray-200 dark:bg-[#1a1a1a] text-gray-900 dark:text-white px-2.5 py-1 rounded-md text-[11px] font-medium border border-gray-300 dark:border-white/10 shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:-translate-y-1 transition-all duration-200 pointer-events-none">
             {t('support')} ({loveCount})
           </span>
         </button>

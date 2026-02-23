@@ -71,6 +71,7 @@
     "filter_category": "Filter berdasarkan Kategori",
     "total": "Total: {count}",
     "view_credential": "Lihat Kredensial",
+    "no_achievements": "Belum ada pencapaian. Nanti cek lagi!",
     "filters": {
       "all": "Semua",
       "professional": "Profesional",
@@ -92,11 +93,14 @@
     "title": "Proyek",
     "subtitle": "Showcase proyek pribadi dan open-source yang telah saya bangun atau kontribusi.",
     "featured": "Unggulan",
-    "view_project": "Lihat Proyek"
+    "view_project": "Lihat Proyek",
+    "no_projects": "Belum ada proyek. Nanti cek lagi!"
   },
   "project_detail": {
     "back": "Kembali",
-    "tech_stack": "Teknologi"
+    "tech_stack": "Teknologi",
+    "live_demo": "Demo Langsung",
+    "github_repo": "Repositori GitHub"
   },
   "contact": {
     "title": "Kontak",

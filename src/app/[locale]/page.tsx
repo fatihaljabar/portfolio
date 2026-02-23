@@ -14,40 +14,40 @@ export default function HomePage() {
     <>
       {/* Intro Section */}
       <section className="mb-20">
-        <div className="text-[11px] font-bold text-[#555] tracking-widest mb-6 uppercase">
+        <div className="text-[11px] font-bold text-gray-500 dark:text-[#555] tracking-widest mb-6 uppercase">
           {t('intro')}
         </div>
-        <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight text-white">
+        <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight text-gray-900 dark:text-white">
           {t('greeting')}
         </h2>
-        <div className="flex flex-wrap items-center gap-6 text-[#888] text-sm mb-10">
+        <div className="flex flex-wrap items-center gap-6 text-gray-500 dark:text-[#888] text-sm mb-10">
           <div className="flex items-center gap-2">
-            <MapPin className="text-white" size={16} /> {t('based_in')}
+            <MapPin className="text-gray-700 dark:text-white" size={16} /> {t('based_in')}
           </div>
-          <div className="w-1 h-1 bg-[#444] rounded-full"></div>
-          <div className="flex items-center gap-2 px-3 py-1 bg-green-500/10 border border-green-500/20 rounded-full text-green-400 text-xs font-medium">
+          <div className="w-1 h-1 bg-gray-300 dark:bg-[#444] rounded-full"></div>
+          <div className="flex items-center gap-2 px-3 py-1 bg-green-500/10 border border-green-500/20 rounded-full text-green-600 dark:text-green-400 text-xs font-medium">
             <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
             {t('remote')}
           </div>
         </div>
         <p
-          className="text-lg text-[#999] leading-relaxed max-w-3xl"
+          className="text-lg text-gray-600 dark:text-[#999] leading-relaxed max-w-3xl"
           dangerouslySetInnerHTML={{
-            __html: t.raw('description').replace('{techStack}', `<span class="text-white font-medium">${t('tech_stack_list')}</span>`),
+            __html: t.raw('description').replace('{techStack}', `<span class="text-gray-900 dark:text-white font-medium">${t('tech_stack_list')}</span>`),
           }}
         />
       </section>
 
-      <div className="h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent mb-20"></div>
+      <div className="h-[1px] bg-gray-300 dark:bg-white/20 mb-20"></div>
 
       {/* Skills Section */}
       <section id="skills" className="mb-20">
         <div className="flex items-center gap-3 mb-10">
-          <Code className="text-3xl text-white" size={24} />
-          <h3 className="text-xl font-bold text-white">Skills</h3>
-          <div className="ml-auto flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/5">
+          <Code className="text-3xl text-gray-700 dark:text-white" size={24} />
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white">Skills</h3>
+          <div className="ml-auto flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/5">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-            <span className="text-xs text-[#888] font-mono">My Arsenal</span>
+            <span className="text-xs text-gray-500 dark:text-[#888] font-mono">My Arsenal</span>
           </div>
         </div>
 

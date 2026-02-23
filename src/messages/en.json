@@ -71,6 +71,7 @@
     "filter_category": "Filter by Category",
     "total": "Total: {count}",
     "view_credential": "View Credential",
+    "no_achievements": "No achievements yet. Check back soon!",
     "filters": {
       "all": "All",
       "professional": "Professional",
@@ -92,11 +93,14 @@
     "title": "Projects",
     "subtitle": "A showcase of both private and open-source projects I've built or contributed to.",
     "featured": "Featured",
-    "view_project": "View Project"
+    "view_project": "View Project",
+    "no_projects": "No projects yet. Check back soon!"
   },
   "project_detail": {
     "back": "Back",
-    "tech_stack": "Tech Stack"
+    "tech_stack": "Tech Stack",
+    "live_demo": "Live Demo",
+    "github_repo": "GitHub Repository"
   },
   "contact": {
     "title": "Contact",

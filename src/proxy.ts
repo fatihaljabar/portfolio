@@ -1,5 +1,5 @@
 /**
- * Middleware
+ * Proxy
  * Handles locale detection and theme cookie for next-intl and next-themes
  */
 

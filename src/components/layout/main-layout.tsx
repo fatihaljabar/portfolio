@@ -13,7 +13,7 @@ interface MainLayoutProps {
 
 export function MainLayout({ children }: MainLayoutProps) {
   return (
-    <div className="max-w-[1300px] mx-auto min-h-screen flex flex-col lg:flex-row border-x border-white/5 shadow-2xl bg-[#0a0a0a]">
+    <div className="max-w-[1300px] mx-auto min-h-screen flex flex-col lg:flex-row border-x border-black/5 dark:border-white/5 shadow-2xl bg-white dark:bg-[#0a0a0a]">
       <Sidebar />
       <main className="flex-1 w-full p-8 lg:p-20 pb-40 cursor-gray-dot">{children}</main>
       <FloatingNav />
