@@ -39,44 +39,48 @@ export function ModeToggle() {
           size="sm"
           className="flex items-center gap-2 bg-gray-100 dark:bg-[#151515] hover:bg-gray-200 dark:hover:bg-[#1a1a1a] h-8 px-3 rounded-full border border-gray-200 dark:border-white/5 text-gray-600 dark:text-[#ccc] hover:text-gray-900 dark:hover:text-white transition-colors relative z-50 overflow-hidden"
         >
-          <motion.div
-            className="relative"
-            whileHover={{ scale: 1.1, rotate: 15 }}
-            whileTap={{ scale: 0.95, rotate: -15 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-          >
-            <AnimatePresence mode="wait">
-              {currentTheme === 'dark' ? (
-                <motion.div
-                  key="moon"
-                  initial={{ rotate: -90, opacity: 0, scale: 0 }}
-                  animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                  exit={{ rotate: 90, opacity: 0, scale: 0 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                >
-                  <Moon size={16} className="text-gray-600 dark:text-white" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="sun"
-                  initial={{ rotate: 90, opacity: 0, scale: 0 }}
-                  animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                  exit={{ rotate: -90, opacity: 0, scale: 0 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                >
-                  <Sun size={16} className="text-accent-yellow" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-          <motion.span
-            key={currentTheme}
-            initial={{ y: 10, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="text-xs font-medium"
-          >
+          <AnimatePresence mode="wait">
+            {currentTheme === 'dark' ? (
+              <motion.div
+                key="moon-button"
+                initial={{ rotate: -90, opacity: 0, scale: 0 }}
+                animate={{
+                  rotate: [0, 10, -10, 10, 0],
+                  opacity: 1,
+                  scale: 1,
+                }}
+                exit={{ rotate: 90, opacity: 0, scale: 0 }}
+                transition={{
+                  rotate: { duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 1 },
+                  opacity: { duration: 0.2 },
+                  scale: { duration: 0.2 },
+                }}
+              >
+                <Moon size={16} className="text-gray-600 dark:text-white" />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="sun-button"
+                initial={{ rotate: 90, opacity: 0, scale: 0 }}
+                animate={{
+                  rotate: [0, -10, 10, -10, 0],
+                  opacity: 1,
+                  scale: 1,
+                }}
+                exit={{ rotate: -90, opacity: 0, scale: 0 }}
+                transition={{
+                  rotate: { duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 1 },
+                  opacity: { duration: 0.2 },
+                  scale: { duration: 0.2 },
+                }}
+              >
+                <Sun size={16} className="text-accent-yellow" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+          <span className="text-xs font-medium">
             {currentTheme === 'dark' ? 'Dark' : 'Light'}
-          </motion.span>
+          </span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="center" className="w-auto min-w-32 bg-white dark:bg-[#1a1a1a] border-gray-200 dark:border-white/10 z-[100]">

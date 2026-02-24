@@ -50,31 +50,28 @@ export function LocaleToggle() {
           size="sm"
           className="flex items-center gap-2 bg-gray-100 dark:bg-[#151515] hover:bg-gray-200 dark:hover:bg-[#1a1a1a] h-8 px-3 rounded-full border border-gray-200 dark:border-white/5 text-gray-600 dark:text-[#ccc] hover:text-gray-900 dark:hover:text-white transition-colors relative z-50 overflow-hidden"
         >
-          <motion.div
-            whileHover={{ scale: 1.15, rotate: locale === 'en' ? 20 : -20 }}
-            whileTap={{ scale: 0.9 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-          >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={locale}
-                initial={{ rotate: -180, opacity: 0, scale: 0 }}
-                animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                exit={{ rotate: 180, opacity: 0, scale: 0 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              >
-                <Globe size={16} className="text-gray-600 dark:text-white" />
-              </motion.div>
-            </AnimatePresence>
-          </motion.div>
-          <motion.span
-            key={`label-${locale}`}
-            initial={{ y: 10, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="text-xs font-medium"
-          >
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`globe-${locale}`}
+              initial={{ rotate: -180, opacity: 0, scale: 0 }}
+              animate={{
+                rotate: [0, 15, -15, 15, 0],
+                opacity: 1,
+                scale: 1,
+              }}
+              exit={{ rotate: 180, opacity: 0, scale: 0 }}
+              transition={{
+                rotate: { duration: 2.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 },
+                opacity: { duration: 0.2 },
+                scale: { duration: 0.2 },
+              }}
+            >
+              <Globe size={16} className="text-gray-600 dark:text-white" />
+            </motion.div>
+          </AnimatePresence>
+          <span className="text-xs font-medium">
             {localeNames[locale]}
-          </motion.span>
+          </span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="center" className="w-auto min-w-32 bg-white dark:bg-[#1a1a1a] border-gray-200 dark:border-white/10 z-[100]">
