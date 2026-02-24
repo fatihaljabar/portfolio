@@ -75,8 +75,8 @@ export function ProjectsClient({ projects, translations: t }: ProjectsClientProp
   return (
     <>
       <div className="mb-10">
-        <h2 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">{t('title')}</h2>
-        <p className="text-gray-500 dark:text-[#888] text-sm max-w-2xl leading-relaxed">{t('subtitle')}</p>
+        <h2 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">{t.title}</h2>
+        <p className="text-gray-500 dark:text-[#888] text-sm max-w-2xl leading-relaxed">{t.subtitle}</p>
       </div>
 
       <div className="h-[1px] border-t border-dashed border-gray-300 dark:border-[#333] w-full mb-10"></div>
@@ -86,7 +86,7 @@ export function ProjectsClient({ projects, translations: t }: ProjectsClientProp
           <motion.div {...iconHoverProps} className="mx-auto text-gray-300 dark:text-[#333] mb-4 w-fit">
             <Folder size={48} />
           </motion.div>
-          <p className="text-gray-400 dark:text-[#888]">{t('no_projects')}</p>
+          <p className="text-gray-400 dark:text-[#888]">{t.no_projects}</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -101,7 +101,7 @@ export function ProjectsClient({ projects, translations: t }: ProjectsClientProp
               >
                 {project.isFeatured && (
                   <div className="absolute top-5 left-5 z-30 bg-accent-yellow/10 text-accent-yellow border border-accent-yellow/20 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-md">
-                    {t('featured')}
+                    {t.featured}
                   </div>
                 )}
 
@@ -127,7 +127,7 @@ export function ProjectsClient({ projects, translations: t }: ProjectsClientProp
                       href={`/projects/${project.slug}`}
                       className="flex items-center gap-2 bg-white/20 dark:bg-white/10 backdrop-blur-md border border-white/30 dark:border-white/20 text-gray-900 dark:text-white font-semibold px-6 py-3 rounded-full hover:bg-white hover:text-black transition-all transform translate-y-4 group-hover:translate-y-0 duration-300"
                     >
-                      {t('view_project')} <ArrowUpRight size={16} />
+                      {t.view_project} <ArrowUpRight size={16} />
                     </Link>
                   </div>
                 </div>
