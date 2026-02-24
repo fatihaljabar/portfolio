@@ -52,11 +52,11 @@ export function SkillsGrid() {
         >
           {/* Shadow/Background layer */}
           <span
-            className={`absolute left-0 top-0 block h-full w-full origin-[100%_100%] rotate-[15deg] rounded-[1.25em] transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.83,0,0.17,1)] group-hover:[transform:rotate(25deg)_translate3d(-0.5em,-0.5em,0.5em)] ${skill.color}`}
+            className={`absolute left-0 top-0 block h-full w-full origin-[100%_100%] rotate-[15deg] rounded-[1.25em] transition-[opacity,transform] duration-300 ease-&lsqb;cubic-bezier(0.83,0,0.17,1)&rsqb; group-hover:&lsqb;transform:rotate(25deg)_translate3d(-0.5em,-0.5em,0.5em)&rsqb; ${skill.color}`}
           ></span>
           {/* Card layer */}
           <span
-            className="absolute left-0 top-0 flex h-full w-full origin-[80%_50%] transform rounded-[1.25em] bg-gray-200/50 dark:bg-[hsla(0,0%,100%,0.15)] backdrop-blur-[0.75em] transition-[opacity,transform,border] duration-300 ease-[cubic-bezier(0.83,0,0.17,1)] [-webkit-backdrop-filter:blur(0.75em)] group-hover:[transform:translateZ(2em)] group-hover:border-gray-400/30 dark:group-hover:border-white/30 border border-transparent"
+            className="absolute left-0 top-0 flex h-full w-full origin-[80%_50%] transform rounded-[1.25em] bg-gray-200/50 dark:bg-[hsla(0,0%,100%,0.15)] backdrop-blur-[0.75em] transition-[opacity,transform,border] duration-300 ease-&lsqb;cubic-bezier(0.83,0,0.17,1)&rsqb; &lsqb;-webkit-backdrop-filter:blur(0.75em)&rsqb; group-hover:&lsqb;transform:translateZ(2em)&rsqb; group-hover:border-gray-400/30 dark:group-hover:border-white/30 border border-transparent"
             style={{
               boxShadow: 'rgba(255, 255, 255, 0.3) 0px 0px 0px 0.1em inset',
             }}
@@ -68,7 +68,7 @@ export function SkillsGrid() {
             />
           </span>
           {/* Label */}
-          <span className="absolute left-0 right-0 top-full translate-y-0 whitespace-nowrap text-center text-xs font-bold leading-[2.5] opacity-0 transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.83,0,0.17,1)] group-hover:opacity-100 group-hover:[transform:translateY(20%)] text-gray-600 dark:text-[#999]">
+          <span className="absolute left-0 right-0 top-full translate-y-0 whitespace-nowrap text-center text-xs font-bold leading-[2.5] opacity-0 transition-[opacity,transform] duration-300 ease-&lsqb;cubic-bezier(0.83,0,0.17,1)&rsqb; group-hover:opacity-100 group-hover:&lsqb;transform:translateY(20%)&rsqb; text-gray-600 dark:text-[#999]">
             {skill.name}
           </span>
         </button>
