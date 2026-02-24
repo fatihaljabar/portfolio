@@ -26,24 +26,6 @@ interface NavItem {
   label: string;
 }
 
-const iconHoverVariants = {
-  hover: {
-    scale: 1.2,
-    rotate: [0, -10, 10, -10, 0],
-    transition: {
-      duration: 0.5,
-      ease: 'easeInOut' as const,
-    },
-  },
-  active: {
-    scale: 1.1,
-    rotate: 5,
-    transition: {
-      duration: 0.2,
-    },
-  },
-};
-
 export function FloatingNav() {
   const t = useTranslations('nav');
   const pathname = usePathname();
@@ -112,10 +94,19 @@ export function FloatingNav() {
               }`}
             >
               <motion.div
-                variants={iconHoverVariants}
-                initial="initial"
-                animate={active ? 'active' : 'initial'}
-                whileHover="hover"
+                key={item.href}
+                animate={active ? {
+                  rotate: [0, 360],
+                  transition: {
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: 'linear',
+                  },
+                } : {
+                  rotate: 0,
+                }}
+                whileHover={{ scale: 1.15, rotate: [0, -5, 5, -5, 0] }}
+                transition={{ duration: 0.4, ease: 'easeInOut' as const }}
               >
                 <Icon className="text-xl" size={20} />
               </motion.div>
@@ -137,13 +128,22 @@ export function FloatingNav() {
         >
           <motion.div
             className="relative"
-            variants={iconHoverVariants}
-            initial="initial"
-            whileHover="hover"
+            animate={isLoved ? {
+              scale: [1, 1.1, 1],
+              transition: {
+                duration: 0.6,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              },
+            } : {
+              scale: 1,
+            }}
+            whileHover={{ scale: 1.15, rotate: [0, -5, 5, -5, 0] }}
             whileTap={{ scale: 0.9 }}
+            transition={{ duration: 0.4, ease: 'easeInOut' as const }}
           >
             <Heart
-              className={`text-xl transition-all ${isLoved ? 'text-red-500 fill-red-500 scale-110' : ''}`}
+              className={`text-xl transition-all ${isLoved ? 'text-red-500 fill-red-500' : ''}`}
               size={20}
               fill={isLoved ? 'currentColor' : 'none'}
             />
