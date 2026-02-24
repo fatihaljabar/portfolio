@@ -58,9 +58,17 @@ interface Project {
   techStack: string[] | null;
 }
 
+interface Translations {
+  title: string;
+  subtitle: string;
+  featured: string;
+  view_project: string;
+  no_projects: string;
+}
+
 interface ProjectsClientProps {
   projects: Project[];
-  translations: any;
+  translations: Translations;
 }
 
 export function ProjectsClient({ projects, translations: t }: ProjectsClientProps) {

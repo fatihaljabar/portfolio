@@ -23,5 +23,14 @@ export default async function ProjectsPage() {
     },
   });
 
-  return <ProjectsClient projects={projects} translations={t} />;
+  // Extract all needed translation strings
+  const translations = {
+    title: t('title'),
+    subtitle: t('subtitle'),
+    featured: t('featured'),
+    view_project: t('view_project'),
+    no_projects: t('no_projects'),
+  };
+
+  return <ProjectsClient projects={projects} translations={translations} />;
 }
