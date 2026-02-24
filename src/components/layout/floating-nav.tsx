@@ -96,11 +96,11 @@ export function FloatingNav() {
               <motion.div
                 key={item.href}
                 animate={active ? {
-                  rotate: [0, 360],
+                  rotate: [0, -8, 8, -8, 0],
                   transition: {
-                    duration: 3,
+                    duration: 2,
                     repeat: Infinity,
-                    ease: 'linear',
+                    ease: 'easeInOut',
                   },
                 } : {
                   rotate: 0,
