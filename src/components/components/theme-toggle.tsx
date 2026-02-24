@@ -3,7 +3,7 @@
 import React from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -39,45 +39,30 @@ export function ModeToggle() {
           size="sm"
           className="flex items-center gap-2 bg-gray-100 dark:bg-[#151515] hover:bg-gray-200 dark:hover:bg-[#1a1a1a] h-8 px-3 rounded-full border border-gray-200 dark:border-white/5 text-gray-600 dark:text-[#ccc] hover:text-gray-900 dark:hover:text-white transition-colors relative z-50 overflow-hidden"
         >
-          <AnimatePresence mode="wait">
-            {currentTheme === 'dark' ? (
-              <motion.div
-                key="moon-button"
-                initial={{ rotate: -90, opacity: 0, scale: 0 }}
-                animate={{
-                  rotate: [0, 10, -10, 10, 0],
-                  opacity: 1,
-                  scale: 1,
-                }}
-                exit={{ rotate: 90, opacity: 0, scale: 0 }}
-                transition={{
-                  rotate: { duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 1 },
-                  opacity: { duration: 0.2 },
-                  scale: { duration: 0.2 },
-                }}
-              >
+          <motion.div
+            key={currentTheme}
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.2 }}
+          >
+            <motion.div
+              animate={{
+                rotate: currentTheme === 'dark' ? [0, 10, -10, 10, 0] : [0, -10, 10, -10, 0],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: 'easeInOut',
+                delay: 1,
+              }}
+            >
+              {currentTheme === 'dark' ? (
                 <Moon size={16} className="text-gray-600 dark:text-white" />
-              </motion.div>
-            ) : (
-              <motion.div
-                key="sun-button"
-                initial={{ rotate: 90, opacity: 0, scale: 0 }}
-                animate={{
-                  rotate: [0, -10, 10, -10, 0],
-                  opacity: 1,
-                  scale: 1,
-                }}
-                exit={{ rotate: -90, opacity: 0, scale: 0 }}
-                transition={{
-                  rotate: { duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 1 },
-                  opacity: { duration: 0.2 },
-                  scale: { duration: 0.2 },
-                }}
-              >
+              ) : (
                 <Sun size={16} className="text-accent-yellow" />
-              </motion.div>
-            )}
-          </AnimatePresence>
+              )}
+            </motion.div>
+          </motion.div>
           <span className="text-xs font-medium">
             {currentTheme === 'dark' ? 'Dark' : 'Light'}
           </span>
