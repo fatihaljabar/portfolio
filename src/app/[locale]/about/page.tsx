@@ -22,6 +22,12 @@ import {
   MapPin,
 } from 'lucide-react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+
+const iconHoverProps = {
+  whileHover: { scale: 1.15, rotate: [0, -5, 5, -5, 0] },
+  transition: { duration: 0.4, ease: 'easeInOut' as const },
+};
 
 export default function AboutPage() {
   const t = useTranslations('about');
@@ -60,7 +66,9 @@ export default function AboutPage() {
       {/* Career Section */}
       <section id="career" className="mb-20">
         <div className="flex items-center gap-3 mb-8">
-          <Briefcase className="text-2xl text-gray-700 dark:text-white" />
+          <motion.div {...iconHoverProps}>
+            <Briefcase className="text-2xl text-gray-700 dark:text-white" />
+          </motion.div>
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{t('career.title')}</h3>
         </div>
         <div className="text-[11px] font-bold text-gray-500 dark:text-[#555] tracking-widest mb-6 uppercase">
@@ -79,7 +87,9 @@ export default function AboutPage() {
 
               <div className="flex flex-wrap items-center gap-3 mb-6 text-xs text-gray-500 dark:text-[#888] font-medium">
                 <div className="flex items-center gap-1.5 bg-gray-200 dark:bg-white/5 px-2.5 py-1 rounded-md border border-gray-300 dark:border-white/10">
-                  <Calendar className="text-accent-blue" size={12} />
+                  <motion.div {...iconHoverProps}>
+                    <Calendar className="text-accent-blue" size={12} />
+                  </motion.div>
                   <span>{t('career.duration')}</span>
                 </div>
 
@@ -88,13 +98,17 @@ export default function AboutPage() {
 
                 <span className="text-gray-400 dark:text-[#555]">•</span>
                 <div className="flex items-center gap-1.5">
-                  <Briefcase className="text-gray-400 dark:text-[#666]" size={14} />
+                  <motion.div {...iconHoverProps}>
+                    <Briefcase className="text-gray-400 dark:text-[#666]" size={14} />
+                  </motion.div>
                   <span>{t('career.employment_type')}</span>
                 </div>
 
                 <span className="text-gray-400 dark:text-[#555]">•</span>
                 <div className="flex items-center gap-1.5">
-                  <MapPin className="text-gray-400 dark:text-[#666]" size={14} />
+                  <motion.div {...iconHoverProps}>
+                    <MapPin className="text-gray-400 dark:text-[#666]" size={14} />
+                  </motion.div>
                   <span>{t('career.location')}</span>
                 </div>
               </div>
@@ -103,34 +117,52 @@ export default function AboutPage() {
                 onClick={toggleCareerDetails}
                 className="flex items-center gap-2 text-sm text-gray-500 dark:text-[#888] hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer select-none group"
               >
-                <List className={`group-hover:text-accent-yellow transition-transform duration-300 ${isCareerExpanded ? 'rotate-180' : ''}`} size={16} />
+                <motion.div
+                  {...iconHoverProps}
+                  className={`transition-transform duration-300 ${isCareerExpanded ? 'rotate-180' : ''}`}
+                >
+                  <List className={`group-hover:text-accent-yellow`} size={16} />
+                </motion.div>
                 <span>{isCareerExpanded ? t('career.hide_details') : t('career.show_details')}</span>
               </button>
 
               <div className={`mt-6 space-y-8 border-t border-gray-200 dark:border-white/5 pt-6 animate-fade-in ${isCareerExpanded ? '' : 'hidden'}`}>
                 <div>
                   <div className="flex items-center gap-2 text-accent-yellow text-xs font-bold tracking-widest uppercase mb-4">
-                    <List size={16} /> {t('career.responsibilities.title')}
+                    <motion.div {...iconHoverProps}>
+                      <List size={16} />
+                    </motion.div>
+                    {t('career.responsibilities.title')}
                   </div>
                   <ul className="space-y-3 text-gray-600 dark:text-[#999] text-sm leading-relaxed">
                     <li className="flex items-start gap-3">
-                      <CheckCircle className="text-accent-blue mt-0.5 shrink-0" size={16} />
+                      <motion.div {...iconHoverProps}>
+                        <CheckCircle className="text-accent-blue mt-0.5 shrink-0" size={16} />
+                      </motion.div>
                       <span dangerouslySetInnerHTML={{ __html: t.raw('career.responsibilities.item_1').replace('{project}', '<strong>S-TIX</strong>') }} />
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle className="text-accent-blue mt-0.5 shrink-0" size={16} />
+                      <motion.div {...iconHoverProps}>
+                        <CheckCircle className="text-accent-blue mt-0.5 shrink-0" size={16} />
+                      </motion.div>
                       <span dangerouslySetInnerHTML={{ __html: t.raw('career.responsibilities.item_2').replace('{tech1}', '<strong>React.js</strong>').replace('{tech2}', '<strong>Tailwind CSS</strong>') }} />
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle className="text-accent-blue mt-0.5 shrink-0" size={16} />
+                      <motion.div {...iconHoverProps}>
+                        <CheckCircle className="text-accent-blue mt-0.5 shrink-0" size={16} />
+                      </motion.div>
                       <span dangerouslySetInnerHTML={{ __html: t.raw('career.responsibilities.item_3').replace('{tech}', '<strong>Node.js, Express.js, and MongoDB</strong>') }} />
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle className="text-accent-blue mt-0.5 shrink-0" size={16} />
+                      <motion.div {...iconHoverProps}>
+                        <CheckCircle className="text-accent-blue mt-0.5 shrink-0" size={16} />
+                      </motion.div>
                       <span>{t('career.responsibilities.item_4')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle className="text-accent-blue mt-0.5 shrink-0" size={16} />
+                      <motion.div {...iconHoverProps}>
+                        <CheckCircle className="text-accent-blue mt-0.5 shrink-0" size={16} />
+                      </motion.div>
                       <span>{t('career.responsibilities.item_5')}</span>
                     </li>
                   </ul>
@@ -139,19 +171,28 @@ export default function AboutPage() {
                 <div className="grid md:grid-cols-2 gap-8 items-start">
                   <div>
                     <div className="flex items-center gap-2 text-accent-yellow text-xs font-bold tracking-widest uppercase mb-4">
-                      <Lightbulb size={16} /> {t('career.learned.title')}
+                      <motion.div {...iconHoverProps}>
+                        <Lightbulb size={16} />
+                      </motion.div>
+                      {t('career.learned.title')}
                     </div>
                     <ul className="space-y-3 text-gray-600 dark:text-[#999] text-sm leading-relaxed">
                       <li className="flex items-start gap-3">
-                        <Check className="text-green-500 mt-0.5 shrink-0" size={14} />
+                        <motion.div {...iconHoverProps}>
+                          <Check className="text-green-500 mt-0.5 shrink-0" size={14} />
+                        </motion.div>
                         <span>{t('career.learned.item_1')}</span>
                       </li>
                       <li className="flex items-start gap-3">
-                        <Check className="text-green-500 mt-0.5 shrink-0" size={14} />
+                        <motion.div {...iconHoverProps}>
+                          <Check className="text-green-500 mt-0.5 shrink-0" size={14} />
+                        </motion.div>
                         <span>{t('career.learned.item_2')}</span>
                       </li>
                       <li className="flex items-start gap-3">
-                        <Check className="text-green-500 mt-0.5 shrink-0" size={14} />
+                        <motion.div {...iconHoverProps}>
+                          <Check className="text-green-500 mt-0.5 shrink-0" size={14} />
+                        </motion.div>
                         <span>{t('career.learned.item_3')}</span>
                       </li>
                     </ul>
@@ -159,19 +200,28 @@ export default function AboutPage() {
 
                   <div>
                     <div className="flex items-center gap-2 text-accent-yellow text-xs font-bold tracking-widest uppercase mb-4">
-                      <Rocket size={16} /> {t('career.impact.title')}
+                      <motion.div {...iconHoverProps}>
+                        <Rocket size={16} />
+                      </motion.div>
+                      {t('career.impact.title')}
                     </div>
                     <ul className="space-y-3 text-gray-600 dark:text-[#999] text-sm leading-relaxed">
                       <li className="flex items-start gap-3">
-                        <Trophy className="text-orange-500 mt-0.5 shrink-0" size={16} />
+                        <motion.div {...iconHoverProps}>
+                          <Trophy className="text-orange-500 mt-0.5 shrink-0" size={16} />
+                        </motion.div>
                         <span dangerouslySetInnerHTML={{ __html: t.raw('career.impact.item_1').replace('{award}', '<strong>Best Capstone Project</strong>') }} />
                       </li>
                       <li className="flex items-start gap-3">
-                        <TrendingUp className="text-blue-500 mt-0.5 shrink-0" size={16} />
+                        <motion.div {...iconHoverProps}>
+                          <TrendingUp className="text-blue-500 mt-0.5 shrink-0" size={16} />
+                        </motion.div>
                         <span dangerouslySetInnerHTML={{ __html: t.raw('career.impact.item_2').replace('{link}', '<a href="https://s-ticket.online/" target="_blank" class="text-gray-900 dark:text-white hover:underline decoration-accent-yellow underline-offset-4">s-ticket.online</a>') }} />
                       </li>
                       <li className="flex items-start gap-3">
-                        <Users className="text-purple-500 mt-0.5 shrink-0" size={16} />
+                        <motion.div {...iconHoverProps}>
+                          <Users className="text-purple-500 mt-0.5 shrink-0" size={16} />
+                        </motion.div>
                         <span>{t('career.impact.item_3')}</span>
                       </li>
                     </ul>
@@ -188,7 +238,9 @@ export default function AboutPage() {
       {/* Education Section */}
       <section id="education" className="mb-20">
         <div className="flex items-center gap-3 mb-8">
-          <GraduationCap className="text-2xl text-gray-700 dark:text-white" />
+          <motion.div {...iconHoverProps}>
+            <GraduationCap className="text-2xl text-gray-700 dark:text-white" />
+          </motion.div>
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{t('education.title')}</h3>
         </div>
         <div className="text-[11px] font-bold text-gray-500 dark:text-[#555] tracking-widest mb-6 uppercase">

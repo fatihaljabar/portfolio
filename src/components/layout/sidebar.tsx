@@ -19,9 +19,15 @@ import {
   Video,
   ShieldCheck,
 } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { localeFlags, locales, type Locale } from '@/lib/i18n/config';
 import { ModeToggle } from '@/components/components/theme-toggle';
 import { LocaleToggle } from '@/components/components/locale-toggle';
+
+const iconHoverProps = {
+  whileHover: { scale: 1.15, rotate: [0, -5, 5, -5, 0] },
+  transition: { duration: 0.4, ease: 'easeInOut' as const },
+};
 
 export function Sidebar() {
   const t = useTranslations('sidebar');
@@ -57,7 +63,9 @@ export function Sidebar() {
         {/* Name */}
         <h1 className="text-2xl font-bold mb-2 flex items-center gap-2 text-gray-900 dark:text-white">
           Fatih Al Jabar H.M.
-          <ShieldCheck className="text-accent-blue" size={20} />
+          <motion.div {...iconHoverProps}>
+            <ShieldCheck className="text-accent-blue" size={20} />
+          </motion.div>
         </h1>
 
         {/* Language & Theme Toggles */}
@@ -83,7 +91,9 @@ export function Sidebar() {
                 className="w-fit cursor-arrow-circle flex items-center gap-4 text-sm text-gray-700 dark:text-[#EAEAEA] hover:text-gray-500 dark:hover:text-[#999] transition-colors py-1 group"
               >
                 <div className="w-5 flex justify-center">
-                  <Mail className="text-xl text-gray-400 dark:text-[#666] group-hover:text-gray-500 dark:group-hover:text-[#999] transition-colors" size={20} />
+                  <motion.div {...iconHoverProps}>
+                    <Mail className="text-xl text-gray-400 dark:text-[#666] group-hover:text-gray-500 dark:group-hover:text-[#999] transition-colors" size={20} />
+                  </motion.div>
                 </div>
                 <span className="tracking-wide">hey@fatih.com</span>
               </a>
@@ -95,7 +105,9 @@ export function Sidebar() {
                 className="w-fit cursor-arrow-circle flex items-center gap-4 text-sm text-gray-700 dark:text-[#EAEAEA] hover:text-gray-500 dark:hover:text-[#999] transition-colors py-1 group"
               >
                 <div className="w-5 flex justify-center">
-                  <Globe className="text-xl text-gray-400 dark:text-[#666] group-hover:text-gray-500 dark:group-hover:text-[#999] transition-colors" size={20} />
+                  <motion.div {...iconHoverProps}>
+                    <Globe className="text-xl text-gray-400 dark:text-[#666] group-hover:text-gray-500 dark:group-hover:text-[#999] transition-colors" size={20} />
+                  </motion.div>
                 </div>
                 <span className="tracking-wide">fatihaljabar.com</span>
               </a>
@@ -103,7 +115,9 @@ export function Sidebar() {
             <li>
               <div className="w-fit cursor-arrow-circle flex items-center gap-4 text-sm text-gray-700 dark:text-[#EAEAEA] hover:text-gray-500 dark:hover:text-[#999] transition-colors py-1 group">
                 <div className="w-5 flex justify-center">
-                  <Phone className="text-xl text-gray-400 dark:text-[#666] group-hover:text-gray-500 dark:group-hover:text-[#999] transition-colors" size={20} />
+                  <motion.div {...iconHoverProps}>
+                    <Phone className="text-xl text-gray-400 dark:text-[#666] group-hover:text-gray-500 dark:group-hover:text-[#999] transition-colors" size={20} />
+                  </motion.div>
                 </div>
                 <span className="tracking-wide">+62 812-3456-7890</span>
               </div>
@@ -139,7 +153,9 @@ export function Sidebar() {
               className="cursor-arrow-circle text-gray-400 dark:text-[#666] hover:text-gray-700 dark:hover:text-white transition-colors duration-300"
               aria-label={social.label}
             >
-              <Icon size={24} />
+              <motion.div {...iconHoverProps}>
+                <Icon size={24} />
+              </motion.div>
             </a>
           );
         })}

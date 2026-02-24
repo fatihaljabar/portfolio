@@ -17,6 +17,7 @@ import {
   Video,
 } from 'lucide-react';
 import { z } from 'zod';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -30,6 +31,11 @@ const contactSchema = z.object({
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
+
+const iconHoverProps = {
+  whileHover: { scale: 1.15, rotate: [0, -5, 5, -5, 0] },
+  transition: { duration: 0.4, ease: 'easeInOut' as const },
+};
 
 const socialCards = [
   {
@@ -191,7 +197,10 @@ export default function ContactPage() {
                     href={card.email}
                     className="shrink-0 flex items-center gap-2 bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-black border border-gray-300 dark:border-transparent px-6 py-3 rounded-xl font-bold text-sm hover:bg-gray-200 dark:hover:bg-gray-200 transition-colors shadow-lg"
                   >
-                    <ButtonIcon size={16} /> {t(card.buttonText)}
+                    <motion.div {...iconHoverProps}>
+                      <ButtonIcon size={16} />
+                    </motion.div>
+                    {t(card.buttonText)}
                   </a>
                 ) : (
                   <a
@@ -200,7 +209,10 @@ export default function ContactPage() {
                     rel={card.target ? 'noopener noreferrer' : undefined}
                     className="inline-flex items-center gap-2 bg-gray-200 dark:bg-white/10 text-gray-900 dark:text-white border border-gray-300 dark:border-white/10 px-4 py-2 rounded-lg text-xs font-bold hover:bg-gray-300 dark:hover:bg-white dark:hover:text-black transition-all"
                   >
-                    {t(card.buttonText)} <ButtonIcon size={14} />
+                    {t(card.buttonText)}{' '}
+                    <motion.div {...iconHoverProps}>
+                      <ButtonIcon size={14} />
+                    </motion.div>
                   </a>
                 )}
               </div>

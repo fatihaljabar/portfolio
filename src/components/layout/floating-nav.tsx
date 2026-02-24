@@ -17,6 +17,7 @@ import {
   Mail,
   Heart,
 } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { toggleLove, hasLoved, getLoveCount } from '@/lib/actions/love';
 
 interface NavItem {
@@ -24,6 +25,24 @@ interface NavItem {
   icon: any;
   label: string;
 }
+
+const iconHoverVariants = {
+  hover: {
+    scale: 1.2,
+    rotate: [0, -10, 10, -10, 0],
+    transition: {
+      duration: 0.5,
+      ease: 'easeInOut' as const,
+    },
+  },
+  active: {
+    scale: 1.1,
+    rotate: 5,
+    transition: {
+      duration: 0.2,
+    },
+  },
+};
 
 export function FloatingNav() {
   const t = useTranslations('nav');
@@ -92,7 +111,14 @@ export function FloatingNav() {
                   : 'text-gray-500 dark:text-[#888] hover:text-gray-900 dark:hover:text-white hover:ring-gray-400/20 dark:hover:ring-white/20 hover:bg-transparent'
               }`}
             >
-              <Icon className="text-xl" size={20} />
+              <motion.div
+                variants={iconHoverVariants}
+                initial="initial"
+                animate={active ? 'active' : 'initial'}
+                whileHover="hover"
+              >
+                <Icon className="text-xl" size={20} />
+              </motion.div>
               <span className="absolute bottom-[125%] left-1/2 -translate-x-1/2 bg-gray-200 dark:bg-[#1a1a1a] text-gray-900 dark:text-white px-2.5 py-1 rounded-md text-[11px] font-medium border border-gray-300 dark:border-white/10 shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:-translate-y-1 transition-all duration-200 pointer-events-none">
                 {item.label}
               </span>
@@ -109,7 +135,13 @@ export function FloatingNav() {
           className="group relative p-2.5 text-gray-500 dark:text-[#888] transition-all duration-300 hover:text-gray-900 dark:hover:text-white hover:ring-gray-400/20 dark:hover:ring-white/20 hover:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed"
           aria-label={`${t('support')} (${loveCount})`}
         >
-          <div className="relative">
+          <motion.div
+            className="relative"
+            variants={iconHoverVariants}
+            initial="initial"
+            whileHover="hover"
+            whileTap={{ scale: 0.9 }}
+          >
             <Heart
               className={`text-xl transition-all ${isLoved ? 'text-red-500 fill-red-500 scale-110' : ''}`}
               size={20}
@@ -120,7 +152,7 @@ export function FloatingNav() {
                 {loveCount}
               </span>
             )}
-          </div>
+          </motion.div>
           <span className="absolute bottom-[125%] left-1/2 -translate-x-1/2 bg-gray-200 dark:bg-[#1a1a1a] text-gray-900 dark:text-white px-2.5 py-1 rounded-md text-[11px] font-medium border border-gray-300 dark:border-white/10 shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:-translate-y-1 transition-all duration-200 pointer-events-none">
             {t('support')} ({loveCount})
           </span>

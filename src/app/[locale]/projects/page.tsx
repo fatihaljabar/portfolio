@@ -8,6 +8,7 @@ import { Folder, ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
 import { Link } from '@/lib/i18n/navigation';
 import { prisma } from '@/lib/prisma/client';
+import { FramerIcon } from '@/components/components/framer-icon';
 
 const techIcons: Record<string, string> = {
   TypeScript: 'TS',
@@ -70,7 +71,7 @@ export default async function ProjectsPage() {
 
       {projects.length === 0 ? (
         <div className="text-center py-20">
-          <Folder className="mx-auto text-gray-300 dark:text-[#333] mb-4" size={48} />
+          <FramerIcon icon={Folder} size={48} className="mx-auto text-gray-300 dark:text-[#333] mb-4" />
           <p className="text-gray-400 dark:text-[#888]">{t('no_projects')}</p>
         </div>
       ) : (
@@ -101,7 +102,7 @@ export default async function ProjectsPage() {
                     />
                   ) : (
                     <div className="absolute inset-0 bg-gray-200 dark:bg-[#1a1a1a] flex items-center justify-center">
-                      <Folder className="text-gray-300 dark:text-[#333]" size={48} />
+                      <FramerIcon icon={Folder} size={48} className="text-gray-300 dark:text-[#333]" />
                     </div>
                   )}
 

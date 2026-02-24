@@ -9,12 +9,18 @@ import { useTranslations } from 'next-intl';
 import { useState, useMemo } from 'react';
 import { Search, ChevronDown, ShieldCheck, Calendar, ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import type { AchievementType, AchievementCardData } from '@/types';
 
 interface AchievementsClientProps {
   initialAchievements: AchievementCardData[];
   categories: string[];
 }
+
+const iconHoverProps = {
+  whileHover: { scale: 1.15, rotate: [0, -5, 5, -5, 0] },
+  transition: { duration: 0.4, ease: 'easeInOut' as const },
+};
 
 const typeOptions: { value: AchievementType | 'ALL'; label: string }[] = [
   { value: 'ALL', label: 'All' },
@@ -68,7 +74,9 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
       {/* Filters */}
       <div className="flex flex-col md:flex-row gap-4 mb-8">
         <div className="flex-1 relative group">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-[#666] group-focus-within:text-gray-900 dark:group-focus-within:text-white transition-colors" size={20} />
+          <motion.div {...iconHoverProps} className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
+            <Search className="text-gray-400 dark:text-[#666] group-focus-within:text-gray-900 dark:group-focus-within:text-white transition-colors" size={20} />
+          </motion.div>
           <input
             type="text"
             placeholder={t('search_placeholder')}
@@ -91,7 +99,9 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
                 </option>
               ))}
             </select>
-            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-[#666] pointer-events-none" size={16} />
+            <motion.div {...iconHoverProps} className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+              <ChevronDown className="text-gray-400 dark:text-[#666]" size={16} />
+            </motion.div>
           </div>
           <div className="relative group min-w-[160px]">
             <select
@@ -105,7 +115,9 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
                 </option>
               ))}
             </select>
-            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-[#666] pointer-events-none" size={16} />
+            <motion.div {...iconHoverProps} className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+              <ChevronDown className="text-gray-400 dark:text-[#666]" size={16} />
+            </motion.div>
           </div>
         </div>
       </div>
@@ -146,7 +158,9 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
                   </>
                 ) : (
                   <div className="absolute inset-0 bg-gray-200 dark:bg-[#0a0a0a] flex items-center justify-center">
-                    <ShieldCheck className="text-gray-300 dark:text-[#333]" size={48} />
+                    <motion.div {...iconHoverProps}>
+                      <ShieldCheck className="text-gray-300 dark:text-[#333]" size={48} />
+                    </motion.div>
                   </div>
                 )}
 
@@ -188,7 +202,9 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
 
                 {/* Issuer */}
                 <div className="flex items-center gap-2 text-gray-600 dark:text-[#888] text-xs mb-3">
-                  <ShieldCheck className="text-gray-400 dark:text-[#555] shrink-0" size={14} />
+                  <motion.div {...iconHoverProps}>
+                    <ShieldCheck className="text-gray-400 dark:text-[#555] shrink-0" size={14} />
+                  </motion.div>
                   <span>{achievement.issuer}</span>
                 </div>
 
@@ -207,7 +223,10 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
                 {/* Date */}
                 <div className="mt-3">
                   <span className="text-[10px] text-gray-500 dark:text-[#666] font-mono flex items-center gap-2">
-                    <Calendar size={14} className="shrink-0 text-gray-400 dark:text-[#555]" /> {formatDate(achievement.issuedDate)}
+                    <motion.div {...iconHoverProps}>
+                      <Calendar size={14} className="shrink-0 text-gray-400 dark:text-[#555]" />
+                    </motion.div>
+                    {formatDate(achievement.issuedDate)}
                   </span>
                 </div>
               </div>
