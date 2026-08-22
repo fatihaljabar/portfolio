@@ -64,6 +64,7 @@ export interface AchievementCardData {
   certificateNumber: string | null;
   credentialUrl: string | null;
   imageUrl: string | null;
+  additionalImages: string[];
   issuedDate: Date;
   type: AchievementType;
   category: string | null;

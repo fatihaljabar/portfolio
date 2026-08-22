@@ -7,7 +7,7 @@
 
 import { useTranslations } from 'next-intl';
 import { useState, useMemo } from 'react';
-import { Search, ChevronDown, ShieldCheck, Calendar, Eye, ArrowUpRight } from 'lucide-react';
+import { Search, ChevronDown, ShieldCheck, Calendar, Eye, ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import {
@@ -45,6 +45,14 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
   const [selectedType, setSelectedType] = useState<AchievementType | 'ALL'>('ALL');
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [selectedAchievement, setSelectedAchievement] = useState<AchievementCardData | null>(null);
+  const [slideIndex, setSlideIndex] = useState(0);
+
+  const slides = useMemo(() => {
+    if (!selectedAchievement) return [];
+    return [selectedAchievement.imageUrl, ...selectedAchievement.additionalImages].filter(
+      (src): src is string => Boolean(src),
+    );
+  }, [selectedAchievement]);
 
   const categoryOptions = useMemo(() => {
     return [
@@ -76,6 +84,11 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
 
   const openDetails = (achievement: AchievementCardData) => {
     setSelectedAchievement(achievement);
+    setSlideIndex(0);
+  };
+
+  const goToSlide = (index: number) => {
+    setSlideIndex((index + slides.length) % slides.length);
   };
 
   return (
@@ -161,6 +174,7 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
               type="button"
               onClick={() => openDetails(achievement)}
               aria-haspopup="dialog"
+              aria-label={`${t('view_details')}: ${achievement.title}`}
               className="group relative flex flex-col text-left w-full bg-gray-100 dark:bg-[#121212] border border-gray-200 dark:border-white/5 rounded-2xl overflow-hidden hover:border-accent-blue/30 hover:-translate-y-1 hover:shadow-2xl hover:shadow-accent-blue/5 transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue/50"
             >
               {/* Image Area */}
@@ -171,7 +185,7 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
                       src={achievement.imageUrl}
                       alt={achievement.title}
                       fill
-                      className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+                      className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-500 ease-out"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-100 dark:from-[#121212] via-transparent to-transparent opacity-80"></div>
                   </>
@@ -183,21 +197,24 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
                   </div>
                 )}
 
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-[2px] bg-black/40">
-                  <span className="flex items-center gap-2 text-white font-semibold text-sm border border-white/20 bg-white/10 px-5 py-2.5 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    {t('view_details')} <Eye size={16} />
-                  </span>
-                </div>
+                <span
+                  aria-hidden="true"
+                  className="absolute top-3 right-3 flex items-center justify-center w-8 h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm border border-black/5 dark:border-white/10 text-gray-700 dark:text-white opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 ease-out shadow-sm"
+                >
+                  <Eye size={14} />
+                </span>
               </div>
 
               {/* Content */}
               <div className="p-6 flex flex-col flex-1 relative">
                 {/* Badge */}
-                {achievement.certificateNumber && (
-                  <span className="text-[10px] text-blue-600 dark:text-accent-blue font-mono mb-2">
-                    {achievement.certificateNumber}
-                  </span>
-                )}
+                <div className="h-4 mb-2 flex items-center">
+                  {achievement.certificateNumber && (
+                    <span className="text-[10px] text-blue-600 dark:text-accent-blue font-mono">
+                      {achievement.certificateNumber}
+                    </span>
+                  )}
+                </div>
 
                 {/* Title */}
                 <div className="mb-3" style={{ minHeight: '42px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -246,23 +263,59 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
         open={selectedAchievement !== null}
         onOpenChange={(open) => !open && setSelectedAchievement(null)}
       >
-        <DialogContent className="max-w-xl p-0 gap-0 bg-white dark:bg-[#121212] border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden">
+        <DialogContent className="max-w-2xl p-0 gap-0 bg-white dark:bg-[#121212] border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden">
           {selectedAchievement && (
             <>
-              <div className="relative w-full aspect-video bg-gray-200 dark:bg-[#0a0a0a] overflow-hidden">
-                {selectedAchievement.imageUrl ? (
+              <div className="relative w-full aspect-[3/2] bg-gray-200 dark:bg-[#0a0a0a] overflow-hidden">
+                {slides.length > 0 ? (
                   <Image
-                    src={selectedAchievement.imageUrl}
-                    alt={selectedAchievement.title}
+                    key={slides[slideIndex]}
+                    src={slides[slideIndex]}
+                    alt={`${selectedAchievement.title} — page ${slideIndex + 1}`}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                   />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center">
                     <ShieldCheck className="text-gray-300 dark:text-[#333]" size={64} />
                   </div>
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-[#121212] via-transparent to-transparent opacity-90" />
+
+                {slides.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => goToSlide(slideIndex - 1)}
+                      aria-label="Previous page"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm border border-black/5 dark:border-white/10 text-gray-700 dark:text-white hover:bg-white dark:hover:bg-black/80 transition-colors"
+                    >
+                      <ChevronLeft size={16} />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => goToSlide(slideIndex + 1)}
+                      aria-label="Next page"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm border border-black/5 dark:border-white/10 text-gray-700 dark:text-white hover:bg-white dark:hover:bg-black/80 transition-colors"
+                    >
+                      <ChevronRight size={16} />
+                    </button>
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5">
+                      {slides.map((slide, index) => (
+                        <button
+                          key={slide}
+                          type="button"
+                          onClick={() => goToSlide(index)}
+                          aria-label={`Go to page ${index + 1}`}
+                          className={`h-1.5 rounded-full transition-all duration-300 ${
+                            index === slideIndex
+                              ? 'w-5 bg-white'
+                              : 'w-1.5 bg-white/50 hover:bg-white/75'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </>
+                )}
               </div>
 
               <div className="p-6 sm:p-8">

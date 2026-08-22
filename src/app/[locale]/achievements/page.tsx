@@ -42,6 +42,7 @@ export default async function AchievementsPage({
       certificateNumber: true,
       credentialUrl: true,
       imageUrl: true,
+      additionalImages: true,
       issuedDate: true,
       type: true,
       category: true,
