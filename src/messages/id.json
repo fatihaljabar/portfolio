@@ -141,6 +141,10 @@
   "common": {
     "loading": "Memuat...",
     "error": "Terjadi kesalahan",
-    "not_found": "Tidak Ditemukan"
+    "not_found": "Tidak Ditemukan",
+    "not_found_description": "Halaman yang kamu cari tidak ada atau sudah dipindahkan.",
+    "back_home": "Kembali ke beranda",
+    "error_description": "Terjadi kesalahan tak terduga. Silakan coba lagi.",
+    "retry": "Coba lagi"
   }
 }
