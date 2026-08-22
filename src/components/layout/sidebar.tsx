@@ -8,7 +8,6 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/lib/i18n/navigation';
 import Image from 'next/image';
-import { useState } from 'react';
 import {
   Mail,
   Globe,
@@ -32,10 +31,6 @@ const iconHoverProps = {
 export function Sidebar() {
   const t = useTranslations('sidebar');
   const tNav = useTranslations('nav');
-  const [mounted, setMounted] = useState(false);
-
-  // Prevent hydration mismatch
-  useState(() => setMounted(true));
 
   const socialLinks = [
     { icon: X, href: 'https://x.com/fatihaljabar', label: 'X' },
