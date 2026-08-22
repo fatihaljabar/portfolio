@@ -7,6 +7,7 @@
 
 import { useTranslations } from 'next-intl';
 import { Link } from '@/lib/i18n/navigation';
+import Image from 'next/image';
 import { useState } from 'react';
 import {
   Mail,
@@ -51,12 +52,8 @@ export function Sidebar() {
       <div className="flex flex-col items-center w-full">
         {/* Profile Image */}
         <div className="mb-6">
-          <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-gray-200 dark:border-dark-border shadow-2xl">
-            <img
-              src="/img/1.jpg"
-              alt="Profile"
-              className="w-full h-full object-cover"
-            />
+          <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-gray-200 dark:border-dark-border shadow-2xl">
+            <Image src="/img/profile.jpg" alt="Profile" fill sizes="96px" className="object-cover" priority />
           </div>
         </div>
 
