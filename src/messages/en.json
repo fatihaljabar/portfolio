@@ -13,7 +13,8 @@
     "based_in": "Based in Sidoarjo, Indonesia 🇮🇩",
     "remote": "Remote",
     "description": "A Software Engineer and Front-End specialist dedicated to building impactful digital solutions. I specialize in developing scalable web platforms using a modern tech stack, primarily {techStack}. My focus is on crafting software architecture that is well-structured, maintainable, and aligned with business goals.",
-    "tech_stack_list": "React, Tailwind CSS, and TypeScript"
+    "tech_stack_list": "React, Tailwind CSS, and TypeScript",
+    "tagline": "Software Engineer & Front-End Specialist"
   },
   "about": {
     "title": "About",
@@ -141,6 +142,10 @@
   "common": {
     "loading": "Loading...",
     "error": "Something went wrong",
-    "not_found": "Not Found"
+    "not_found": "Not Found",
+    "not_found_description": "The page you're looking for doesn't exist or has been moved.",
+    "back_home": "Back to home",
+    "error_description": "Something unexpected happened. Please try again.",
+    "retry": "Try again"
   }
 }

@@ -7,11 +7,10 @@
 
 import { useTranslations } from 'next-intl';
 import { Link } from '@/lib/i18n/navigation';
-import { useState } from 'react';
+import Image from 'next/image';
 import {
   Mail,
   Globe,
-  Phone,
   X,
   Instagram,
   Linkedin,
@@ -32,31 +31,23 @@ const iconHoverProps = {
 export function Sidebar() {
   const t = useTranslations('sidebar');
   const tNav = useTranslations('nav');
-  const [mounted, setMounted] = useState(false);
-
-  // Prevent hydration mismatch
-  useState(() => setMounted(true));
 
   const socialLinks = [
-    { icon: X, href: '#', label: 'X' },
-    { icon: Instagram, href: '#', label: 'Instagram' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Github, href: '#', label: 'GitHub' },
-    { icon: Video, href: '#', label: 'TikTok' },
-    { icon: Mail, href: 'mailto:hey@fatih.com', label: 'Email' },
+    { icon: X, href: 'https://x.com/fatihaljabar', label: 'X' },
+    { icon: Instagram, href: 'https://www.instagram.com/fatihaljabar/', label: 'Instagram' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/fatihaljabar/', label: 'LinkedIn' },
+    { icon: Github, href: 'https://github.com/fatihaljabar', label: 'GitHub' },
+    { icon: Video, href: 'https://www.tiktok.com/@fatihaljabarr', label: 'TikTok' },
+    { icon: Mail, href: 'mailto:fatihaljabar@gmail.com', label: 'Email' },
   ];
 
   return (
-    <aside className="lg:w-[380px] lg:h-screen lg:sticky lg:top-0 p-8 lg:p-10 flex flex-col justify-between z-40 bg-white dark:bg-[#0a0a0a] lg:border-r border-gray-200 dark:border-dark-border">
+    <aside className="lg:w-[380px] lg:h-screen lg:sticky lg:top-0 p-8 pb-28 lg:p-10 flex flex-col justify-between z-40 bg-white dark:bg-[#0a0a0a] lg:border-r border-gray-200 dark:border-dark-border">
       <div className="flex flex-col items-center w-full">
         {/* Profile Image */}
         <div className="mb-6">
-          <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-gray-200 dark:border-dark-border shadow-2xl">
-            <img
-              src="/img/1.jpg"
-              alt="Profile"
-              className="w-full h-full object-cover"
-            />
+          <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-gray-200 dark:border-dark-border shadow-2xl">
+            <Image src="/img/profile.jpg" alt="Profile" fill sizes="96px" className="object-cover" priority />
           </div>
         </div>
 
@@ -87,7 +78,7 @@ export function Sidebar() {
           <ul className="space-y-2">
             <li>
               <a
-                href="mailto:hey@fatih.com"
+                href="mailto:fatihaljabar@gmail.com"
                 className="w-fit cursor-arrow-circle flex items-center gap-4 text-sm text-gray-700 dark:text-[#EAEAEA] hover:text-gray-500 dark:hover:text-[#999] transition-colors py-1 group"
               >
                 <div className="w-5 flex justify-center">
@@ -95,13 +86,14 @@ export function Sidebar() {
                     <Mail className="text-xl text-gray-400 dark:text-[#666] group-hover:text-gray-500 dark:group-hover:text-[#999] transition-colors" size={20} />
                   </motion.div>
                 </div>
-                <span className="tracking-wide">hey@fatih.com</span>
+                <span className="tracking-wide">fatihaljabar@gmail.com</span>
               </a>
             </li>
             <li>
               <a
-                href="https://fatih.com"
+                href="https://fatihaljabar.com"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="w-fit cursor-arrow-circle flex items-center gap-4 text-sm text-gray-700 dark:text-[#EAEAEA] hover:text-gray-500 dark:hover:text-[#999] transition-colors py-1 group"
               >
                 <div className="w-5 flex justify-center">
@@ -111,16 +103,6 @@ export function Sidebar() {
                 </div>
                 <span className="tracking-wide">fatihaljabar.com</span>
               </a>
-            </li>
-            <li>
-              <div className="w-fit cursor-arrow-circle flex items-center gap-4 text-sm text-gray-700 dark:text-[#EAEAEA] hover:text-gray-500 dark:hover:text-[#999] transition-colors py-1 group">
-                <div className="w-5 flex justify-center">
-                  <motion.div {...iconHoverProps}>
-                    <Phone className="text-xl text-gray-400 dark:text-[#666] group-hover:text-gray-500 dark:group-hover:text-[#999] transition-colors" size={20} />
-                  </motion.div>
-                </div>
-                <span className="tracking-wide">+62 812-3456-7890</span>
-              </div>
             </li>
           </ul>
         </div>
@@ -150,6 +132,8 @@ export function Sidebar() {
             <a
               key={social.label}
               href={social.href}
+              target={social.href.startsWith('mailto:') ? undefined : '_blank'}
+              rel={social.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
               className="cursor-arrow-circle text-gray-400 dark:text-[#666] hover:text-gray-700 dark:hover:text-white transition-colors duration-300"
               aria-label={social.label}
             >

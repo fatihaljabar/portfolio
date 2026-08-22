@@ -2,9 +2,11 @@
 
 import React from 'react';
 import { useLocale } from 'next-intl';
+import { useParams } from 'next/navigation';
 import { Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { locales, type Locale } from '@/lib/i18n/config';
+import { usePathname, useRouter } from '@/lib/i18n/navigation';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -15,6 +17,9 @@ import {
 
 export function LocaleToggle() {
   const locale = useLocale() as Locale;
+  const pathname = usePathname();
+  const params = useParams();
+  const router = useRouter();
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
@@ -22,10 +27,11 @@ export function LocaleToggle() {
   }, []);
 
   const handleLocaleChange = (newLocale: Locale) => {
-    // Update URL with new locale
-    const currentPath = window.location.pathname;
-    const pathWithoutLocale = currentPath.replace(`/${locale}`, '').replace(/^\//, '') || '';
-    window.location.href = `/${newLocale}${pathWithoutLocale ? `/${pathWithoutLocale}` : ''}`;
+    router.replace(
+      // @ts-expect-error -- pathname is a template like "/projects/[slug]"; params fills in the dynamic segments
+      { pathname, params },
+      { locale: newLocale },
+    );
   };
 
   if (!mounted) {
