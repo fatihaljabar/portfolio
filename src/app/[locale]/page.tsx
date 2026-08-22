@@ -3,12 +3,29 @@
  * Landing page with intro and skills sections
  */
 
-import { useTranslations } from 'next-intl';
+import type { Metadata } from 'next';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { MapPin, Code } from 'lucide-react';
 import { SkillsGrid } from '@/components/sections/skills-grid';
+import { buildMetadata } from '@/lib/seo/metadata';
+import type { Locale } from '@/lib/i18n/config';
 
-export default function HomePage() {
-  const t = useTranslations('home');
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations('home');
+  const description = t('description').replace('{techStack}', t('tech_stack_list'));
+  return buildMetadata({ locale, path: '', title: t('tagline'), description });
+}
+
+export default async function HomePage({ params }: { params: Promise<{ locale: Locale }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations('home');
 
   return (
     <>

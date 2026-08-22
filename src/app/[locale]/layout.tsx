@@ -4,7 +4,7 @@
  * (needed for the lang attribute) is only known inside the [locale] segment
  */
 
-import type { Viewport } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Manrope, Sacramento } from 'next/font/google';
 import { routing } from '@/lib/i18n/navigation';
 import { Providers } from '@/components/providers/intl-provider';
@@ -13,6 +13,10 @@ import '../globals.css';
 
 export const viewport: Viewport = {
   viewportFit: 'cover',
+};
+
+export const metadata: Metadata = {
+  metadataBase: new URL((process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000').replace(/\/$/, '')),
 };
 
 const manrope = Manrope({
