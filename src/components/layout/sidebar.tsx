@@ -42,7 +42,7 @@ export function Sidebar() {
   ];
 
   return (
-    <aside className="lg:w-[380px] lg:h-screen lg:sticky lg:top-0 p-8 lg:p-10 flex flex-col justify-between z-40 bg-white dark:bg-[#0a0a0a] lg:border-r border-gray-200 dark:border-dark-border">
+    <aside className="lg:w-[380px] lg:h-screen lg:sticky lg:top-0 p-8 pb-28 lg:p-10 flex flex-col justify-between z-40 bg-white dark:bg-[#0a0a0a] lg:border-r border-gray-200 dark:border-dark-border">
       <div className="flex flex-col items-center w-full">
         {/* Profile Image */}
         <div className="mb-6">

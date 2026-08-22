@@ -4,11 +4,16 @@
  * (needed for the lang attribute) is only known inside the [locale] segment
  */
 
+import type { Viewport } from 'next';
 import { Manrope, Sacramento } from 'next/font/google';
 import { routing } from '@/lib/i18n/navigation';
 import { Providers } from '@/components/providers/intl-provider';
 import { MainLayout } from '@/components/layout/main-layout';
 import '../globals.css';
+
+export const viewport: Viewport = {
+  viewportFit: 'cover',
+};
 
 const manrope = Manrope({
   subsets: ['latin'],

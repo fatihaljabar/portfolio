@@ -78,7 +78,7 @@ export function FloatingNav() {
   };
 
   return (
-    <div className="fixed bottom-8 left-0 lg:left-[380px] right-0 z-50 flex justify-center pointer-events-none">
+    <div className="fixed bottom-[max(2rem,calc(env(safe-area-inset-bottom)+1rem))] left-0 lg:left-[380px] right-0 z-50 flex justify-center pointer-events-none">
       <nav className="flex items-center gap-1.5 bg-gray-100/90 dark:bg-[#121212]/90 backdrop-blur-xl border border-gray-300 dark:border-white/10 px-2 py-1.5 rounded-full shadow-2xl pointer-events-auto">
         {navItems.map((item) => {
           const Icon = item.icon;
