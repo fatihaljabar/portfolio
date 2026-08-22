@@ -3,7 +3,7 @@
  * Detailed view of a single project
  */
 
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ArrowLeft, Box, ExternalLink, Github } from 'lucide-react';
 import { Link } from '@/lib/i18n/navigation';
 import Image from 'next/image';
@@ -23,9 +23,17 @@ const techColors: Record<string, { color: string; bg: string; border: string }> 
   Laravel: { color: 'text-[#FF2D20]', bg: 'bg-[#FF2D20]/10', border: 'border-[#FF2D20]/20' },
 };
 
-export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+export const revalidate = 60;
+
+export default async function ProjectDetailPage({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}) {
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
+
   const t = await getTranslations('project_detail');
-  const { slug } = await params;
 
   const project = await prisma.project.findUnique({
     where: { slug },

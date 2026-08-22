@@ -6,6 +6,8 @@
 import { prisma } from '@/lib/prisma/client';
 import { AchievementsClient } from './achievements-client';
 
+export const revalidate = 60;
+
 export default async function AchievementsPage() {
   const achievements = await prisma.achievement.findMany({
     orderBy: { issuedDate: 'desc' },

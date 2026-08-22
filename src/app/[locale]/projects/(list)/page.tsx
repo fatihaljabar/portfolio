@@ -3,11 +3,20 @@
  * Showcase of projects with filtering
  */
 
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { prisma } from '@/lib/prisma/client';
 import { ProjectsClient } from './projects-client';
 
-export default async function ProjectsPage() {
+export const revalidate = 60;
+
+export default async function ProjectsPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   const t = await getTranslations('projects');
 
   // Fetch projects directly from Prisma
