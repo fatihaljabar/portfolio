@@ -5,7 +5,9 @@
  */
 
 import type { Metadata, Viewport } from 'next';
+import { notFound } from 'next/navigation';
 import { Manrope, Sacramento } from 'next/font/google';
+import { locales } from '@/lib/i18n/config';
 import { routing } from '@/lib/i18n/navigation';
 import { Providers } from '@/components/providers/intl-provider';
 import { MainLayout } from '@/components/layout/main-layout';
@@ -44,18 +46,20 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const validLocale = locale || 'en';
 
-  // Import messages directly based on locale
-  const messages = (await import(`@/messages/${validLocale}.json`)).default;
+  if (!locales.includes(locale as (typeof locales)[number])) {
+    notFound();
+  }
+
+  const messages = (await import(`@/messages/${locale}.json`)).default;
 
   return (
-    <html lang={validLocale} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={`${manrope.variable} ${sacramento.variable}`}
         suppressHydrationWarning
       >
-        <Providers locale={validLocale} messages={messages}>
+        <Providers locale={locale} messages={messages}>
           <MainLayout>{children}</MainLayout>
         </Providers>
       </body>
