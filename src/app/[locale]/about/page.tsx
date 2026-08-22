@@ -78,7 +78,7 @@ export default function AboutPage() {
         <div className="rounded-2xl border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-[#121212] p-6 transition-all hover:border-gray-300 dark:hover:border-white/10">
           <div className="flex flex-col md:flex-row gap-5 items-start">
             <div className="w-14 h-14 min-w-[56px] rounded-xl bg-gray-200 dark:bg-[#1a1a1a] overflow-hidden flex items-center justify-center border border-gray-300 dark:border-white/10">
-              <Image src="/img/dicodinglogo.jpeg" alt="Dicoding" width={56} height={56} className="w-full h-full object-cover" />
+              <Image src="/img/dicoding-logo.png" alt="Dicoding" width={56} height={56} className="w-full h-full object-cover" />
             </div>
 
             <div className="flex-1 w-full">
@@ -250,7 +250,7 @@ export default function AboutPage() {
         <div className="rounded-2xl border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-[#121212] p-6 transition-all hover:border-gray-300 dark:hover:border-white/10">
           <div className="flex flex-col md:flex-row gap-5 items-center">
             <div className="w-14 h-14 min-w-[56px] rounded-xl bg-gray-200 dark:bg-[#1a1a1a] overflow-hidden flex items-center justify-center border border-gray-300 dark:border-white/10">
-              <Image src="/img/univ.jpeg" alt="Untag Surabaya" width={56} height={56} className="w-full h-full object-cover" />
+              <Image src="/img/untag-logo.png" alt="Untag Surabaya" width={56} height={56} className="w-full h-full object-cover" />
             </div>
 
             <div className="w-full">

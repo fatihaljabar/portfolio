@@ -49,3 +49,6 @@ logs/
 # Dokumentasi internal — lokal saja, jangan di-push (kecuali README)
 *.md
 !README.md
+
+# Folder staging aset lokal — sumber mentah, bukan aset publik final
+/img/
