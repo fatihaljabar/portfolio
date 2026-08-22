@@ -41,7 +41,7 @@ const socialCards = [
   {
     title: 'project_inquiry_title',
     description: 'project_inquiry_desc',
-    email: 'mailto:hey@fatih.com',
+    email: 'mailto:fatihaljabar@gmail.com',
     buttonText: 'send_email',
     buttonIcon: Send,
     gradient: 'from-red-900/20 dark:from-red-900/40 via-gray-100 dark:via-[#1a1a1a] to-white dark:to-[#121212]',
@@ -61,7 +61,7 @@ const socialCards = [
     hoverBorder: 'hover:border-pink-500/30',
     icon: Instagram,
     iconColor: 'text-pink-500/5',
-    href: '#',
+    href: 'https://www.instagram.com/fatihaljabar/',
     target: true,
   },
   {
@@ -73,7 +73,7 @@ const socialCards = [
     hoverBorder: 'hover:border-blue-500/30',
     icon: Linkedin,
     iconColor: 'text-blue-500/5',
-    href: '#',
+    href: 'https://www.linkedin.com/in/fatihaljabar/',
     target: true,
   },
   {
@@ -85,7 +85,7 @@ const socialCards = [
     hoverBorder: 'hover:border-teal-500/30',
     icon: Video,
     iconColor: 'text-teal-500/5',
-    href: '#',
+    href: 'https://www.tiktok.com/@fatihaljabarr',
     target: true,
   },
   {
@@ -97,7 +97,7 @@ const socialCards = [
     hoverBorder: 'hover:border-gray-300 dark:hover:border-white/20',
     icon: Github,
     iconColor: 'text-gray-400/5 dark:text-white/5',
-    href: '#',
+    href: 'https://github.com/fatihaljabar',
     target: true,
   },
 ];
