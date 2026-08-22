@@ -216,7 +216,7 @@ export default function AboutPage() {
                         <motion.div {...iconHoverProps}>
                           <TrendingUp className="text-blue-500 mt-0.5 shrink-0" size={16} />
                         </motion.div>
-                        <span dangerouslySetInnerHTML={{ __html: t.raw('career.impact.item_2').replace('{link}', '<a href="https://s-ticket.online/" target="_blank" class="text-gray-900 dark:text-white hover:underline decoration-accent-yellow underline-offset-4">s-ticket.online</a>') }} />
+                        <span dangerouslySetInnerHTML={{ __html: t.raw('career.impact.item_2').replace('{link}', '<a href="https://s-ticket.online/" target="_blank" rel="noopener noreferrer" class="text-gray-900 dark:text-white hover:underline decoration-accent-yellow underline-offset-4">s-ticket.online</a>') }} />
                       </li>
                       <li className="flex items-start gap-3">
                         <motion.div {...iconHoverProps}>
