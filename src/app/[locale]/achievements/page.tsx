@@ -37,6 +37,7 @@ export default async function AchievementsPage({
       id: true,
       slug: true,
       title: true,
+      description: true,
       issuer: true,
       certificateNumber: true,
       credentialUrl: true,

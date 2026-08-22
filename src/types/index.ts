@@ -59,6 +59,7 @@ export interface AchievementCardData {
   id: string;
   slug: string;
   title: string;
+  description: string | null;
   issuer: string;
   certificateNumber: string | null;
   credentialUrl: string | null;

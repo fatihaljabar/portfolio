@@ -1,15 +1,22 @@
 /**
  * Achievements Client Component
- * Handles client-side filtering and interactions
+ * Handles client-side filtering, interactions, and the detail modal
  */
 
 'use client';
 
 import { useTranslations } from 'next-intl';
 import { useState, useMemo } from 'react';
-import { Search, ChevronDown, ShieldCheck, Calendar, ArrowUpRight } from 'lucide-react';
+import { Search, ChevronDown, ShieldCheck, Calendar, Eye, ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from '@/components/ui/dialog';
 import type { AchievementType, AchievementCardData } from '@/types';
 
 interface AchievementsClientProps {
@@ -37,6 +44,7 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedType, setSelectedType] = useState<AchievementType | 'ALL'>('ALL');
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
+  const [selectedAchievement, setSelectedAchievement] = useState<AchievementCardData | null>(null);
 
   const categoryOptions = useMemo(() => {
     return [
@@ -60,6 +68,14 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
 
   const formatDate = (date: Date) => {
     return new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' }).format(date);
+  };
+
+  const formatFullDate = (date: Date) => {
+    return new Intl.DateTimeFormat('en-US', { day: '2-digit', month: 'long', year: 'numeric' }).format(date);
+  };
+
+  const openDetails = (achievement: AchievementCardData) => {
+    setSelectedAchievement(achievement);
   };
 
   return (
@@ -140,9 +156,12 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {filteredAchievements.map((achievement) => (
-            <div
+            <button
               key={achievement.id}
-              className="group relative flex flex-col bg-gray-100 dark:bg-[#121212] border border-gray-200 dark:border-white/5 rounded-2xl overflow-hidden hover:border-accent-blue/30 hover:-translate-y-1 hover:shadow-2xl hover:shadow-accent-blue/5 transition-all duration-300"
+              type="button"
+              onClick={() => openDetails(achievement)}
+              aria-haspopup="dialog"
+              className="group relative flex flex-col text-left w-full bg-gray-100 dark:bg-[#121212] border border-gray-200 dark:border-white/5 rounded-2xl overflow-hidden hover:border-accent-blue/30 hover:-translate-y-1 hover:shadow-2xl hover:shadow-accent-blue/5 transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue/50"
             >
               {/* Image Area */}
               <div className="relative w-full aspect-[16/10] bg-gray-200 dark:bg-[#0a0a0a] overflow-hidden">
@@ -164,18 +183,11 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
                   </div>
                 )}
 
-                {achievement.credentialUrl && (
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-[2px] bg-black/40">
-                    <a
-                      href={achievement.credentialUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-white font-semibold text-sm border border-white/20 bg-white/10 px-5 py-2.5 rounded-full hover:bg-white hover:text-black transition-all transform translate-y-4 group-hover:translate-y-0 duration-300"
-                    >
-                      {t('view_credential')} <ArrowUpRight size={16} />
-                    </a>
-                  </div>
-                )}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-[2px] bg-black/40">
+                  <span className="flex items-center gap-2 text-white font-semibold text-sm border border-white/20 bg-white/10 px-5 py-2.5 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                    {t('view_details')} <Eye size={16} />
+                  </span>
+                </div>
               </div>
 
               {/* Content */}
@@ -189,15 +201,9 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
 
                 {/* Title */}
                 <div className="mb-3" style={{ minHeight: '42px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                  <a
-                    href={achievement.credentialUrl || '#'}
-                    target={achievement.credentialUrl ? '_blank' : undefined}
-                    rel={achievement.credentialUrl ? 'noopener noreferrer' : undefined}
-                  >
-                    <h3 className="text-gray-900 dark:text-white font-bold text-lg leading-tight line-clamp-2 group-hover:text-accent-blue transition-colors">
-                      {achievement.title}
-                    </h3>
-                  </a>
+                  <h3 className="text-gray-900 dark:text-white font-bold text-lg leading-tight line-clamp-2 group-hover:text-accent-blue transition-colors">
+                    {achievement.title}
+                  </h3>
                 </div>
 
                 {/* Issuer */}
@@ -230,10 +236,89 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
                   </span>
                 </div>
               </div>
-            </div>
+            </button>
           ))}
         </div>
       )}
+
+      {/* Detail Modal */}
+      <Dialog
+        open={selectedAchievement !== null}
+        onOpenChange={(open) => !open && setSelectedAchievement(null)}
+      >
+        <DialogContent className="max-w-xl p-0 gap-0 bg-white dark:bg-[#121212] border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden">
+          {selectedAchievement && (
+            <>
+              <div className="relative w-full aspect-video bg-gray-200 dark:bg-[#0a0a0a] overflow-hidden">
+                {selectedAchievement.imageUrl ? (
+                  <Image
+                    src={selectedAchievement.imageUrl}
+                    alt={selectedAchievement.title}
+                    fill
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <ShieldCheck className="text-gray-300 dark:text-[#333]" size={64} />
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-[#121212] via-transparent to-transparent opacity-90" />
+              </div>
+
+              <div className="p-6 sm:p-8">
+                <DialogHeader className="text-left space-y-3">
+                  {selectedAchievement.certificateNumber && (
+                    <span className="text-[11px] text-blue-600 dark:text-accent-blue font-mono">
+                      {selectedAchievement.certificateNumber}
+                    </span>
+                  )}
+                  <DialogTitle className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white leading-tight">
+                    {selectedAchievement.title}
+                  </DialogTitle>
+                  <div className="flex items-center gap-2 text-gray-600 dark:text-[#888] text-sm">
+                    <ShieldCheck className="text-gray-400 dark:text-[#555] shrink-0" size={16} />
+                    <span>{selectedAchievement.issuer}</span>
+                  </div>
+                </DialogHeader>
+
+                <div className="flex flex-wrap items-center gap-2 mt-4">
+                  <span className="text-[10px] font-medium bg-gray-200 dark:bg-[#1a1a1a] text-gray-600 dark:text-[#999] px-2.5 py-1 rounded-md border border-gray-300 dark:border-white/10">
+                    {selectedAchievement.type}
+                  </span>
+                  {selectedAchievement.category && (
+                    <span className="text-[10px] font-medium bg-gray-200 dark:bg-[#1a1a1a] text-gray-600 dark:text-[#999] px-2.5 py-1 rounded-md border border-gray-300 dark:border-white/10">
+                      {selectedAchievement.category}
+                    </span>
+                  )}
+                  <span className="flex items-center gap-1.5 text-[10px] text-gray-500 dark:text-[#666] font-mono ml-auto">
+                    <Calendar size={12} className="shrink-0" />
+                    {formatFullDate(selectedAchievement.issuedDate)}
+                  </span>
+                </div>
+
+                {selectedAchievement.description && (
+                  <p className="text-gray-600 dark:text-[#999] text-sm leading-relaxed mt-5">
+                    {selectedAchievement.description}
+                  </p>
+                )}
+
+                {selectedAchievement.credentialUrl && (
+                  <DialogFooter className="mt-6 sm:justify-start">
+                    <a
+                      href={selectedAchievement.credentialUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-gray-900 dark:bg-white text-white dark:text-black font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
+                    >
+                      {t('view_credential')} <ArrowUpRight size={16} />
+                    </a>
+                  </DialogFooter>
+                )}
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
