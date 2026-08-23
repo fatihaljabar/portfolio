@@ -34,13 +34,13 @@
     @apply bg-[#333] !important;
   }
 
-  /* Base styles - default light mode */
+  /* Base styles - default dark mode (matches next-themes defaultTheme="dark") */
   html {
-    background-color: white;
+    background-color: #080808;
   }
 
-  :is(html.dark) {
-    background-color: #080808 !important;
+  :is(html:not(.dark)) {
+    background-color: white !important;
   }
 
   body {
