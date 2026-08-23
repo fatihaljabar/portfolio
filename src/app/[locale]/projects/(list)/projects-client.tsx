@@ -5,42 +5,22 @@
 
 'use client';
 
-import { Folder, ArrowUpRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ArrowUpRight, Folder } from 'lucide-react';
 import Image from 'next/image';
 import { Link } from '@/lib/i18n/navigation';
-import { motion } from 'framer-motion';
-
-const techIcons: Record<string, string> = {
-  TypeScript: 'TS',
-  React: 'atom',
-  Tailwind: 'wind',
-  'Next.js': 'N',
-  Go: 'GO',
-  Docker: 'cube',
-  Flutter: 'code',
-  Dart: 'Dt',
-  Vue: 'V',
-  Laravel: 'code',
-};
-
-const techColors: Record<string, string> = {
-  TypeScript: 'text-[#3178C6]',
-  React: 'text-[#61DAFB]',
-  Tailwind: 'text-[#06B6D4]',
-  'Next.js': 'text-gray-900 dark:text-white',
-  Go: 'text-[#00ADD8]',
-  Docker: 'text-[#2496ED]',
-  Flutter: 'text-[#02569B]',
-  Dart: 'text-[#0175C2]',
-  Vue: 'text-[#4FC08D]',
-  Laravel: 'text-[#FF2D20]',
-};
+import { techIcons } from '@/lib/tech-icons';
 
 const hoverColors: Record<string, string> = {
+  'Vue.js': 'hover:text-[#4FC08D]',
+  TypeScript: 'hover:text-[#3178C6]',
+  'Tailwind CSS': 'hover:text-[#06B6D4]',
+  Hono: 'hover:text-[#E36002]',
+  MySQL: 'hover:text-[#4479A1]',
+  React: 'hover:text-[#61DAFB]',
+  Vite: 'hover:text-[#646CFF]',
+  'Node.js': 'hover:text-[#339933]',
   'Next.js': 'hover:text-accent-yellow',
-  Go: 'hover:text-cyan-400',
-  Flutter: 'hover:text-blue-400',
-  Vue: 'hover:text-green-400',
   default: 'hover:text-gray-900 dark:hover:text-white',
 };
 
@@ -76,14 +56,19 @@ export function ProjectsClient({ projects, translations: t }: ProjectsClientProp
     <>
       <div className="mb-10">
         <h2 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">{t.title}</h2>
-        <p className="text-gray-500 dark:text-[#888] text-sm max-w-2xl leading-relaxed">{t.subtitle}</p>
+        <p className="text-gray-500 dark:text-[#888] text-sm max-w-2xl leading-relaxed">
+          {t.subtitle}
+        </p>
       </div>
 
       <div className="h-[1px] border-t border-dashed border-gray-300 dark:border-[#333] w-full mb-10"></div>
 
       {projects.length === 0 ? (
         <div className="text-center py-20">
-          <motion.div {...iconHoverProps} className="mx-auto text-gray-300 dark:text-[#333] mb-4 w-fit">
+          <motion.div
+            {...iconHoverProps}
+            className="mx-auto text-gray-300 dark:text-[#333] mb-4 w-fit"
+          >
             <Folder size={48} />
           </motion.div>
           <p className="text-gray-400 dark:text-[#888]">{t.no_projects}</p>
@@ -137,24 +122,45 @@ export function ProjectsClient({ projects, translations: t }: ProjectsClientProp
                 </div>
 
                 <div className="p-6 flex flex-col flex-1">
-                  <div className="mb-3" style={{ minHeight: '64px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                    <h3 className={`text-xl font-bold text-gray-900 dark:text-white ${hoverColor} transition-colors duration-300 leading-snug line-clamp-2`}>
+                  <div
+                    className="mb-3"
+                    style={{
+                      minHeight: '64px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <h3
+                      className={`text-xl font-bold text-gray-900 dark:text-white ${hoverColor} transition-colors duration-300 leading-snug line-clamp-2`}
+                    >
                       {project.title}
                     </h3>
                   </div>
 
-                  <p className="text-gray-500 dark:text-[#888] text-sm leading-relaxed mb-6 line-clamp-2">{project.description}</p>
+                  <p className="text-gray-500 dark:text-[#888] text-sm leading-relaxed mb-6 line-clamp-2">
+                    {project.description}
+                  </p>
 
                   <div className="mt-auto flex items-center gap-3">
-                    {project.techStack?.map((tech, index) => (
-                      <div
-                        key={index}
-                        className={`w-8 h-8 rounded-full bg-gray-200 dark:bg-[#1a1a1a] border border-gray-300 dark:border-white/5 flex items-center justify-center ${techColors[tech] || 'text-gray-900 dark:text-white'} text-xs font-bold`}
-                        title={tech}
-                      >
-                        {techIcons[tech] || tech.charAt(0)}
-                      </div>
-                    ))}
+                    {project.techStack?.map((tech) => {
+                      const TechIcon = techIcons[tech]?.icon;
+                      return (
+                        <div
+                          key={tech}
+                          className="w-8 h-8 rounded-full bg-gray-200 dark:bg-[#1a1a1a] border border-gray-300 dark:border-white/5 flex items-center justify-center"
+                          title={tech}
+                        >
+                          {TechIcon ? (
+                            <TechIcon size={16} style={{ color: techIcons[tech].color }} />
+                          ) : (
+                            <span className="text-gray-900 dark:text-white text-xs font-bold">
+                              {tech.charAt(0)}
+                            </span>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </Link>
