@@ -1,38 +1,29 @@
 'use client';
 
-import React from 'react';
-import { useLocale } from 'next-intl';
-import { useParams } from 'next/navigation';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Globe } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { locales, type Locale } from '@/lib/i18n/config';
+import { useParams } from 'next/navigation';
+import { useLocale } from 'next-intl';
+import React from 'react';
+import type { Locale } from '@/lib/i18n/config';
 import { usePathname, useRouter } from '@/lib/i18n/navigation';
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+
+const localeNames: Record<Locale, string> = {
+  en: 'English',
+  id: 'Indonesia',
+};
 
 export function LocaleToggle() {
   const locale = useLocale() as Locale;
   const pathname = usePathname();
   const params = useParams();
   const router = useRouter();
+  const [isPending, startTransition] = React.useTransition();
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
     setMounted(true);
   }, []);
-
-  const handleLocaleChange = (newLocale: Locale) => {
-    router.replace(
-      // @ts-expect-error -- pathname is a template like "/projects/[slug]"; params fills in the dynamic segments
-      { pathname, params },
-      { locale: newLocale },
-    );
-  };
 
   if (!mounted) {
     return (
@@ -43,63 +34,40 @@ export function LocaleToggle() {
     );
   }
 
-  const localeNames: Record<Locale, string> = {
-    en: 'English',
-    id: 'Indonesia',
+  const nextLocale: Locale = locale === 'en' ? 'id' : 'en';
+
+  const handleClick = () => {
+    if (isPending) return;
+    startTransition(() => {
+      router.replace(
+        // @ts-expect-error -- pathname is a template like "/projects/[slug]"; params fills in the dynamic segments
+        { pathname, params },
+        { locale: nextLocale },
+      );
+    });
   };
 
   return (
-    <DropdownMenu modal={false}>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          size="sm"
-          className="flex items-center gap-2 bg-gray-100 dark:bg-[#151515] hover:bg-gray-200 dark:hover:bg-[#1a1a1a] h-8 px-3 rounded-full border border-gray-200 dark:border-white/5 text-gray-600 dark:text-[#ccc] hover:text-gray-900 dark:hover:text-white transition-colors relative z-50 overflow-hidden"
+    <button
+      type="button"
+      onClick={handleClick}
+      disabled={isPending}
+      aria-label={`Switch to ${localeNames[nextLocale]}`}
+      className="flex items-center gap-2 bg-gray-100 dark:bg-[#151515] hover:bg-gray-200 dark:hover:bg-[#1a1a1a] h-8 px-3 rounded-full border border-gray-200 dark:border-white/5 text-gray-600 dark:text-[#ccc] hover:text-gray-900 dark:hover:text-white transition-colors duration-200 overflow-hidden disabled:opacity-60 disabled:cursor-wait"
+    >
+      <Globe size={16} className="shrink-0" />
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={locale}
+          initial={{ opacity: 0, y: -6 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 6 }}
+          transition={{ duration: 0.15, ease: 'easeOut' }}
+          className="text-xs font-medium uppercase"
         >
-          <motion.div
-            key={locale}
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.2 }}
-          >
-            <motion.div
-              animate={{
-                rotate: [0, 15, -15, 15, 0],
-              }}
-              transition={{
-                duration: 2.5,
-                repeat: Infinity,
-                ease: 'easeInOut',
-                delay: 0.5,
-              }}
-            >
-              <Globe size={16} className="text-gray-600 dark:text-white" />
-            </motion.div>
-          </motion.div>
-          <span className="text-xs font-medium">
-            {localeNames[locale]}
-          </span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="center" className="w-auto min-w-32 bg-white dark:bg-[#1a1a1a] border-gray-200 dark:border-white/10 z-[100]">
-        {locales.map((loc) => (
-          <DropdownMenuItem
-            key={loc}
-            onClick={() => handleLocaleChange(loc)}
-            className={`text-gray-600 dark:text-[#ccc] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5 focus:text-gray-900 dark:focus:text-white cursor-pointer py-2 px-3 flex items-center gap-2 ${
-              locale === loc ? 'bg-gray-100 dark:bg-white/5' : ''
-            }`}
-          >
-            <motion.div
-              whileHover={{ rotate: loc === 'en' ? 20 : -20, scale: 1.15 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-            >
-              <Globe className="h-4 w-4 shrink-0" />
-            </motion.div>
-            <span className="text-xs font-medium">{localeNames[loc]}</span>
-          </DropdownMenuItem>
-        ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
+          {locale}
+        </motion.span>
+      </AnimatePresence>
+    </button>
   );
 }
