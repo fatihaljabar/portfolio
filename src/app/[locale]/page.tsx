@@ -62,10 +62,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
         <div className="flex items-center gap-3 mb-10">
           <Code className="text-3xl text-gray-700 dark:text-white" size={24} />
           <h3 className="text-xl font-bold text-gray-900 dark:text-white">Skills</h3>
-          <div className="ml-auto flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/5">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-            <span className="text-xs text-gray-500 dark:text-[#888] font-mono">My Arsenal</span>
-          </div>
         </div>
 
         <SkillsGrid />
