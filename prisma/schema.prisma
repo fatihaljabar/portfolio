@@ -48,6 +48,7 @@ model Achievement {
   certificateNumber String?
   credentialUrl String?
   imageUrl     String?
+  additionalImages String[] @default([])
   issuedDate   DateTime
   type         AchievementType
   category     String?
