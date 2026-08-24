@@ -5,7 +5,7 @@
  * instead of letter badges.
  */
 
-import { ScanText, TestTube } from 'lucide-react';
+import { CreditCard, PawPrint, ScanText, TestTube } from 'lucide-react';
 import type { IconType } from 'react-icons';
 import {
   SiCloudflare,
@@ -14,9 +14,11 @@ import {
   SiMysql,
   SiNextdotjs,
   SiNodedotjs,
+  SiPrisma,
   SiReact,
   SiReactrouter,
   SiResend,
+  SiSupabase,
   SiTailwindcss,
   SiTypescript,
   SiVite,
@@ -33,11 +35,15 @@ export const techIcons: Record<string, { icon: IconType; color: string }> = {
   Vite: { icon: SiVite, color: '#646CFF' },
   'Node.js': { icon: SiNodedotjs, color: '#339933' },
   'Next.js': { icon: SiNextdotjs, color: '#A3A3A3' },
+  Prisma: { icon: SiPrisma, color: '#A3A3A3' },
+  Supabase: { icon: SiSupabase, color: '#3FCF8E' },
+  'Framer Motion': { icon: SiFramer, color: '#0055FF' },
+  Zustand: { icon: PawPrint, color: '#A3A3A3' },
+  Midtrans: { icon: CreditCard, color: '#00AAE4' },
   'Cloudflare R2': { icon: SiCloudflare, color: '#F38020' },
   Resend: { icon: SiResend, color: '#A3A3A3' },
   // No official logo exists for these — representative icons instead.
   Playwright: { icon: TestTube, color: '#A3A3A3' },
   'Tesseract.js': { icon: ScanText, color: '#A3A3A3' },
   'React Router': { icon: SiReactrouter, color: '#CA4245' },
-  'Framer Motion': { icon: SiFramer, color: '#0055FF' },
 };
