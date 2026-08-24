@@ -7,11 +7,13 @@
 
 import type { IconType } from 'react-icons';
 import {
+  SiCloudflare,
   SiHono,
   SiMysql,
   SiNextdotjs,
   SiNodedotjs,
   SiReact,
+  SiResend,
   SiTailwindcss,
   SiTypescript,
   SiVite,
@@ -28,4 +30,6 @@ export const techIcons: Record<string, { icon: IconType; color: string }> = {
   Vite: { icon: SiVite, color: '#646CFF' },
   'Node.js': { icon: SiNodedotjs, color: '#339933' },
   'Next.js': { icon: SiNextdotjs, color: '#A3A3A3' },
+  'Cloudflare R2': { icon: SiCloudflare, color: '#F38020' },
+  Resend: { icon: SiResend, color: '#A3A3A3' },
 };
