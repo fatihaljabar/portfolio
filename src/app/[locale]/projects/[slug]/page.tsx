@@ -154,7 +154,7 @@ export default async function ProjectDetailPage({
 
       {/* Full Content */}
       {project.content && (
-        <div className="mt-12 prose prose-neutral dark:prose-invert max-w-none prose-headings:font-bold prose-a:text-accent-blue prose-code:before:content-none prose-code:after:content-none prose-code:bg-gray-100 dark:prose-code:bg-white/5 prose-code:rounded prose-code:px-1.5 prose-code:py-0.5 prose-pre:bg-gray-100 dark:prose-pre:bg-[#0a0a0a] prose-pre:border prose-pre:border-gray-200 dark:prose-pre:border-white/5">
+        <div className="mt-12 prose prose-neutral dark:prose-invert max-w-none prose-headings:font-bold prose-a:text-accent-blue prose-code:before:content-none prose-code:after:content-none prose-code:bg-gray-100 dark:prose-code:bg-white/5 prose-code:rounded prose-code:px-1.5 prose-code:py-0.5 prose-pre:bg-gray-100 dark:prose-pre:bg-[#0a0a0a] prose-pre:border prose-pre:border-gray-200 dark:prose-pre:border-white/5 prose-img:rounded-xl prose-img:border prose-img:border-gray-200 dark:prose-img:border-white/5">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{project.content}</ReactMarkdown>
         </div>
       )}
