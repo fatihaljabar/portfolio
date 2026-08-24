@@ -106,7 +106,8 @@
     "subtitle": "Showcase proyek pribadi dan open-source yang telah saya bangun atau kontribusi.",
     "featured": "Unggulan",
     "view_project": "Lihat Proyek",
-    "no_projects": "Belum ada proyek. Nanti cek lagi!"
+    "no_projects": "Belum ada proyek. Nanti cek lagi!",
+    "all": "Semua"
   },
   "project_detail": {
     "back": "Kembali",

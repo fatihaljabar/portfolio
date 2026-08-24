@@ -106,7 +106,8 @@
     "subtitle": "A showcase of both private and open-source projects I've built or contributed to.",
     "featured": "Featured",
     "view_project": "View Project",
-    "no_projects": "No projects yet. Check back soon!"
+    "no_projects": "No projects yet. Check back soon!",
+    "all": "All"
   },
   "project_detail": {
     "back": "Back",
