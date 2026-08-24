@@ -15,6 +15,7 @@ import { Link } from '@/lib/i18n/navigation';
 import { prisma } from '@/lib/prisma/client';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { techIcons } from '@/lib/tech-icons';
+import { ScrollToTopButton } from './scroll-to-top-button';
 
 export const revalidate = 60;
 
@@ -158,6 +159,8 @@ export default async function ProjectDetailPage({
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{project.content}</ReactMarkdown>
         </div>
       )}
+
+      <ScrollToTopButton />
     </>
   );
 }

@@ -27,7 +27,7 @@
       "subtitle": "My professional journey.",
       "position": "Front-End and Back-End Developer Internship",
       "company": "Dicoding Indonesia",
-      "duration": "Sep 2024 — Dec 2024",
+      "duration": "Sep 2024 – Dec 2024",
       "length": "4 Months",
       "employment_type": "Part-time",
       "location": "Remote",
@@ -65,7 +65,7 @@
       "thesis": {
         "title": "Undergraduate Thesis",
         "project_title": "Sentiment Analysis on Online Reviews of Electric Vehicles Using Deep Learning on Platform X",
-        "description": "My capstone project: comparing four deep learning architectures — CNN, LSTM, BiLSTM, and a hybrid CNN+BiLSTM with Attention — to classify Indonesian-language sentiment toward electric vehicles from real public discussion on Platform X (2023–2025). Labels were assigned with a quantile-based lexicon threshold rather than a fixed cutoff, and the best model was deployed as a live web demo.",
+        "description": "My capstone project: comparing four deep learning architectures (CNN, LSTM, BiLSTM, and a hybrid CNN+BiLSTM with Attention) to classify Indonesian-language sentiment toward electric vehicles from real public discussion on Platform X (2023–2025). Labels were assigned with a quantile-based lexicon threshold rather than a fixed cutoff, and the best model was deployed as a live web demo.",
         "result": "The hybrid CNN+BiLSTM model won on every metric, reaching 75% accuracy and a 0.76 macro F1-score, while a single-direction LSTM collapsed entirely and performed no better than chance.",
         "show_details": "Show thesis details",
         "hide_details": "Hide thesis details",
@@ -106,7 +106,8 @@
     "subtitle": "A showcase of both private and open-source projects I've built or contributed to.",
     "featured": "Featured",
     "view_project": "View Project",
-    "no_projects": "No projects yet. Check back soon!"
+    "no_projects": "No projects yet. Check back soon!",
+    "all": "All"
   },
   "project_detail": {
     "back": "Back",

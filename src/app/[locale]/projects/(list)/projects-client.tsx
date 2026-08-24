@@ -5,9 +5,10 @@
 
 'use client';
 
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUpRight, Folder } from 'lucide-react';
 import Image from 'next/image';
+import { useState } from 'react';
 import { Link } from '@/lib/i18n/navigation';
 import { techIcons } from '@/lib/tech-icons';
 
@@ -36,6 +37,7 @@ interface Project {
   imageUrl: string | null;
   isFeatured: boolean;
   techStack: string[] | null;
+  category: string | null;
 }
 
 interface Translations {
@@ -44,6 +46,7 @@ interface Translations {
   featured: string;
   view_project: string;
   no_projects: string;
+  all: string;
 }
 
 interface ProjectsClientProps {
@@ -52,6 +55,13 @@ interface ProjectsClientProps {
 }
 
 export function ProjectsClient({ projects, translations: t }: ProjectsClientProps) {
+  const categories = [...new Set(projects.map((p) => p.category).filter((c): c is string => !!c))];
+  const filters = [t.all, ...categories];
+  const [activeFilter, setActiveFilter] = useState(t.all);
+
+  const filteredProjects =
+    activeFilter === t.all ? projects : projects.filter((p) => p.category === activeFilter);
+
   return (
     <>
       <div className="mb-10">
@@ -61,9 +71,38 @@ export function ProjectsClient({ projects, translations: t }: ProjectsClientProp
         </p>
       </div>
 
-      <div className="h-[1px] border-t border-dashed border-gray-300 dark:border-[#333] w-full mb-10"></div>
+      <div className="h-[1px] border-t border-dashed border-gray-300 dark:border-[#333] w-full mb-8"></div>
 
-      {projects.length === 0 ? (
+      {categories.length > 0 && (
+        <div className="flex flex-wrap gap-1.5 mb-8">
+          {filters.map((filter) => {
+            const isActive = filter === activeFilter;
+            return (
+              <button
+                key={filter}
+                type="button"
+                onClick={() => setActiveFilter(filter)}
+                className={`relative px-3 py-1.5 rounded-full text-xs font-medium transition-colors duration-200 ${
+                  isActive
+                    ? 'text-gray-900 dark:text-white'
+                    : 'text-gray-500 dark:text-[#888] hover:text-gray-700 dark:hover:text-white'
+                }`}
+              >
+                {isActive && (
+                  <motion.span
+                    layoutId="project-filter-pill"
+                    className="absolute inset-0 rounded-full bg-gray-100 dark:bg-white/10 border border-gray-200 dark:border-white/10"
+                    transition={{ type: 'spring', stiffness: 400, damping: 32 }}
+                  />
+                )}
+                <span className="relative">{filter}</span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      {filteredProjects.length === 0 ? (
         <div className="text-center py-20">
           <motion.div
             {...iconHoverProps}
@@ -74,99 +113,108 @@ export function ProjectsClient({ projects, translations: t }: ProjectsClientProp
           <p className="text-gray-400 dark:text-[#888]">{t.no_projects}</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {projects.map((project) => {
-            const firstTech = project.techStack?.[0] || 'default';
-            const hoverColor = hoverColors[firstTech] || hoverColors.default;
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeFilter}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
+            {filteredProjects.map((project) => {
+              const firstTech = project.techStack?.[0] || 'default';
+              const hoverColor = hoverColors[firstTech] || hoverColors.default;
 
-            return (
-              <Link
-                key={project.slug}
-                href={`/projects/${project.slug}`}
-                aria-label={`${t.view_project}: ${project.title}`}
-                className={`group relative flex flex-col bg-gray-50 dark:bg-[#121212] border border-gray-200 dark:border-white/5 rounded-2xl overflow-hidden hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 ${
-                  project.isFeatured
-                    ? 'hover:border-accent-yellow/30 hover:shadow-accent-yellow/5'
-                    : 'hover:border-accent-blue/30 hover:shadow-accent-blue/5'
-                }`}
-              >
-                {project.isFeatured && (
-                  <div className="absolute top-4 left-4 z-30 bg-accent-yellow/10 text-accent-yellow border border-accent-yellow/20 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-md">
-                    {t.featured}
-                  </div>
-                )}
-
-                <div className="relative w-full aspect-video bg-gray-200 dark:bg-[#0a0a0a] overflow-hidden">
-                  {project.imageUrl ? (
-                    <Image
-                      src={project.imageUrl}
-                      alt={project.title}
-                      fill
-                      className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-500 ease-out"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <motion.div {...iconHoverProps} className="text-gray-300 dark:text-[#333]">
-                        <Folder size={48} />
-                      </motion.div>
+              return (
+                <Link
+                  key={project.slug}
+                  href={`/projects/${project.slug}`}
+                  aria-label={`${t.view_project}: ${project.title}`}
+                  className={`group relative flex flex-col bg-gray-50 dark:bg-[#121212] border border-gray-200 dark:border-white/5 rounded-2xl overflow-hidden hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 ${
+                    project.isFeatured
+                      ? 'hover:border-accent-yellow/30 hover:shadow-accent-yellow/5'
+                      : 'hover:border-accent-blue/30 hover:shadow-accent-blue/5'
+                  }`}
+                >
+                  {project.isFeatured && (
+                    <div className="absolute top-4 left-4 z-30 bg-accent-yellow/10 text-accent-yellow border border-accent-yellow/20 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-md">
+                      {t.featured}
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-50 dark:from-[#121212] via-transparent to-transparent opacity-80" />
 
-                  <span
-                    aria-hidden="true"
-                    className="absolute top-3 right-3 flex items-center justify-center w-8 h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm border border-black/5 dark:border-white/10 text-gray-700 dark:text-white opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 ease-out shadow-sm"
-                  >
-                    <ArrowUpRight size={14} />
-                  </span>
-                </div>
+                  <div className="relative w-full aspect-video bg-gray-200 dark:bg-[#0a0a0a] overflow-hidden">
+                    {project.imageUrl ? (
+                      <Image
+                        src={project.imageUrl}
+                        alt={project.title}
+                        fill
+                        className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-500 ease-out"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <motion.div {...iconHoverProps} className="text-gray-300 dark:text-[#333]">
+                          <Folder size={48} />
+                        </motion.div>
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-50 dark:from-[#121212] via-transparent to-transparent opacity-80" />
 
-                <div className="p-6 flex flex-col flex-1">
-                  <div
-                    className="mb-3"
-                    style={{
-                      minHeight: '64px',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    <h3
-                      className={`text-xl font-bold text-gray-900 dark:text-white ${hoverColor} transition-colors duration-300 leading-snug line-clamp-2`}
+                    <span
+                      aria-hidden="true"
+                      className="absolute top-3 right-3 flex items-center justify-center w-8 h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm border border-black/5 dark:border-white/10 text-gray-700 dark:text-white opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 ease-out shadow-sm"
                     >
-                      {project.title}
-                    </h3>
+                      <ArrowUpRight size={14} />
+                    </span>
                   </div>
 
-                  <p className="text-gray-500 dark:text-[#888] text-sm leading-relaxed mb-6 line-clamp-2">
-                    {project.description}
-                  </p>
+                  <div className="p-6 flex flex-col flex-1">
+                    <div
+                      className="mb-3"
+                      style={{
+                        minHeight: '64px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <h3
+                        className={`text-xl font-bold text-gray-900 dark:text-white ${hoverColor} transition-colors duration-300 leading-snug line-clamp-2`}
+                      >
+                        {project.title}
+                      </h3>
+                    </div>
 
-                  <div className="mt-auto flex items-center gap-3">
-                    {project.techStack?.map((tech) => {
-                      const TechIcon = techIcons[tech]?.icon;
-                      return (
-                        <div
-                          key={tech}
-                          className="w-8 h-8 rounded-full bg-gray-200 dark:bg-[#1a1a1a] border border-gray-300 dark:border-white/5 flex items-center justify-center"
-                          title={tech}
-                        >
-                          {TechIcon ? (
-                            <TechIcon size={16} style={{ color: techIcons[tech].color }} />
-                          ) : (
-                            <span className="text-gray-900 dark:text-white text-xs font-bold">
-                              {tech.charAt(0)}
-                            </span>
-                          )}
-                        </div>
-                      );
-                    })}
+                    <p className="text-gray-500 dark:text-[#888] text-sm leading-relaxed mb-6 line-clamp-2">
+                      {project.description}
+                    </p>
+
+                    <div className="mt-auto flex items-center gap-3">
+                      {project.techStack?.map((tech) => {
+                        const TechIcon = techIcons[tech]?.icon;
+                        return (
+                          <div
+                            key={tech}
+                            className="w-8 h-8 rounded-full bg-gray-200 dark:bg-[#1a1a1a] border border-gray-300 dark:border-white/5 flex items-center justify-center"
+                            title={tech}
+                          >
+                            {TechIcon ? (
+                              <TechIcon size={16} style={{ color: techIcons[tech].color }} />
+                            ) : (
+                              <span className="text-gray-900 dark:text-white text-xs font-bold">
+                                {tech.charAt(0)}
+                              </span>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+                </Link>
+              );
+            })}
+          </motion.div>
+        </AnimatePresence>
       )}
     </>
   );
