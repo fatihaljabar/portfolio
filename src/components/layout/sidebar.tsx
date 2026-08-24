@@ -72,7 +72,7 @@ export function Sidebar() {
 
         {/* Contact Info */}
         <div className="w-full">
-          <div className="text-[11px] font-bold text-gray-500 dark:text-[#555] tracking-widest mb-4 uppercase">
+          <div className="text-[11px] font-bold text-gray-500 dark:text-[#888] tracking-widest mb-4 uppercase">
             {t('contact')}
           </div>
           <ul className="space-y-2">
@@ -111,7 +111,7 @@ export function Sidebar() {
 
         {/* Languages */}
         <div className="w-full">
-          <div className="text-[11px] font-bold text-gray-500 dark:text-[#555] tracking-widest mb-4 uppercase">
+          <div className="text-[11px] font-bold text-gray-500 dark:text-[#888] tracking-widest mb-4 uppercase">
             {t('languages')}
           </div>
           <div className="flex gap-6">
