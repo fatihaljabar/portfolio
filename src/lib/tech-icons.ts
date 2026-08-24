@@ -7,11 +7,13 @@
 
 import type { IconType } from 'react-icons';
 import {
+  SiFramer,
   SiHono,
   SiMysql,
   SiNextdotjs,
   SiNodedotjs,
   SiReact,
+  SiReactrouter,
   SiTailwindcss,
   SiTypescript,
   SiVite,
@@ -28,4 +30,6 @@ export const techIcons: Record<string, { icon: IconType; color: string }> = {
   Vite: { icon: SiVite, color: '#646CFF' },
   'Node.js': { icon: SiNodedotjs, color: '#339933' },
   'Next.js': { icon: SiNextdotjs, color: '#A3A3A3' },
+  'React Router': { icon: SiReactrouter, color: '#CA4245' },
+  'Framer Motion': { icon: SiFramer, color: '#0055FF' },
 };
