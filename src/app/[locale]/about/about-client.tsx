@@ -5,24 +5,27 @@
 
 'use client';
 
-import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { motion } from 'framer-motion';
 import {
   Briefcase,
-  GraduationCap,
-  CheckCircle,
-  List,
-  Lightbulb,
-  Rocket,
-  Trophy,
-  TrendingUp,
-  Users,
-  Check,
   Calendar,
+  Check,
+  CheckCircle,
+  ExternalLink,
+  FileText,
+  GraduationCap,
+  Lightbulb,
+  List,
   MapPin,
+  Rocket,
+  TrendingUp,
+  Trophy,
+  Users,
 } from 'lucide-react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+import { Link } from '@/lib/i18n/navigation';
 
 const iconHoverProps = {
   whileHover: { scale: 1.15, rotate: [0, -5, 5, -5, 0] },
@@ -32,9 +35,14 @@ const iconHoverProps = {
 export function AboutClient() {
   const t = useTranslations('about');
   const [isCareerExpanded, setIsCareerExpanded] = useState(false);
+  const [isThesisExpanded, setIsThesisExpanded] = useState(false);
 
   const toggleCareerDetails = () => {
     setIsCareerExpanded((prev) => !prev);
+  };
+
+  const toggleThesisDetails = () => {
+    setIsThesisExpanded((prev) => !prev);
   };
 
   return (
@@ -78,12 +86,22 @@ export function AboutClient() {
         <div className="rounded-2xl border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-[#121212] p-6 transition-all hover:border-gray-300 dark:hover:border-white/10">
           <div className="flex flex-col md:flex-row gap-5 items-start">
             <div className="w-14 h-14 min-w-[56px] rounded-xl bg-gray-200 dark:bg-[#1a1a1a] overflow-hidden flex items-center justify-center border border-gray-300 dark:border-white/10">
-              <Image src="/img/dicoding-logo.png" alt="Dicoding" width={56} height={56} className="w-full h-full object-cover" />
+              <Image
+                src="/img/dicoding-logo.png"
+                alt="Dicoding"
+                width={56}
+                height={56}
+                className="w-full h-full object-cover"
+              />
             </div>
 
             <div className="flex-1 w-full">
-              <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-1">{t('career.position')}</h4>
-              <div className="text-gray-500 dark:text-[#888] font-medium text-sm mb-4">{t('career.company')}</div>
+              <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
+                {t('career.position')}
+              </h4>
+              <div className="text-gray-500 dark:text-[#888] font-medium text-sm mb-4">
+                {t('career.company')}
+              </div>
 
               <div className="flex flex-wrap items-center gap-3 mb-6 text-xs text-gray-500 dark:text-[#888] font-medium">
                 <div className="flex items-center gap-1.5 bg-gray-200 dark:bg-white/5 px-2.5 py-1 rounded-md border border-gray-300 dark:border-white/10">
@@ -123,10 +141,14 @@ export function AboutClient() {
                 >
                   <List className={`group-hover:text-accent-yellow`} size={16} />
                 </motion.div>
-                <span>{isCareerExpanded ? t('career.hide_details') : t('career.show_details')}</span>
+                <span>
+                  {isCareerExpanded ? t('career.hide_details') : t('career.show_details')}
+                </span>
               </button>
 
-              <div className={`mt-6 space-y-8 border-t border-gray-200 dark:border-white/5 pt-6 animate-fade-in ${isCareerExpanded ? '' : 'hidden'}`}>
+              <div
+                className={`mt-6 space-y-8 border-t border-gray-200 dark:border-white/5 pt-6 animate-fade-in ${isCareerExpanded ? '' : 'hidden'}`}
+              >
                 <div>
                   <div className="flex items-center gap-2 text-accent-yellow text-xs font-bold tracking-widest uppercase mb-4">
                     <motion.div {...iconHoverProps}>
@@ -139,19 +161,38 @@ export function AboutClient() {
                       <motion.div {...iconHoverProps}>
                         <CheckCircle className="text-accent-blue mt-0.5 shrink-0" size={16} />
                       </motion.div>
-                      <span dangerouslySetInnerHTML={{ __html: t.raw('career.responsibilities.item_1').replace('{project}', '<strong>S-TIX</strong>') }} />
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: t
+                            .raw('career.responsibilities.item_1')
+                            .replace('{project}', '<strong>S-TIX</strong>'),
+                        }}
+                      />
                     </li>
                     <li className="flex items-start gap-3">
                       <motion.div {...iconHoverProps}>
                         <CheckCircle className="text-accent-blue mt-0.5 shrink-0" size={16} />
                       </motion.div>
-                      <span dangerouslySetInnerHTML={{ __html: t.raw('career.responsibilities.item_2').replace('{tech1}', '<strong>React.js</strong>').replace('{tech2}', '<strong>Tailwind CSS</strong>') }} />
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: t
+                            .raw('career.responsibilities.item_2')
+                            .replace('{tech1}', '<strong>React.js</strong>')
+                            .replace('{tech2}', '<strong>Tailwind CSS</strong>'),
+                        }}
+                      />
                     </li>
                     <li className="flex items-start gap-3">
                       <motion.div {...iconHoverProps}>
                         <CheckCircle className="text-accent-blue mt-0.5 shrink-0" size={16} />
                       </motion.div>
-                      <span dangerouslySetInnerHTML={{ __html: t.raw('career.responsibilities.item_3').replace('{tech}', '<strong>Node.js, Express.js, and MongoDB</strong>') }} />
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: t
+                            .raw('career.responsibilities.item_3')
+                            .replace('{tech}', '<strong>Node.js, Express.js, and MongoDB</strong>'),
+                        }}
+                      />
                     </li>
                     <li className="flex items-start gap-3">
                       <motion.div {...iconHoverProps}>
@@ -210,13 +251,28 @@ export function AboutClient() {
                         <motion.div {...iconHoverProps}>
                           <Trophy className="text-orange-500 mt-0.5 shrink-0" size={16} />
                         </motion.div>
-                        <span dangerouslySetInnerHTML={{ __html: t.raw('career.impact.item_1').replace('{award}', '<strong>Best Capstone Project</strong>') }} />
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: t
+                              .raw('career.impact.item_1')
+                              .replace('{award}', '<strong>Best Capstone Project</strong>'),
+                          }}
+                        />
                       </li>
                       <li className="flex items-start gap-3">
                         <motion.div {...iconHoverProps}>
                           <TrendingUp className="text-blue-500 mt-0.5 shrink-0" size={16} />
                         </motion.div>
-                        <span dangerouslySetInnerHTML={{ __html: t.raw('career.impact.item_2').replace('{link}', '<a href="https://s-ticket.online/" target="_blank" rel="noopener noreferrer" class="text-gray-900 dark:text-white hover:underline decoration-accent-yellow underline-offset-4">s-ticket.online</a>') }} />
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: t
+                              .raw('career.impact.item_2')
+                              .replace(
+                                '{link}',
+                                '<a href="https://s-ticket.online/" target="_blank" rel="noopener noreferrer" class="text-gray-900 dark:text-white hover:underline decoration-accent-yellow underline-offset-4">s-ticket.online</a>',
+                              ),
+                          }}
+                        />
                       </li>
                       <li className="flex items-start gap-3">
                         <motion.div {...iconHoverProps}>
@@ -241,20 +297,30 @@ export function AboutClient() {
           <motion.div {...iconHoverProps}>
             <GraduationCap className="text-2xl text-gray-700 dark:text-white" />
           </motion.div>
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{t('education.title')}</h3>
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+            {t('education.title')}
+          </h3>
         </div>
         <div className="text-[11px] font-bold text-gray-500 dark:text-[#555] tracking-widest mb-6 uppercase">
           {t('education.subtitle')}
         </div>
 
         <div className="rounded-2xl border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-[#121212] p-6 transition-all hover:border-gray-300 dark:hover:border-white/10">
-          <div className="flex flex-col md:flex-row gap-5 items-center">
+          <div className="flex flex-col md:flex-row gap-5 items-start">
             <div className="w-14 h-14 min-w-[56px] rounded-xl bg-gray-200 dark:bg-[#1a1a1a] overflow-hidden flex items-center justify-center border border-gray-300 dark:border-white/10">
-              <Image src="/img/untag-logo.png" alt="Untag Surabaya" width={56} height={56} className="w-full h-full object-cover" />
+              <Image
+                src="/img/untag-logo.png"
+                alt="Untag Surabaya"
+                width={56}
+                height={56}
+                className="w-full h-full object-cover"
+              />
             </div>
 
             <div className="w-full">
-              <h4 className="text-lg font-bold text-gray-900 dark:text-white">{t('education.university')}</h4>
+              <h4 className="text-lg font-bold text-gray-900 dark:text-white">
+                {t('education.university')}
+              </h4>
               <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-gray-600 dark:text-[#999] text-sm mt-1">
                 <span>{t('education.degree')}</span>
                 <span className="hidden sm:inline text-gray-400 dark:text-[#444]">&bull;</span>
@@ -264,6 +330,62 @@ export function AboutClient() {
                 <span>{t('education.period')}</span>
                 <span className="w-1 h-1 rounded-full bg-gray-300 dark:bg-[#444]"></span>
                 <span>{t('education.location')}</span>
+              </div>
+
+              <button
+                type="button"
+                onClick={toggleThesisDetails}
+                className="flex items-center gap-2 text-sm text-gray-500 dark:text-[#888] hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer select-none group mt-6"
+              >
+                <motion.div
+                  {...iconHoverProps}
+                  className={`transition-transform duration-300 ${isThesisExpanded ? 'rotate-180' : ''}`}
+                >
+                  <List className="group-hover:text-accent-yellow" size={16} />
+                </motion.div>
+                <span>
+                  {isThesisExpanded
+                    ? t('education.thesis.hide_details')
+                    : t('education.thesis.show_details')}
+                </span>
+              </button>
+
+              <div
+                className={`mt-6 space-y-4 border-t border-gray-200 dark:border-white/5 pt-6 animate-fade-in ${isThesisExpanded ? '' : 'hidden'}`}
+              >
+                <div className="flex items-center gap-2 text-accent-yellow text-xs font-bold tracking-widest uppercase mb-1">
+                  <motion.div {...iconHoverProps}>
+                    <FileText size={16} />
+                  </motion.div>
+                  {t('education.thesis.title')}
+                </div>
+                <div className="text-gray-900 dark:text-white font-semibold text-sm italic">
+                  {t('education.thesis.project_title')}
+                </div>
+                <p className="text-gray-600 dark:text-[#999] text-sm leading-relaxed">
+                  {t('education.thesis.description')}
+                </p>
+                <p className="text-gray-600 dark:text-[#999] text-sm leading-relaxed">
+                  {t('education.thesis.result')}
+                </p>
+                <div className="flex flex-wrap items-center gap-4 pt-2 text-sm">
+                  <Link
+                    href="/projects/sentiment-analysis-electric-vehicles"
+                    className="inline-flex items-center gap-1.5 text-gray-900 dark:text-white hover:text-accent-yellow dark:hover:text-accent-yellow transition-colors font-medium"
+                  >
+                    {t('education.thesis.read_more')}
+                    <ExternalLink size={14} />
+                  </Link>
+                  <a
+                    href="https://doi.org/10.36040/jati.v10i1.17094"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-gray-900 dark:text-white hover:text-accent-yellow dark:hover:text-accent-yellow transition-colors font-medium"
+                  >
+                    {t('education.thesis.published_journal')}
+                    <ExternalLink size={14} />
+                  </a>
+                </div>
               </div>
             </div>
           </div>

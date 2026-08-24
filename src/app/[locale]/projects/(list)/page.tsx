@@ -5,9 +5,9 @@
 
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+import type { Locale } from '@/lib/i18n/config';
 import { prisma } from '@/lib/prisma/client';
 import { buildMetadata } from '@/lib/seo/metadata';
-import type { Locale } from '@/lib/i18n/config';
 import { ProjectsClient } from './projects-client';
 
 export const revalidate = 60;
@@ -20,14 +20,15 @@ export async function generateMetadata({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations('projects');
-  return buildMetadata({ locale, path: '/projects', title: t('title'), description: t('subtitle') });
+  return buildMetadata({
+    locale,
+    path: '/projects',
+    title: t('title'),
+    description: t('subtitle'),
+  });
 }
 
-export default async function ProjectsPage({
-  params,
-}: {
-  params: Promise<{ locale: Locale }>;
-}) {
+export default async function ProjectsPage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
 
@@ -43,6 +44,7 @@ export default async function ProjectsPage({
       imageUrl: true,
       isFeatured: true,
       techStack: true,
+      category: true,
     },
   });
 
@@ -53,6 +55,7 @@ export default async function ProjectsPage({
     featured: t('featured'),
     view_project: t('view_project'),
     no_projects: t('no_projects'),
+    all: t('all'),
   };
 
   return <ProjectsClient projects={projects} translations={translations} />;
