@@ -61,7 +61,17 @@
       "degree": "Sarjana Teknik • Teknik Informatika (S.Kom)",
       "gpa": "IPK: 3.63/4.00",
       "period": "2021 - 2026",
-      "location": "Surabaya, Indonesia 🇮🇩"
+      "location": "Surabaya, Indonesia 🇮🇩",
+      "thesis": {
+        "title": "Tugas Akhir",
+        "project_title": "Analisis Sentimen terhadap Ulasan Online untuk Kendaraan Listrik Menggunakan Deep Learning di Platform X",
+        "description": "Proyek tugas akhir saya: membandingkan empat arsitektur deep learning — CNN, LSTM, BiLSTM, dan hybrid CNN+BiLSTM dengan Attention — untuk mengklasifikasikan sentimen berbahasa Indonesia terhadap kendaraan listrik dari diskusi publik asli di Platform X (2023–2025). Pelabelan menggunakan ambang batas leksikon berbasis kuantil, bukan ambang tetap, dan model terbaik diimplementasikan sebagai demo web langsung.",
+        "result": "Model hybrid CNN+BiLSTM unggul di semua metrik, mencapai akurasi 75% dan macro F1-score 0.76, sementara LSTM satu arah gagal total dan kinerjanya tidak lebih baik dari tebakan acak.",
+        "show_details": "Tampilkan detail tugas akhir",
+        "hide_details": "Sembunyikan detail tugas akhir",
+        "read_more": "Baca dokumentasi lengkapnya",
+        "published_journal": "Dipublikasikan di jurnal JATI (Jurnal Mahasiswa Teknik Informatika), Vol. 10 No. 1 (2026)"
+      }
     }
   },
   "achievements": {
