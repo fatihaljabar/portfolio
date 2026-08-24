@@ -50,7 +50,7 @@ export function AboutClient() {
       {/* About Section */}
       <section id="about" className="mb-20">
         <h2 className="text-4xl font-bold mb-8 text-gray-900 dark:text-white">{t('title')}</h2>
-        <div className="text-[11px] font-bold text-gray-500 dark:text-[#555] tracking-widest mb-4 uppercase">
+        <div className="text-[11px] font-bold text-gray-500 dark:text-[#888] tracking-widest mb-4 uppercase">
           {t('subtitle')}
         </div>
 
@@ -79,7 +79,7 @@ export function AboutClient() {
           </motion.div>
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{t('career.title')}</h3>
         </div>
-        <div className="text-[11px] font-bold text-gray-500 dark:text-[#555] tracking-widest mb-6 uppercase">
+        <div className="text-[11px] font-bold text-gray-500 dark:text-[#888] tracking-widest mb-6 uppercase">
           {t('career.subtitle')}
         </div>
 
@@ -111,10 +111,10 @@ export function AboutClient() {
                   <span>{t('career.duration')}</span>
                 </div>
 
-                <span className="text-gray-400 dark:text-[#555]">•</span>
+                <span className="text-gray-400 dark:text-[#888]">•</span>
                 <span className="text-gray-600 dark:text-[#999]">{t('career.length')}</span>
 
-                <span className="text-gray-400 dark:text-[#555]">•</span>
+                <span className="text-gray-400 dark:text-[#888]">•</span>
                 <div className="flex items-center gap-1.5">
                   <motion.div {...iconHoverProps}>
                     <Briefcase className="text-gray-400 dark:text-[#666]" size={14} />
@@ -122,7 +122,7 @@ export function AboutClient() {
                   <span>{t('career.employment_type')}</span>
                 </div>
 
-                <span className="text-gray-400 dark:text-[#555]">•</span>
+                <span className="text-gray-400 dark:text-[#888]">•</span>
                 <div className="flex items-center gap-1.5">
                   <motion.div {...iconHoverProps}>
                     <MapPin className="text-gray-400 dark:text-[#666]" size={14} />
@@ -301,7 +301,7 @@ export function AboutClient() {
             {t('education.title')}
           </h3>
         </div>
-        <div className="text-[11px] font-bold text-gray-500 dark:text-[#555] tracking-widest mb-6 uppercase">
+        <div className="text-[11px] font-bold text-gray-500 dark:text-[#888] tracking-widest mb-6 uppercase">
           {t('education.subtitle')}
         </div>
 

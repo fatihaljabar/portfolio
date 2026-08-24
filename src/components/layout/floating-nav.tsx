@@ -87,6 +87,7 @@ export function FloatingNav() {
             <Link
               key={item.href}
               href={item.href}
+              aria-label={item.label}
               className={`group relative p-2.5 transition-all duration-300 ${
                 active
                   ? 'text-gray-900 dark:text-white ring-gray-400/20 dark:ring-white/20 bg-transparent'
