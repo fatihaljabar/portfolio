@@ -5,9 +5,10 @@
  * instead of letter badges.
  */
 
-import { CreditCard, PawPrint } from 'lucide-react';
+import { CreditCard, PawPrint, ScanText, TestTube } from 'lucide-react';
 import type { IconType } from 'react-icons';
 import {
+  SiCloudflare,
   SiFramer,
   SiHono,
   SiMysql,
@@ -15,6 +16,8 @@ import {
   SiNodedotjs,
   SiPrisma,
   SiReact,
+  SiReactrouter,
+  SiResend,
   SiSupabase,
   SiTailwindcss,
   SiTypescript,
@@ -37,4 +40,10 @@ export const techIcons: Record<string, { icon: IconType; color: string }> = {
   'Framer Motion': { icon: SiFramer, color: '#0055FF' },
   Zustand: { icon: PawPrint, color: '#A3A3A3' },
   Midtrans: { icon: CreditCard, color: '#00AAE4' },
+  'Cloudflare R2': { icon: SiCloudflare, color: '#F38020' },
+  Resend: { icon: SiResend, color: '#A3A3A3' },
+  // No official logo exists for these — representative icons instead.
+  Playwright: { icon: TestTube, color: '#A3A3A3' },
+  'Tesseract.js': { icon: ScanText, color: '#A3A3A3' },
+  'React Router': { icon: SiReactrouter, color: '#CA4245' },
 };
