@@ -9,11 +9,13 @@ import { ScanText, TestTube } from 'lucide-react';
 import type { IconType } from 'react-icons';
 import {
   SiCloudflare,
+  SiFramer,
   SiHono,
   SiMysql,
   SiNextdotjs,
   SiNodedotjs,
   SiReact,
+  SiReactrouter,
   SiResend,
   SiTailwindcss,
   SiTypescript,
@@ -36,4 +38,6 @@ export const techIcons: Record<string, { icon: IconType; color: string }> = {
   // No official logo exists for these — representative icons instead.
   Playwright: { icon: TestTube, color: '#A3A3A3' },
   'Tesseract.js': { icon: ScanText, color: '#A3A3A3' },
+  'React Router': { icon: SiReactrouter, color: '#CA4245' },
+  'Framer Motion': { icon: SiFramer, color: '#0055FF' },
 };
