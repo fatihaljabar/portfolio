@@ -72,11 +72,11 @@ const skillCategories: { label: string; skills: Skill[] }[] = [
   {
     label: 'Languages',
     skills: [
-      { name: 'TypeScript', icon: SiTypescript, color: '#3E80CA' },
+      { name: 'TypeScript', icon: SiTypescript, color: '#4A88CD' },
       { name: 'JavaScript', icon: SiJavascript, color: '#CA8A04' },
-      { name: 'Python', icon: SiPython, color: '#4982B3' },
+      { name: 'Python', icon: SiPython, color: '#558BB8' },
       { name: 'HTML5', icon: SiHtml5, color: '#E34F26' },
-      { name: 'CSS3', icon: SiCss, color: '#3183BF' },
+      { name: 'CSS3', icon: SiCss, color: '#3F8BC3' },
     ],
   },
   {
@@ -87,14 +87,14 @@ const skillCategories: { label: string; skills: Skill[] }[] = [
       { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4' },
       { name: 'Radix UI', icon: SiRadixui, color: '#A3A3A3' },
       { name: 'shadcn/ui', icon: SiShadcnui, color: '#A3A3A3' },
-      { name: 'Framer Motion', icon: SiFramer, color: '#2F74FF' },
+      { name: 'Framer Motion', icon: SiFramer, color: '#4080FF' },
       { name: 'Zustand', icon: PawPrint, color: '#A3A3A3' },
       { name: 'TanStack Query', icon: SiReactquery, color: '#FF4154' },
       { name: 'Recharts', icon: BarChart3, color: '#A3A3A3' },
       { name: 'Vite', icon: SiVite, color: '#646CFF' },
-      { name: 'React Router', icon: SiReactrouter, color: '#CF5558' },
+      { name: 'React Router', icon: SiReactrouter, color: '#D36265' },
       { name: 'Vue.js', icon: SiVuedotjs, color: '#4FC08D' },
-      { name: 'Bootstrap', icon: SiBootstrap, color: '#8E6DBF' },
+      { name: 'Bootstrap', icon: SiBootstrap, color: '#9678C4' },
     ],
   },
   {
@@ -106,7 +106,7 @@ const skillCategories: { label: string; skills: Skill[] }[] = [
       { name: 'Prisma', icon: SiPrisma, color: '#A3A3A3' },
       { name: 'Drizzle ORM', icon: SiDrizzle, color: '#65A30D' },
       { name: 'Auth.js', icon: KeyRound, color: '#A3A3A3' },
-      { name: 'Zod', icon: SiZod, color: '#5A7DBC' },
+      { name: 'Zod', icon: SiZod, color: '#6585C1' },
       { name: 'Google Identity', icon: SiGoogle, color: '#4285F4' },
       { name: 'aws4fetch', icon: Webhook, color: '#A3A3A3' },
       { name: 'Resend', icon: SiResend, color: '#A3A3A3' },
@@ -115,8 +115,8 @@ const skillCategories: { label: string; skills: Skill[] }[] = [
   {
     label: 'Databases & Infra',
     skills: [
-      { name: 'PostgreSQL', icon: SiPostgresql, color: '#5377E4' },
-      { name: 'MySQL', icon: SiMysql, color: '#5283A8' },
+      { name: 'PostgreSQL', icon: SiPostgresql, color: '#5E80E6' },
+      { name: 'MySQL', icon: SiMysql, color: '#5C8AAD' },
       { name: 'MariaDB', icon: SiMariadb, color: '#4FA8C7' },
       { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
       { name: 'Supabase', icon: SiSupabase, color: '#3FCF8E' },
@@ -128,7 +128,7 @@ const skillCategories: { label: string; skills: Skill[] }[] = [
     label: 'Machine Learning',
     skills: [
       { name: 'TensorFlow', icon: SiTensorflow, color: '#FF6F00' },
-      { name: 'Keras', icon: SiKeras, color: '#DD4545' },
+      { name: 'Keras', icon: SiKeras, color: '#E05757' },
       { name: 'PyTorch', icon: SiPytorch, color: '#EE4C2C' },
       { name: 'scikit-learn', icon: SiScikitlearn, color: '#F7931E' },
       { name: 'pandas', icon: SiPandas, color: '#8B7FD6' },
@@ -142,9 +142,9 @@ const skillCategories: { label: string; skills: Skill[] }[] = [
     skills: [
       { name: 'Git', icon: SiGit, color: '#F05032' },
       { name: 'GitHub', icon: SiGithub, color: '#A3A3A3' },
-      { name: 'Jest', icon: SiJest, color: '#D2505D' },
+      { name: 'Jest', icon: SiJest, color: '#D65F6B' },
       { name: 'Playwright', icon: TestTube, color: '#A3A3A3' },
-      { name: 'ESLint', icon: SiEslint, color: '#7F6DD4' },
+      { name: 'ESLint', icon: SiEslint, color: '#8878D7' },
       { name: 'Biome', icon: SiBiome, color: '#60A5FA' },
       { name: 'Postman', icon: SiPostman, color: '#FF6C37' },
       { name: 'Figma', icon: SiFigma, color: '#F24E1E' },
