@@ -5,13 +5,17 @@
  * instead of letter badges.
  */
 
+import { CreditCard, PawPrint } from 'lucide-react';
 import type { IconType } from 'react-icons';
 import {
+  SiFramer,
   SiHono,
   SiMysql,
   SiNextdotjs,
   SiNodedotjs,
+  SiPrisma,
   SiReact,
+  SiSupabase,
   SiTailwindcss,
   SiTypescript,
   SiVite,
@@ -28,4 +32,9 @@ export const techIcons: Record<string, { icon: IconType; color: string }> = {
   Vite: { icon: SiVite, color: '#646CFF' },
   'Node.js': { icon: SiNodedotjs, color: '#339933' },
   'Next.js': { icon: SiNextdotjs, color: '#A3A3A3' },
+  Prisma: { icon: SiPrisma, color: '#A3A3A3' },
+  Supabase: { icon: SiSupabase, color: '#3FCF8E' },
+  'Framer Motion': { icon: SiFramer, color: '#0055FF' },
+  Zustand: { icon: PawPrint, color: '#A3A3A3' },
+  Midtrans: { icon: CreditCard, color: '#00AAE4' },
 };
