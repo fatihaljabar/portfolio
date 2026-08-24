@@ -226,7 +226,7 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
                 {/* Issuer */}
                 <div className="flex items-center gap-2 text-gray-600 dark:text-[#888] text-xs mb-3">
                   <motion.div {...iconHoverProps}>
-                    <ShieldCheck className="text-gray-400 dark:text-[#555] shrink-0" size={14} />
+                    <ShieldCheck className="text-gray-400 dark:text-[#888] shrink-0" size={14} />
                   </motion.div>
                   <span>{achievement.issuer}</span>
                 </div>
@@ -247,7 +247,7 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
                 <div className="mt-3">
                   <span className="text-[10px] text-gray-500 dark:text-[#666] font-mono flex items-center gap-2">
                     <motion.div {...iconHoverProps}>
-                      <Calendar size={14} className="shrink-0 text-gray-400 dark:text-[#555]" />
+                      <Calendar size={14} className="shrink-0 text-gray-400 dark:text-[#888]" />
                     </motion.div>
                     {formatDate(achievement.issuedDate)}
                   </span>
@@ -329,7 +329,7 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
                     {selectedAchievement.title}
                   </DialogTitle>
                   <div className="flex items-center gap-2 text-gray-600 dark:text-[#888] text-sm">
-                    <ShieldCheck className="text-gray-400 dark:text-[#555] shrink-0" size={16} />
+                    <ShieldCheck className="text-gray-400 dark:text-[#888] shrink-0" size={16} />
                     <span>{selectedAchievement.issuer}</span>
                   </div>
                 </DialogHeader>

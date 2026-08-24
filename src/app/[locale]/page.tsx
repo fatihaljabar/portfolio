@@ -33,7 +33,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
     <>
       {/* Intro Section */}
       <section className="mb-20">
-        <div className="text-[11px] font-bold text-gray-500 dark:text-[#555] tracking-widest mb-6 uppercase">
+        <div className="text-[11px] font-bold text-gray-500 dark:text-[#888] tracking-widest mb-6 uppercase">
           {t('intro')}
         </div>
         <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight text-gray-900 dark:text-white">

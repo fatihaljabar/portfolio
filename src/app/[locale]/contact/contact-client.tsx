@@ -174,7 +174,7 @@ export function ContactClient() {
 
       <div className="h-[1px] border-t border-dashed border-gray-300 dark:border-[#333] w-full mb-10"></div>
 
-      <div className="text-[11px] font-bold text-gray-500 dark:text-[#555] tracking-widest mb-6 uppercase">{t('social_media')}</div>
+      <div className="text-[11px] font-bold text-gray-500 dark:text-[#888] tracking-widest mb-6 uppercase">{t('social_media')}</div>
 
       {/* Social Media Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
@@ -222,7 +222,7 @@ export function ContactClient() {
       </div>
 
       {/* Contact Form */}
-      <div className="text-[11px] font-bold text-gray-500 dark:text-[#555] tracking-widest mb-6 uppercase">{t('send_message')}</div>
+      <div className="text-[11px] font-bold text-gray-500 dark:text-[#888] tracking-widest mb-6 uppercase">{t('send_message')}</div>
 
       <form className="space-y-6" onSubmit={handleSubmit}>
         <div className="grid md:grid-cols-2 gap-6">
