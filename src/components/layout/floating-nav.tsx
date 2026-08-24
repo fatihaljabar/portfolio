@@ -111,7 +111,10 @@ export function FloatingNav() {
               >
                 <Icon className="text-xl" size={20} />
               </motion.div>
-              <span className="absolute bottom-[125%] left-1/2 -translate-x-1/2 bg-gray-200 dark:bg-[#1a1a1a] text-gray-900 dark:text-white px-2.5 py-1 rounded-md text-[11px] font-medium border border-gray-300 dark:border-white/10 shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:-translate-y-1 transition-all duration-200 pointer-events-none">
+              <span
+                aria-hidden="true"
+                className="absolute bottom-[125%] left-1/2 -translate-x-1/2 bg-gray-200 dark:bg-[#1a1a1a] text-gray-900 dark:text-white px-2.5 py-1 rounded-md text-[11px] font-medium border border-gray-300 dark:border-white/10 shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:-translate-y-1 transition-all duration-200 pointer-events-none"
+              >
                 {item.label}
               </span>
             </Link>
@@ -154,7 +157,10 @@ export function FloatingNav() {
               </span>
             )}
           </motion.div>
-          <span className="absolute bottom-[125%] left-1/2 -translate-x-1/2 bg-gray-200 dark:bg-[#1a1a1a] text-gray-900 dark:text-white px-2.5 py-1 rounded-md text-[11px] font-medium border border-gray-300 dark:border-white/10 shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:-translate-y-1 transition-all duration-200 pointer-events-none">
+          <span
+            aria-hidden="true"
+            className="absolute bottom-[125%] left-1/2 -translate-x-1/2 bg-gray-200 dark:bg-[#1a1a1a] text-gray-900 dark:text-white px-2.5 py-1 rounded-md text-[11px] font-medium border border-gray-300 dark:border-white/10 shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:-translate-y-1 transition-all duration-200 pointer-events-none"
+          >
             {t('support')} ({loveCount})
           </span>
         </button>
