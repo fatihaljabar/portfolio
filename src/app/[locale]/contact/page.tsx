@@ -9,6 +9,8 @@ import { buildMetadata } from '@/lib/seo/metadata';
 import type { Locale } from '@/lib/i18n/config';
 import { ContactClient } from './contact-client';
 
+export const revalidate = 60;
+
 export async function generateMetadata({
   params,
 }: {
