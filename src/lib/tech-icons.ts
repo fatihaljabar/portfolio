@@ -5,8 +5,10 @@
  * instead of letter badges.
  */
 
+import { ScanText, TestTube } from 'lucide-react';
 import type { IconType } from 'react-icons';
 import {
+  SiCloudflare,
   SiFramer,
   SiHono,
   SiMysql,
@@ -14,6 +16,7 @@ import {
   SiNodedotjs,
   SiReact,
   SiReactrouter,
+  SiResend,
   SiTailwindcss,
   SiTypescript,
   SiVite,
@@ -30,6 +33,11 @@ export const techIcons: Record<string, { icon: IconType; color: string }> = {
   Vite: { icon: SiVite, color: '#646CFF' },
   'Node.js': { icon: SiNodedotjs, color: '#339933' },
   'Next.js': { icon: SiNextdotjs, color: '#A3A3A3' },
+  'Cloudflare R2': { icon: SiCloudflare, color: '#F38020' },
+  Resend: { icon: SiResend, color: '#A3A3A3' },
+  // No official logo exists for these — representative icons instead.
+  Playwright: { icon: TestTube, color: '#A3A3A3' },
+  'Tesseract.js': { icon: ScanText, color: '#A3A3A3' },
   'React Router': { icon: SiReactrouter, color: '#CA4245' },
   'Framer Motion': { icon: SiFramer, color: '#0055FF' },
 };
