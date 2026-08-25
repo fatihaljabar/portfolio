@@ -17,10 +17,16 @@ import {
   Instagram,
   Linkedin,
   Github,
-  Video,
+  Share2,
   ShieldCheck,
 } from 'lucide-react';
+import { SiTiktok } from 'react-icons/si';
 import { motion } from 'framer-motion';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { localeFlags, locales } from '@/lib/i18n/config';
 import { ModeToggle } from '@/components/components/theme-toggle';
 import { LocaleToggle } from '@/components/components/locale-toggle';
@@ -38,7 +44,7 @@ export function Sidebar() {
     { icon: Instagram, href: 'https://www.instagram.com/fatihaljabar/', label: 'Instagram' },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/fatihaljabar/', label: 'LinkedIn' },
     { icon: Github, href: 'https://github.com/fatihaljabar', label: 'GitHub' },
-    { icon: Video, href: 'https://www.tiktok.com/@fatihaljabarr', label: 'TikTok' },
+    { icon: SiTiktok, href: 'https://www.tiktok.com/@fatihaljabarr', label: 'TikTok' },
     { icon: Mail, href: 'mailto:fatihaljabar@gmail.com', label: 'Email' },
   ];
 
@@ -55,6 +61,36 @@ export function Sidebar() {
         <div className="flex items-center gap-2 shrink-0">
           <LocaleToggle />
           <ModeToggle />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                type="button"
+                aria-label={t('contact')}
+                className="flex items-center justify-center h-11 w-11 rounded-full text-gray-600 dark:text-[#ccc] hover:text-gray-900 dark:hover:text-white transition-colors"
+              >
+                <Share2 size={16} />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-auto p-2">
+              <div className="flex items-center gap-1">
+                {socialLinks.map((social) => {
+                  const Icon = social.icon;
+                  return (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      target={social.href.startsWith('mailto:') ? undefined : '_blank'}
+                      rel={social.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+                      aria-label={social.label}
+                      className="flex items-center justify-center h-11 w-11 rounded-full text-gray-500 dark:text-[#888] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5 transition-colors"
+                    >
+                      <Icon size={18} />
+                    </a>
+                  );
+                })}
+              </div>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
 

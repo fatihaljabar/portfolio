@@ -15,7 +15,7 @@ export function ModeToggle() {
 
   if (!mounted) {
     return (
-      <div className="flex items-center justify-center lg:justify-start gap-0 lg:gap-2 bg-gray-100 dark:bg-[#151515] h-11 w-11 lg:h-8 lg:w-auto lg:px-3 rounded-full border border-gray-200 dark:border-white/5 opacity-50">
+      <div className="flex items-center justify-center lg:justify-start gap-0 lg:gap-2 bg-transparent lg:bg-gray-100 dark:lg:bg-[#151515] h-11 w-11 lg:h-8 lg:w-auto lg:px-3 rounded-full border border-transparent lg:border-gray-200 dark:lg:border-white/5 opacity-50">
         <Moon size={16} className="text-gray-400 dark:text-[#666]" />
         <div className="hidden lg:block w-9 h-5 rounded-full bg-gray-300 dark:bg-[#333]" />
       </div>
@@ -29,7 +29,7 @@ export function ModeToggle() {
       type="button"
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
-      className="flex items-center justify-center lg:justify-start gap-0 lg:gap-2 bg-gray-100 dark:bg-[#151515] hover:bg-gray-200 dark:hover:bg-[#1a1a1a] h-11 w-11 lg:h-8 lg:w-auto lg:px-3 rounded-full border border-gray-200 dark:border-white/5 text-gray-600 dark:text-[#ccc] hover:text-gray-900 dark:hover:text-white transition-colors duration-200 overflow-hidden shrink-0"
+      className="flex items-center justify-center lg:justify-start gap-0 lg:gap-2 bg-transparent lg:bg-gray-100 dark:lg:bg-[#151515] hover:bg-transparent lg:hover:bg-gray-200 dark:lg:hover:bg-[#1a1a1a] h-11 w-11 lg:h-8 lg:w-auto lg:px-3 rounded-full border border-transparent lg:border-gray-200 dark:lg:border-white/5 text-gray-600 dark:text-[#ccc] hover:text-gray-900 dark:hover:text-white transition-colors duration-200 overflow-hidden shrink-0"
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
