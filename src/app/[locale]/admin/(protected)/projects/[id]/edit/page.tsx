@@ -9,6 +9,7 @@ import { notFound } from 'next/navigation';
 import { updateProject } from '@/lib/actions/admin-projects';
 import type { Locale } from '@/lib/i18n/config';
 import { prisma } from '@/lib/prisma/client';
+import { getTechIcon, type TechIconResult } from '@/lib/tech-icon';
 import { ProjectForm } from '../../project-form';
 
 export const dynamic = 'force-dynamic';
@@ -32,6 +33,11 @@ export default async function EditProjectPage({
 
   const boundUpdateProject = updateProject.bind(null, project.id);
 
+  const initialTechIcons: Record<string, TechIconResult | null> = {};
+  for (const tech of project.techStack) {
+    initialTechIcons[tech] = getTechIcon(tech);
+  }
+
   return (
     <div>
       <Link
@@ -45,6 +51,7 @@ export default async function EditProjectPage({
       <ProjectForm
         action={boundUpdateProject}
         submitLabel="Save Changes"
+        initialTechIcons={initialTechIcons}
         defaultValues={{
           title: project.title,
           description: project.description,
