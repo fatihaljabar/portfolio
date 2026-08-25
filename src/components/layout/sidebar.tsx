@@ -1,12 +1,14 @@
 /**
  * Sidebar Component
- * Left sidebar containing profile info, contact, languages, and social links
+ * Desktop: full profile card (photo, contact, languages, social links), sticky.
+ * Mobile/tablet (<lg): compact identity bar only — contact info and social
+ * links already live on the Contact page, so repeating them above every
+ * page's content is redundant. See Contact page for that content on mobile.
  */
 
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Link } from '@/lib/i18n/navigation';
 import Image from 'next/image';
 import {
   Mail,
@@ -19,7 +21,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { localeFlags, locales, type Locale } from '@/lib/i18n/config';
+import { localeFlags, locales } from '@/lib/i18n/config';
 import { ModeToggle } from '@/components/components/theme-toggle';
 import { LocaleToggle } from '@/components/components/locale-toggle';
 
@@ -30,7 +32,6 @@ const iconHoverProps = {
 
 export function Sidebar() {
   const t = useTranslations('sidebar');
-  const tNav = useTranslations('nav');
 
   const socialLinks = [
     { icon: X, href: 'https://x.com/fatihaljabar', label: 'X' },
@@ -42,8 +43,23 @@ export function Sidebar() {
   ];
 
   return (
-    <aside className="lg:w-[380px] lg:h-screen lg:sticky lg:top-0 p-8 pb-28 lg:p-10 flex flex-col justify-between z-40 bg-white dark:bg-[#0a0a0a] lg:border-r border-gray-200 dark:border-dark-border">
-      <div className="flex flex-col items-center w-full">
+    <aside className="lg:w-[380px] lg:h-screen lg:sticky lg:top-0 p-4 lg:p-10 flex flex-col justify-between z-40 bg-white dark:bg-[#0a0a0a] border-b lg:border-b-0 lg:border-r border-gray-200 dark:border-dark-border">
+      {/* Mobile/tablet compact identity bar (<lg) */}
+      <div className="flex lg:hidden items-center justify-between w-full">
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="relative w-10 h-10 shrink-0 rounded-full overflow-hidden border-2 border-gray-200 dark:border-dark-border">
+            <Image src="/img/profile.jpg" alt="Profile" fill sizes="40px" className="object-cover" priority />
+          </div>
+          <span className="font-bold text-gray-900 dark:text-white truncate">Fatih Al Jabar H.M.</span>
+        </div>
+        <div className="flex items-center gap-2 shrink-0">
+          <LocaleToggle />
+          <ModeToggle />
+        </div>
+      </div>
+
+      {/* Desktop full profile card (lg+) */}
+      <div className="hidden lg:flex lg:flex-col items-center w-full">
         {/* Profile Image */}
         <div className="mb-6">
           <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-gray-200 dark:border-dark-border shadow-2xl">
@@ -124,8 +140,8 @@ export function Sidebar() {
         </div>
       </div>
 
-      {/* Social Links Footer */}
-      <div className="mt-auto pt-6 flex justify-between items-center border-t border-black/5 dark:border-white/5 w-full">
+      {/* Social Links Footer (lg+) */}
+      <div className="hidden lg:flex mt-auto pt-6 justify-between items-center border-t border-black/5 dark:border-white/5 w-full">
         {socialLinks.map((social) => {
           const Icon = social.icon;
           return (
