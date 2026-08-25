@@ -13,6 +13,7 @@ import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import type { ProjectInput } from '@/lib/actions/admin-projects';
 import { ImageUploadField } from '../image-upload-field';
+import { ContentImageUploader } from './content-image-uploader';
 
 interface ProjectFormProps {
   action: (data: ProjectInput) => Promise<{ success: boolean; error?: string } | undefined>;
@@ -102,6 +103,15 @@ export function ProjectForm({ action, defaultValues, submitLabel }: ProjectFormP
             onChange={(e) => setForm((prev) => ({ ...prev, content: e.target.value }))}
             required
           />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <Label>Content images</Label>
+          <p className="text-xs text-gray-500 dark:text-[#888] -mt-1">
+            Upload an image, then copy its markdown line into Content above wherever you want it to
+            appear.
+          </p>
+          <ContentImageUploader />
         </div>
       </section>
 
