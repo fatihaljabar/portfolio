@@ -14,7 +14,7 @@ export default async function ProtectedAdminLayout({ children }: { children: Rea
     <div className="min-h-dvh bg-white dark:bg-[#0a0a0a]">
       <AdminSidebar unreadMessageCount={unreadMessageCount} />
       <main className="lg:pl-60 pb-16 lg:pb-0">
-        <div className="p-6 lg:p-10 max-w-5xl">{children}</div>
+        <div className="mx-auto max-w-5xl p-6 lg:p-10">{children}</div>
       </main>
     </div>
   );

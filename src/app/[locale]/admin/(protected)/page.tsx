@@ -62,7 +62,7 @@ export default async function AdminHomePage({ params }: { params: Promise<{ loca
 
         <Link
           href={`/${locale}/admin/achievements`}
-          className="group relative overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 p-6 hover:border-gray-300 dark:hover:border-white/20 transition-colors sm:mt-6"
+          className="group relative overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 p-6 hover:border-gray-300 dark:hover:border-white/20 transition-colors"
         >
           <Award className="absolute -right-3 -bottom-3 text-[100px] text-gray-500/5 rotate-12" />
           <div className="relative flex items-start justify-between mb-8">
