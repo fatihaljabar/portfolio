@@ -27,9 +27,9 @@ export function LocaleToggle() {
 
   if (!mounted) {
     return (
-      <div className="flex items-center gap-2 bg-gray-100 dark:bg-[#151515] p-1.5 rounded-full border border-gray-200 dark:border-white/5 opacity-50">
+      <div className="flex items-center justify-center lg:justify-start gap-0 lg:gap-2 bg-transparent lg:bg-gray-100 dark:lg:bg-[#151515] h-11 w-11 lg:h-8 lg:w-auto lg:px-3 rounded-full border border-transparent lg:border-gray-200 dark:lg:border-white/5 opacity-50">
         <Globe size={16} className="text-gray-400 dark:text-[#666]" />
-        <div className="w-9 h-5 rounded-full bg-gray-300 dark:bg-[#333]" />
+        <div className="hidden lg:block w-9 h-5 rounded-full bg-gray-300 dark:bg-[#333]" />
       </div>
     );
   }
@@ -53,7 +53,7 @@ export function LocaleToggle() {
       onClick={handleClick}
       disabled={isPending}
       aria-label={`Switch to ${localeNames[nextLocale]}`}
-      className="flex items-center gap-2 bg-gray-100 dark:bg-[#151515] hover:bg-gray-200 dark:hover:bg-[#1a1a1a] h-8 px-3 rounded-full border border-gray-200 dark:border-white/5 text-gray-600 dark:text-[#ccc] hover:text-gray-900 dark:hover:text-white transition-colors duration-200 overflow-hidden disabled:opacity-60 disabled:cursor-wait"
+      className="flex items-center justify-center lg:justify-start gap-0 lg:gap-2 bg-transparent lg:bg-gray-100 dark:lg:bg-[#151515] hover:bg-transparent lg:hover:bg-gray-200 dark:lg:hover:bg-[#1a1a1a] h-11 w-11 lg:h-8 lg:w-auto lg:px-3 rounded-full border border-transparent lg:border-gray-200 dark:lg:border-white/5 text-gray-600 dark:text-[#ccc] hover:text-gray-900 dark:hover:text-white transition-colors duration-200 overflow-hidden disabled:opacity-60 disabled:cursor-wait shrink-0"
     >
       <Globe size={16} className="shrink-0" />
       <AnimatePresence mode="wait" initial={false}>
@@ -63,7 +63,7 @@ export function LocaleToggle() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 6 }}
           transition={{ duration: 0.15, ease: 'easeOut' }}
-          className="text-xs font-medium uppercase"
+          className="hidden lg:inline text-xs font-medium uppercase"
         >
           {locale}
         </motion.span>

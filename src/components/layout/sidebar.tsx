@@ -1,12 +1,14 @@
 /**
  * Sidebar Component
- * Left sidebar containing profile info, contact, languages, and social links
+ * Desktop: full profile card (photo, contact, languages, social links), sticky.
+ * Mobile/tablet (<lg): compact identity bar only — contact info and social
+ * links already live on the Contact page, so repeating them above every
+ * page's content is redundant. See Contact page for that content on mobile.
  */
 
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Link } from '@/lib/i18n/navigation';
 import Image from 'next/image';
 import {
   Mail,
@@ -15,11 +17,17 @@ import {
   Instagram,
   Linkedin,
   Github,
-  Video,
+  Share2,
   ShieldCheck,
 } from 'lucide-react';
+import { SiTiktok } from 'react-icons/si';
 import { motion } from 'framer-motion';
-import { localeFlags, locales, type Locale } from '@/lib/i18n/config';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { localeFlags, locales } from '@/lib/i18n/config';
 import { ModeToggle } from '@/components/components/theme-toggle';
 import { LocaleToggle } from '@/components/components/locale-toggle';
 
@@ -30,20 +38,64 @@ const iconHoverProps = {
 
 export function Sidebar() {
   const t = useTranslations('sidebar');
-  const tNav = useTranslations('nav');
 
   const socialLinks = [
     { icon: X, href: 'https://x.com/fatihaljabar', label: 'X' },
     { icon: Instagram, href: 'https://www.instagram.com/fatihaljabar/', label: 'Instagram' },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/fatihaljabar/', label: 'LinkedIn' },
     { icon: Github, href: 'https://github.com/fatihaljabar', label: 'GitHub' },
-    { icon: Video, href: 'https://www.tiktok.com/@fatihaljabarr', label: 'TikTok' },
+    { icon: SiTiktok, href: 'https://www.tiktok.com/@fatihaljabarr', label: 'TikTok' },
     { icon: Mail, href: 'mailto:fatihaljabar@gmail.com', label: 'Email' },
   ];
 
   return (
-    <aside className="lg:w-[380px] lg:h-screen lg:sticky lg:top-0 p-8 pb-28 lg:p-10 flex flex-col justify-between z-40 bg-white dark:bg-[#0a0a0a] lg:border-r border-gray-200 dark:border-dark-border">
-      <div className="flex flex-col items-center w-full">
+    <aside className="lg:w-[380px] lg:h-screen lg:sticky lg:top-0 p-4 lg:p-10 flex flex-col justify-between z-40 bg-white dark:bg-[#0a0a0a] border-b lg:border-b-0 lg:border-r border-gray-200 dark:border-dark-border">
+      {/* Mobile/tablet compact identity bar (<lg) */}
+      <div className="flex lg:hidden items-center justify-between w-full">
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="relative w-10 h-10 shrink-0 rounded-full overflow-hidden border-2 border-gray-200 dark:border-dark-border">
+            <Image src="/img/profile.jpg" alt="Profile" fill sizes="40px" className="object-cover" priority />
+          </div>
+          <span className="font-bold text-gray-900 dark:text-white truncate">Fatih</span>
+        </div>
+        <div className="flex items-center gap-2 shrink-0">
+          <LocaleToggle />
+          <ModeToggle />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                type="button"
+                aria-label={t('contact')}
+                className="flex items-center justify-center h-11 w-11 rounded-full text-gray-600 dark:text-[#ccc] hover:text-gray-900 dark:hover:text-white transition-colors"
+              >
+                <Share2 size={16} />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-auto p-2">
+              <div className="flex items-center gap-1">
+                {socialLinks.map((social) => {
+                  const Icon = social.icon;
+                  return (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      target={social.href.startsWith('mailto:') ? undefined : '_blank'}
+                      rel={social.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+                      aria-label={social.label}
+                      className="flex items-center justify-center h-11 w-11 rounded-full text-gray-500 dark:text-[#888] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5 transition-colors"
+                    >
+                      <Icon size={18} />
+                    </a>
+                  );
+                })}
+              </div>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      </div>
+
+      {/* Desktop full profile card (lg+) */}
+      <div className="hidden lg:flex lg:flex-col items-center w-full">
         {/* Profile Image */}
         <div className="mb-6">
           <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-gray-200 dark:border-dark-border shadow-2xl">
@@ -53,7 +105,7 @@ export function Sidebar() {
 
         {/* Name */}
         <h1 className="text-2xl font-bold mb-2 flex items-center gap-2 text-gray-900 dark:text-white">
-          Fatih Al Jabar H.M.
+          Fatih
           <motion.div {...iconHoverProps}>
             <ShieldCheck className="text-accent-blue" size={20} />
           </motion.div>
@@ -124,8 +176,8 @@ export function Sidebar() {
         </div>
       </div>
 
-      {/* Social Links Footer */}
-      <div className="mt-auto pt-6 flex justify-between items-center border-t border-black/5 dark:border-white/5 w-full">
+      {/* Social Links Footer (lg+) */}
+      <div className="hidden lg:flex mt-auto pt-6 justify-between items-center border-t border-black/5 dark:border-white/5 w-full">
         {socialLinks.map((social) => {
           const Icon = social.icon;
           return (
