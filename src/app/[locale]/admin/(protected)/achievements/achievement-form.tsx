@@ -12,6 +12,7 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import type { AchievementInput } from '@/lib/actions/admin-achievements';
+import { AdditionalImagesField } from '../additional-images-field';
 import { ImageUploadField } from '../image-upload-field';
 
 interface AchievementFormProps {
@@ -27,6 +28,7 @@ const emptyValues: AchievementInput = {
   certificateNumber: '',
   credentialUrl: '',
   imageUrl: '',
+  additionalImages: [],
   issuedDate: '',
   type: 'CERTIFICATION',
   category: '',
@@ -153,6 +155,17 @@ export function AchievementForm({ action, defaultValues, submitLabel }: Achievem
               folder="achievements"
               value={form.imageUrl ?? ''}
               onChange={(url) => setForm((prev) => ({ ...prev, imageUrl: url }))}
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label>Additional images</Label>
+            <p className="text-xs text-gray-500 dark:text-[#888] -mt-1">
+              Shown as a slideshow after the main image on the public site
+            </p>
+            <AdditionalImagesField
+              folder="achievements"
+              value={form.additionalImages}
+              onChange={(urls) => setForm((prev) => ({ ...prev, additionalImages: urls }))}
             />
           </div>
           <div className="flex flex-col gap-2">

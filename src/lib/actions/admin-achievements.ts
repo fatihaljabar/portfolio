@@ -23,6 +23,7 @@ const achievementSchema = z.object({
   certificateNumber: z.string().optional(),
   credentialUrl: urlField,
   imageUrl: urlField,
+  additionalImages: z.array(z.string().url()).default([]),
   issuedDate: z.string().min(1, 'Issued date is required'),
   type: z.enum(AchievementType),
   category: z.string().optional(),
@@ -98,7 +99,7 @@ export async function updateAchievement(id: string, data: AchievementInput) {
 
   const existing = await prisma.achievement.findUnique({
     where: { id },
-    select: { imageUrl: true },
+    select: { imageUrl: true, additionalImages: true },
   });
   const newImageUrl = parsed.data.imageUrl || null;
 
@@ -116,6 +117,11 @@ export async function updateAchievement(id: string, data: AchievementInput) {
     await deleteStorageImage(existing.imageUrl);
   }
 
+  const removedAdditionalImages = (existing?.additionalImages ?? []).filter(
+    (url) => !parsed.data.additionalImages.includes(url),
+  );
+  await Promise.all(removedAdditionalImages.map((url) => deleteStorageImage(url)));
+
   revalidateAchievementPaths();
   const locale = await getLocale();
   redirect({ href: '/admin/achievements', locale });
@@ -129,13 +135,14 @@ export async function deleteAchievement(id: string) {
 
   const achievement = await prisma.achievement.findUnique({
     where: { id },
-    select: { imageUrl: true },
+    select: { imageUrl: true, additionalImages: true },
   });
   await prisma.achievement.delete({ where: { id } });
 
   if (achievement?.imageUrl) {
     await deleteStorageImage(achievement.imageUrl);
   }
+  await Promise.all((achievement?.additionalImages ?? []).map((url) => deleteStorageImage(url)));
 
   revalidateAchievementPaths();
   return { success: true };
