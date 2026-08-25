@@ -5,7 +5,6 @@
  */
 
 import { notFound } from 'next/navigation';
-import { MainLayout } from '@/components/layout/main-layout';
 import { HtmlLangSync } from '@/components/providers/html-lang-sync';
 import { Providers } from '@/components/providers/intl-provider';
 import { locales } from '@/lib/i18n/config';
@@ -33,7 +32,7 @@ export default async function LocaleLayout({
   return (
     <Providers locale={locale} messages={messages}>
       <HtmlLangSync locale={locale} />
-      <MainLayout>{children}</MainLayout>
+      {children}
     </Providers>
   );
 }
