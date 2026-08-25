@@ -19,7 +19,7 @@ const navItems = [
   { path: 'admin/messages', label: 'Messages', icon: Mail },
 ];
 
-export function AdminNav() {
+export function AdminNav({ unreadMessageCount }: { unreadMessageCount: number }) {
   const pathname = usePathname();
   const locale = pathname.split('/')[1];
 
@@ -30,12 +30,13 @@ export function AdminNav() {
           const href = `/${locale}/${item.path}`;
           const isActive = pathname === href;
           const Icon = item.icon;
+          const badgeCount = item.path === 'admin/messages' ? unreadMessageCount : 0;
           return (
             <Link
               key={item.path}
               href={href}
-              aria-label={item.label}
-              className={`shrink-0 flex items-center gap-2 w-11 h-11 lg:w-auto lg:h-auto justify-center lg:px-4 lg:py-2 rounded-xl text-sm font-medium transition-colors ${
+              aria-label={badgeCount > 0 ? `${item.label} (${badgeCount} unread)` : item.label}
+              className={`relative shrink-0 flex items-center gap-2 w-11 h-11 lg:w-auto lg:h-auto justify-center lg:px-4 lg:py-2 rounded-xl text-sm font-medium transition-colors ${
                 isActive
                   ? 'bg-gray-900 dark:bg-white text-white dark:text-black'
                   : 'text-gray-500 dark:text-[#888] hover:bg-gray-100 dark:hover:bg-white/10'
@@ -43,6 +44,11 @@ export function AdminNav() {
             >
               <Icon size={18} />
               <span className="hidden lg:inline">{item.label}</span>
+              {badgeCount > 0 && (
+                <span className="absolute top-1 right-1 lg:static lg:ml-0.5 flex items-center justify-center min-w-[16px] h-4 px-1 rounded-full bg-red-500 text-white text-[10px] font-bold">
+                  {badgeCount}
+                </span>
+              )}
             </Link>
           );
         })}
