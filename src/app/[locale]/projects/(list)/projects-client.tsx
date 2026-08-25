@@ -9,6 +9,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUpRight, Folder } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
+import { ScrollableFilterBar } from '@/components/components/scrollable-filter-bar';
 import { Link } from '@/lib/i18n/navigation';
 import { techIcons } from '@/lib/tech-icons';
 
@@ -74,31 +75,13 @@ export function ProjectsClient({ projects, translations: t }: ProjectsClientProp
       <div className="h-[1px] border-t border-dashed border-gray-300 dark:border-[#333] w-full mb-8"></div>
 
       {categories.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 mb-8">
-          {filters.map((filter) => {
-            const isActive = filter === activeFilter;
-            return (
-              <button
-                key={filter}
-                type="button"
-                onClick={() => setActiveFilter(filter)}
-                className={`relative px-3 py-1.5 rounded-full text-xs font-medium transition-colors duration-200 ${
-                  isActive
-                    ? 'text-gray-900 dark:text-white'
-                    : 'text-gray-500 dark:text-[#888] hover:text-gray-700 dark:hover:text-white'
-                }`}
-              >
-                {isActive && (
-                  <motion.span
-                    layoutId="project-filter-pill"
-                    className="absolute inset-0 rounded-full bg-gray-100 dark:bg-white/10 border border-gray-200 dark:border-white/10"
-                    transition={{ type: 'spring', stiffness: 400, damping: 32 }}
-                  />
-                )}
-                <span className="relative">{filter}</span>
-              </button>
-            );
-          })}
+        <div className="mb-8">
+          <ScrollableFilterBar
+            filters={filters}
+            activeFilter={activeFilter}
+            onSelect={setActiveFilter}
+            layoutId="project-filter-pill"
+          />
         </div>
       )}
 

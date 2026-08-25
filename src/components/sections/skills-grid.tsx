@@ -12,6 +12,7 @@ import { BarChart3, KeyRound, PawPrint, TestTube, Webhook } from 'lucide-react';
 import { useState } from 'react';
 import type { IconType } from 'react-icons';
 import { BsOpenai } from 'react-icons/bs';
+import { ScrollableFilterBar } from '@/components/components/scrollable-filter-bar';
 import {
   SiBiome,
   SiBootstrap,
@@ -167,32 +168,12 @@ export function SkillsGrid() {
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex flex-wrap gap-1.5">
-        {filters.map((filter) => {
-          const isActive = filter === activeFilter;
-          return (
-            <button
-              key={filter}
-              type="button"
-              onClick={() => setActiveFilter(filter)}
-              className={`relative px-3 py-1.5 rounded-full text-xs font-medium transition-colors duration-200 ${
-                isActive
-                  ? 'text-gray-900 dark:text-white'
-                  : 'text-gray-500 dark:text-[#888] hover:text-gray-700 dark:hover:text-white'
-              }`}
-            >
-              {isActive && (
-                <motion.span
-                  layoutId="skill-filter-pill"
-                  className="absolute inset-0 rounded-full bg-gray-100 dark:bg-white/10 border border-gray-200 dark:border-white/10"
-                  transition={{ type: 'spring', stiffness: 400, damping: 32 }}
-                />
-              )}
-              <span className="relative">{filter}</span>
-            </button>
-          );
-        })}
-      </div>
+      <ScrollableFilterBar
+        filters={filters}
+        activeFilter={activeFilter}
+        onSelect={setActiveFilter}
+        layoutId="skill-filter-pill"
+      />
 
       <AnimatePresence mode="wait">
         <motion.div

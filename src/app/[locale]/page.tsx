@@ -43,11 +43,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
           <div className="flex items-center gap-2">
             <MapPin className="text-gray-700 dark:text-white" size={16} /> {t('based_in')}
           </div>
-          <div className="w-1 h-1 bg-gray-300 dark:bg-[#444] rounded-full"></div>
-          <div className="flex items-center gap-2 px-3 py-1 bg-green-500/10 border border-green-500/20 rounded-full text-green-600 dark:text-green-400 text-xs font-medium">
-            <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
-            {t('remote')}
-          </div>
         </div>
         <p
           className="text-lg text-gray-600 dark:text-[#999] leading-relaxed max-w-3xl"
@@ -60,7 +55,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
       <div className="h-[1px] bg-gray-300 dark:bg-white/20 mb-20"></div>
 
       {/* Skills Section */}
-      <section id="skills" className="mb-20">
+      <section id="skills">
         <div className="flex items-center gap-3 mb-10">
           <Code className="text-3xl text-gray-700 dark:text-white" size={24} />
           <h3 className="text-xl font-bold text-gray-900 dark:text-white">Skills</h3>
