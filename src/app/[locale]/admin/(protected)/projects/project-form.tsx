@@ -14,6 +14,7 @@ import { Textarea } from '@/components/ui/textarea';
 import type { ProjectInput } from '@/lib/actions/admin-projects';
 import type { TechIconResult } from '@/lib/tech-icon-data';
 import { ImageUploadField } from '../image-upload-field';
+import { CategorySelect } from './category-select';
 import { ContentImageUploader } from './content-image-uploader';
 import { TechStackCombobox } from './tech-stack-combobox';
 
@@ -131,18 +132,11 @@ export function ProjectForm({
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="category">Category</Label>
-            <Input
-              id="category"
-              list="category-options"
-              value={form.category}
-              onChange={(e) => setForm((prev) => ({ ...prev, category: e.target.value }))}
-              placeholder="Web App"
+            <CategorySelect
+              value={form.category ?? ''}
+              onChange={(category) => setForm((prev) => ({ ...prev, category }))}
+              existingCategories={existingCategories}
             />
-            <datalist id="category-options">
-              {existingCategories.map((category) => (
-                <option key={category} value={category} />
-              ))}
-            </datalist>
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="githubUrl">GitHub URL</Label>
