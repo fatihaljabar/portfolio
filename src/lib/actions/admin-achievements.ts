@@ -9,6 +9,7 @@ import { AchievementType } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 import { getLocale } from 'next-intl/server';
 import { z } from 'zod';
+import { deleteStorageImage } from '@/lib/actions/upload';
 import { getAdminUser } from '@/lib/auth/server';
 import { redirect } from '@/lib/i18n/navigation';
 import { prisma } from '@/lib/prisma/client';
@@ -95,15 +96,25 @@ export async function updateAchievement(id: string, data: AchievementInput) {
     return { success: false, error: parsed.error.issues[0]?.message || 'Validation failed' };
   }
 
+  const existing = await prisma.achievement.findUnique({
+    where: { id },
+    select: { imageUrl: true },
+  });
+  const newImageUrl = parsed.data.imageUrl || null;
+
   await prisma.achievement.update({
     where: { id },
     data: {
       ...parsed.data,
       issuedDate: new Date(parsed.data.issuedDate),
       credentialUrl: parsed.data.credentialUrl || null,
-      imageUrl: parsed.data.imageUrl || null,
+      imageUrl: newImageUrl,
     },
   });
+
+  if (existing?.imageUrl && existing.imageUrl !== newImageUrl) {
+    await deleteStorageImage(existing.imageUrl);
+  }
 
   revalidateAchievementPaths();
   const locale = await getLocale();
@@ -116,7 +127,16 @@ export async function deleteAchievement(id: string) {
     return { success: false, error: 'Unauthorized' };
   }
 
+  const achievement = await prisma.achievement.findUnique({
+    where: { id },
+    select: { imageUrl: true },
+  });
   await prisma.achievement.delete({ where: { id } });
+
+  if (achievement?.imageUrl) {
+    await deleteStorageImage(achievement.imageUrl);
+  }
+
   revalidateAchievementPaths();
   return { success: true };
 }

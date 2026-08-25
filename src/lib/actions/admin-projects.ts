@@ -8,6 +8,7 @@
 import { revalidatePath } from 'next/cache';
 import { getLocale } from 'next-intl/server';
 import { z } from 'zod';
+import { deleteStorageImage } from '@/lib/actions/upload';
 import { getAdminUser } from '@/lib/auth/server';
 import { redirect } from '@/lib/i18n/navigation';
 import { prisma } from '@/lib/prisma/client';
@@ -96,15 +97,22 @@ export async function updateProject(id: string, data: ProjectInput) {
     return { success: false, error: parsed.error.issues[0]?.message || 'Validation failed' };
   }
 
+  const existing = await prisma.project.findUnique({ where: { id }, select: { imageUrl: true } });
+  const newImageUrl = parsed.data.imageUrl || null;
+
   await prisma.project.update({
     where: { id },
     data: {
       ...parsed.data,
-      imageUrl: parsed.data.imageUrl || null,
+      imageUrl: newImageUrl,
       githubUrl: parsed.data.githubUrl || null,
       demoUrl: parsed.data.demoUrl || null,
     },
   });
+
+  if (existing?.imageUrl && existing.imageUrl !== newImageUrl) {
+    await deleteStorageImage(existing.imageUrl);
+  }
 
   revalidateProjectPaths();
   const locale = await getLocale();
@@ -117,7 +125,13 @@ export async function deleteProject(id: string) {
     return { success: false, error: 'Unauthorized' };
   }
 
+  const project = await prisma.project.findUnique({ where: { id }, select: { imageUrl: true } });
   await prisma.project.delete({ where: { id } });
+
+  if (project?.imageUrl) {
+    await deleteStorageImage(project.imageUrl);
+  }
+
   revalidateProjectPaths();
   return { success: true };
 }
