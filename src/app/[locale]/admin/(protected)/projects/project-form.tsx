@@ -12,13 +12,16 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import type { ProjectInput } from '@/lib/actions/admin-projects';
+import type { TechIconResult } from '@/lib/tech-icon-data';
 import { ImageUploadField } from '../image-upload-field';
 import { ContentImageUploader } from './content-image-uploader';
+import { TechStackCombobox } from './tech-stack-combobox';
 
 interface ProjectFormProps {
   action: (data: ProjectInput) => Promise<{ success: boolean; error?: string } | undefined>;
   defaultValues?: ProjectInput;
   submitLabel: string;
+  initialTechIcons?: Record<string, TechIconResult | null>;
 }
 
 const emptyValues: ProjectInput = {
@@ -42,11 +45,13 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function ProjectForm({ action, defaultValues, submitLabel }: ProjectFormProps) {
+export function ProjectForm({
+  action,
+  defaultValues,
+  submitLabel,
+  initialTechIcons,
+}: ProjectFormProps) {
   const [form, setForm] = useState<ProjectInput>(defaultValues ?? emptyValues);
-  const [techStackText, setTechStackText] = useState(
-    (defaultValues ?? emptyValues).techStack.join(', '),
-  );
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -55,12 +60,7 @@ export function ProjectForm({ action, defaultValues, submitLabel }: ProjectFormP
     setError(null);
     setIsSubmitting(true);
 
-    const techStack = techStackText
-      .split(',')
-      .map((item) => item.trim())
-      .filter(Boolean);
-
-    const result = await action({ ...form, techStack });
+    const result = await action(form);
 
     if (result && !result.success) {
       setError(result.error ?? 'Something went wrong');
@@ -157,12 +157,11 @@ export function ProjectForm({ action, defaultValues, submitLabel }: ProjectFormP
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label htmlFor="techStack">Tech stack (comma-separated)</Label>
-          <Input
-            id="techStack"
-            value={techStackText}
-            onChange={(e) => setTechStackText(e.target.value)}
-            placeholder="React, TypeScript, Prisma"
+          <Label>Tech stack</Label>
+          <TechStackCombobox
+            value={form.techStack}
+            onChange={(techStack) => setForm((prev) => ({ ...prev, techStack }))}
+            initialIcons={initialTechIcons}
           />
         </div>
       </section>

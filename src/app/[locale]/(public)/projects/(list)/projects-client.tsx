@@ -10,8 +10,9 @@ import { ArrowUpRight, Folder } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 import { ScrollableFilterBar } from '@/components/components/scrollable-filter-bar';
+import { TechIconGlyph } from '@/components/components/tech-icon-glyph';
 import { Link } from '@/lib/i18n/navigation';
-import { techIcons } from '@/lib/tech-icons';
+import type { TechIconResult } from '@/lib/tech-icon-data';
 
 const hoverColors: Record<string, string> = {
   'Vue.js': 'hover:text-[#4FC08D]',
@@ -53,9 +54,10 @@ interface Translations {
 interface ProjectsClientProps {
   projects: Project[];
   translations: Translations;
+  techIconMap: Record<string, TechIconResult | null>;
 }
 
-export function ProjectsClient({ projects, translations: t }: ProjectsClientProps) {
+export function ProjectsClient({ projects, translations: t, techIconMap }: ProjectsClientProps) {
   const categories = [...new Set(projects.map((p) => p.category).filter((c): c is string => !!c))];
   const filters = [t.all, ...categories];
   const [activeFilter, setActiveFilter] = useState(t.all);
@@ -173,24 +175,15 @@ export function ProjectsClient({ projects, translations: t }: ProjectsClientProp
                     </p>
 
                     <div className="mt-auto flex items-center gap-3">
-                      {project.techStack?.map((tech) => {
-                        const TechIcon = techIcons[tech]?.icon;
-                        return (
-                          <div
-                            key={tech}
-                            className="w-8 h-8 rounded-full bg-gray-200 dark:bg-[#1a1a1a] border border-gray-300 dark:border-white/5 flex items-center justify-center"
-                            title={tech}
-                          >
-                            {TechIcon ? (
-                              <TechIcon size={16} style={{ color: techIcons[tech].color }} />
-                            ) : (
-                              <span className="text-gray-900 dark:text-white text-xs font-bold">
-                                {tech.charAt(0)}
-                              </span>
-                            )}
-                          </div>
-                        );
-                      })}
+                      {project.techStack?.map((tech) => (
+                        <div
+                          key={tech}
+                          className="w-8 h-8 rounded-full bg-gray-200 dark:bg-[#1a1a1a] border border-gray-300 dark:border-white/5 flex items-center justify-center"
+                          title={tech}
+                        >
+                          <TechIconGlyph result={techIconMap[tech] ?? null} name={tech} size={16} />
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </Link>

@@ -8,6 +8,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Locale } from '@/lib/i18n/config';
 import { prisma } from '@/lib/prisma/client';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { getTechIcon, type TechIconResult } from '@/lib/tech-icon';
 import { ProjectsClient } from './projects-client';
 
 export const revalidate = 60;
@@ -58,5 +59,17 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
     all: t('all'),
   };
 
-  return <ProjectsClient projects={projects} translations={translations} />;
+  // Resolve tech icons server-side so the (client) icon library never ships to the browser.
+  const techIconMap: Record<string, TechIconResult | null> = {};
+  for (const project of projects) {
+    for (const tech of project.techStack) {
+      if (!(tech in techIconMap)) {
+        techIconMap[tech] = getTechIcon(tech);
+      }
+    }
+  }
+
+  return (
+    <ProjectsClient projects={projects} translations={translations} techIconMap={techIconMap} />
+  );
 }

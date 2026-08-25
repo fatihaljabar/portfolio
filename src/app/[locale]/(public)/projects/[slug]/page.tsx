@@ -10,11 +10,12 @@ import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { TechIconGlyph } from '@/components/components/tech-icon-glyph';
 import type { Locale } from '@/lib/i18n/config';
 import { Link } from '@/lib/i18n/navigation';
 import { prisma } from '@/lib/prisma/client';
 import { buildMetadata } from '@/lib/seo/metadata';
-import { techIcons } from '@/lib/tech-icons';
+import { getTechIcon } from '@/lib/tech-icon';
 import { ScrollToTopButton } from './scroll-to-top-button';
 
 export const revalidate = 60;
@@ -90,24 +91,15 @@ export default async function ProjectDetailPage({
 
       <div className="border-t border-dashed border-gray-300 dark:border-[#333] w-full py-6 mb-8 flex flex-wrap items-center gap-3">
         <span className="text-gray-900 dark:text-white font-bold text-sm">{t('tech_stack')} :</span>
-        {project.techStack?.map((tech) => {
-          const TechIcon = techIcons[tech]?.icon;
-          const color = techIcons[tech]?.color ?? '#A3A3A3';
-          return (
-            <span
-              key={tech}
-              className="inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium"
-              style={{ color, borderColor: `${color}33`, backgroundColor: `${color}14` }}
-            >
-              {TechIcon ? (
-                <TechIcon size={14} className="shrink-0" aria-hidden="true" />
-              ) : (
-                <Box size={14} className="shrink-0" aria-hidden="true" />
-              )}
-              {tech}
-            </span>
-          );
-        })}
+        {project.techStack?.map((tech) => (
+          <div
+            key={tech}
+            title={tech}
+            className="w-9 h-9 rounded-full bg-gray-100 dark:bg-[#1a1a1a] border border-gray-200 dark:border-white/5 flex items-center justify-center shrink-0"
+          >
+            <TechIconGlyph result={getTechIcon(tech)} name={tech} size={18} />
+          </div>
+        ))}
       </div>
 
       {/* Action Links */}
