@@ -53,6 +53,7 @@ export function ImageUploadField({ folder, value, onChange }: ImageUploadFieldPr
         disabled={isUploading}
         className="text-sm text-gray-500 dark:text-[#888] file:mr-3 file:rounded-md file:border-0 file:bg-gray-100 dark:file:bg-white/10 file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-gray-700 dark:file:text-[#ccc]"
       />
+      <p className="text-xs text-gray-400 dark:text-[#666]">JPEG, PNG, WebP, or GIF · up to 2MB</p>
       {isUploading && <p className="text-xs text-gray-500 dark:text-[#888]">Uploading...</p>}
       {error && <p className="text-xs text-red-500">{error}</p>}
       {value && (
