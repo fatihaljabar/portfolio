@@ -13,6 +13,7 @@ import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import type { AchievementInput } from '@/lib/actions/admin-achievements';
 import { ImageUploadField } from '../image-upload-field';
+import { SelectDropdown } from '../select-dropdown';
 
 interface AchievementFormProps {
   action: (data: AchievementInput) => Promise<{ success: boolean; error?: string } | undefined>;
@@ -40,9 +41,6 @@ const typeOptions: AchievementInput['type'][] = [
   'BOOTCAMP',
   'CERTIFICATION',
 ];
-
-const inputClassName =
-  'flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring';
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -107,20 +105,13 @@ export function AchievementForm({ action, defaultValues, submitLabel }: Achievem
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="type">Type</Label>
-            <select
-              id="type"
+            <SelectDropdown
               value={form.type}
-              onChange={(e) =>
-                setForm((prev) => ({ ...prev, type: e.target.value as AchievementInput['type'] }))
+              onChange={(type) =>
+                setForm((prev) => ({ ...prev, type: type as AchievementInput['type'] }))
               }
-              className={inputClassName}
-            >
-              {typeOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
+              options={typeOptions}
+            />
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="issuedDate">Issued date</Label>
