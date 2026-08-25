@@ -11,7 +11,6 @@
     "intro": "Perkenalan",
     "greeting": "Hai, saya Fatih Al Jabar H.M.",
     "based_in": "Bertempat di Sidoarjo, Indonesia 🇮🇩",
-    "remote": "Remote",
     "description": "Seorang Software Engineer dan spesialis Front-End yang berdedikasi untuk membangun solusi digital yang berdampak. Saya mengkhususkan diri dalam mengembangkan platform web yang skalabel menggunakan teknologi modern, terutama {techStack}. Fokus saya adalah menciptakan arsitektur perangkat lunak yang terstruktur dengan baik, mudah dirawat, dan selaras dengan tujuan bisnis.",
     "tech_stack_list": "React, Tailwind CSS, dan TypeScript",
     "tagline": "Software Engineer & Spesialis Front-End"

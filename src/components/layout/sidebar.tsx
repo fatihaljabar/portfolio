@@ -50,7 +50,7 @@ export function Sidebar() {
           <div className="relative w-10 h-10 shrink-0 rounded-full overflow-hidden border-2 border-gray-200 dark:border-dark-border">
             <Image src="/img/profile.jpg" alt="Profile" fill sizes="40px" className="object-cover" priority />
           </div>
-          <span className="font-bold text-gray-900 dark:text-white truncate">Fatih Al Jabar H.M.</span>
+          <span className="font-bold text-gray-900 dark:text-white truncate">Fatih</span>
         </div>
         <div className="flex items-center gap-2 shrink-0">
           <LocaleToggle />
@@ -69,7 +69,7 @@ export function Sidebar() {
 
         {/* Name */}
         <h1 className="text-2xl font-bold mb-2 flex items-center gap-2 text-gray-900 dark:text-white">
-          Fatih Al Jabar H.M.
+          Fatih
           <motion.div {...iconHoverProps}>
             <ShieldCheck className="text-accent-blue" size={20} />
           </motion.div>
