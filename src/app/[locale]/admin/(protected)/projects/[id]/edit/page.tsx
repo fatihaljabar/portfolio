@@ -38,6 +38,14 @@ export default async function EditProjectPage({
     initialTechIcons[tech] = getTechIcon(tech);
   }
 
+  const categories = await prisma.project.findMany({
+    where: { category: { not: null } },
+    select: { category: true },
+    distinct: ['category'],
+    orderBy: { category: 'asc' },
+  });
+  const existingCategories = categories.map((c) => c.category).filter((c): c is string => !!c);
+
   return (
     <div>
       <Link
@@ -52,6 +60,7 @@ export default async function EditProjectPage({
         action={boundUpdateProject}
         submitLabel="Save Changes"
         initialTechIcons={initialTechIcons}
+        existingCategories={existingCategories}
         defaultValues={{
           title: project.title,
           description: project.description,

@@ -14,6 +14,7 @@ import { Textarea } from '@/components/ui/textarea';
 import type { ProjectInput } from '@/lib/actions/admin-projects';
 import type { TechIconResult } from '@/lib/tech-icon-data';
 import { ImageUploadField } from '../image-upload-field';
+import { CategorySelect } from './category-select';
 import { ContentImageUploader } from './content-image-uploader';
 import { TechStackCombobox } from './tech-stack-combobox';
 
@@ -22,6 +23,7 @@ interface ProjectFormProps {
   defaultValues?: ProjectInput;
   submitLabel: string;
   initialTechIcons?: Record<string, TechIconResult | null>;
+  existingCategories?: string[];
 }
 
 const emptyValues: ProjectInput = {
@@ -50,6 +52,7 @@ export function ProjectForm({
   defaultValues,
   submitLabel,
   initialTechIcons,
+  existingCategories = [],
 }: ProjectFormProps) {
   const [form, setForm] = useState<ProjectInput>(defaultValues ?? emptyValues);
   const [error, setError] = useState<string | null>(null);
@@ -129,11 +132,10 @@ export function ProjectForm({
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="category">Category</Label>
-            <Input
-              id="category"
-              value={form.category}
-              onChange={(e) => setForm((prev) => ({ ...prev, category: e.target.value }))}
-              placeholder="Web App"
+            <CategorySelect
+              value={form.category ?? ''}
+              onChange={(category) => setForm((prev) => ({ ...prev, category }))}
+              existingCategories={existingCategories}
             />
           </div>
           <div className="flex flex-col gap-2">
