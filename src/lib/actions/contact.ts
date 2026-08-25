@@ -5,8 +5,10 @@
 
 'use server';
 
-import { prisma } from '@/lib/prisma/client';
 import { z } from 'zod';
+import { getVisitorId } from '@/lib/get-visitor-id';
+import { prisma } from '@/lib/prisma/client';
+import { isRateLimited } from '@/lib/rate-limit';
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -21,12 +23,21 @@ export type ContactInput = z.infer<typeof contactSchema>;
  */
 export async function submitContactForm(data: ContactInput) {
   try {
+    const ipAddress = await getVisitorId();
+
+    if (isRateLimited(`contact:${ipAddress}`, 3, 10 * 60_000)) {
+      return {
+        success: false,
+        error: 'Too many messages sent. Please try again later.',
+      };
+    }
+
     // Validate input
     const validatedData = contactSchema.parse(data);
 
     // Save to database
     const message = await prisma.message.create({
-      data: validatedData,
+      data: { ...validatedData, ipAddress },
     });
 
     return { success: true, messageId: message.id };
