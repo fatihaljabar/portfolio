@@ -22,6 +22,7 @@ interface ProjectFormProps {
   defaultValues?: ProjectInput;
   submitLabel: string;
   initialTechIcons?: Record<string, TechIconResult | null>;
+  existingCategories?: string[];
 }
 
 const emptyValues: ProjectInput = {
@@ -50,6 +51,7 @@ export function ProjectForm({
   defaultValues,
   submitLabel,
   initialTechIcons,
+  existingCategories = [],
 }: ProjectFormProps) {
   const [form, setForm] = useState<ProjectInput>(defaultValues ?? emptyValues);
   const [error, setError] = useState<string | null>(null);
@@ -131,10 +133,16 @@ export function ProjectForm({
             <Label htmlFor="category">Category</Label>
             <Input
               id="category"
+              list="category-options"
               value={form.category}
               onChange={(e) => setForm((prev) => ({ ...prev, category: e.target.value }))}
               placeholder="Web App"
             />
+            <datalist id="category-options">
+              {existingCategories.map((category) => (
+                <option key={category} value={category} />
+              ))}
+            </datalist>
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="githubUrl">GitHub URL</Label>
