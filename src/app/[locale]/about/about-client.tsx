@@ -292,7 +292,7 @@ export function AboutClient() {
       <div className="h-[1px] bg-gray-300 dark:bg-white/20 mb-20"></div>
 
       {/* Education Section */}
-      <section id="education" className="mb-20">
+      <section id="education">
         <div className="flex items-center gap-3 mb-8">
           <motion.div {...iconHoverProps}>
             <GraduationCap className="text-2xl text-gray-700 dark:text-white" />

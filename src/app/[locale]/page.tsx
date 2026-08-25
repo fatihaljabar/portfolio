@@ -55,7 +55,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
       <div className="h-[1px] bg-gray-300 dark:bg-white/20 mb-20"></div>
 
       {/* Skills Section */}
-      <section id="skills" className="mb-20">
+      <section id="skills">
         <div className="flex items-center gap-3 mb-10">
           <Code className="text-3xl text-gray-700 dark:text-white" size={24} />
           <h3 className="text-xl font-bold text-gray-900 dark:text-white">Skills</h3>
