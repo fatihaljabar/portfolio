@@ -9,14 +9,9 @@ import { z } from 'zod';
 import { getVisitorId } from '@/lib/get-visitor-id';
 import { prisma } from '@/lib/prisma/client';
 import { isRateLimited } from '@/lib/rate-limit';
+import { type ContactInput, contactSchema } from '@/lib/validations/contact';
 
-const contactSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Please enter a valid email address'),
-  message: z.string().min(10, 'Message must be at least 10 characters'),
-});
-
-export type ContactInput = z.infer<typeof contactSchema>;
+export type { ContactInput };
 
 /**
  * Submit contact form to Supabase
