@@ -9,7 +9,7 @@
   },
   "home": {
     "intro": "Intro",
-    "greeting": "Hi, I'm Fatih Al Jabar H.M.",
+    "greeting": "Hi, I'm Fatih",
     "based_in": "Based in Sidoarjo, Indonesia 🇮🇩",
     "description": "A Software Engineer and Front-End specialist dedicated to building impactful digital solutions. I specialize in developing scalable web platforms using a modern tech stack, primarily {techStack}. My focus is on crafting software architecture that is well-structured, maintainable, and aligned with business goals.",
     "tech_stack_list": "React, Tailwind CSS, and TypeScript",
