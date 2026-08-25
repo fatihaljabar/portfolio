@@ -33,6 +33,14 @@ const emptyValues: ProjectInput = {
   isPublished: true,
 };
 
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="text-[11px] font-bold text-gray-400 dark:text-[#666] tracking-widest uppercase">
+      {children}
+    </p>
+  );
+}
+
 export function ProjectForm({ action, defaultValues, submitLabel }: ProjectFormProps) {
   const [form, setForm] = useState<ProjectInput>(defaultValues ?? emptyValues);
   const [techStackText, setTechStackText] = useState(
@@ -60,89 +68,103 @@ export function ProjectForm({ action, defaultValues, submitLabel }: ProjectFormP
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-6 max-w-2xl">
-      <div className="flex flex-col gap-2">
-        <Label htmlFor="title">Title</Label>
-        <Input
-          id="title"
-          value={form.title}
-          onChange={(e) => setForm((prev) => ({ ...prev, title: e.target.value }))}
-          required
-        />
-      </div>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-10 max-w-2xl">
+      <section className="flex flex-col gap-6">
+        <SectionLabel>Basics</SectionLabel>
 
-      <div className="flex flex-col gap-2">
-        <Label htmlFor="description">Description</Label>
-        <Textarea
-          id="description"
-          rows={2}
-          value={form.description}
-          onChange={(e) => setForm((prev) => ({ ...prev, description: e.target.value }))}
-          required
-        />
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <Label htmlFor="content">Content (Markdown)</Label>
-        <Textarea
-          id="content"
-          rows={12}
-          value={form.content}
-          onChange={(e) => setForm((prev) => ({ ...prev, content: e.target.value }))}
-          required
-        />
-      </div>
-
-      <div className="grid sm:grid-cols-2 gap-6">
         <div className="flex flex-col gap-2">
-          <Label>Image</Label>
-          <ImageUploadField
-            folder="projects"
-            value={form.imageUrl ?? ''}
-            onChange={(url) => setForm((prev) => ({ ...prev, imageUrl: url }))}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <Label htmlFor="category">Category</Label>
+          <Label htmlFor="title">Title</Label>
           <Input
-            id="category"
-            value={form.category}
-            onChange={(e) => setForm((prev) => ({ ...prev, category: e.target.value }))}
-            placeholder="Web App"
+            id="title"
+            value={form.title}
+            onChange={(e) => setForm((prev) => ({ ...prev, title: e.target.value }))}
+            required
           />
         </div>
-        <div className="flex flex-col gap-2">
-          <Label htmlFor="githubUrl">GitHub URL</Label>
-          <Input
-            id="githubUrl"
-            value={form.githubUrl}
-            onChange={(e) => setForm((prev) => ({ ...prev, githubUrl: e.target.value }))}
-            placeholder="https://github.com/..."
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <Label htmlFor="demoUrl">Demo URL</Label>
-          <Input
-            id="demoUrl"
-            value={form.demoUrl}
-            onChange={(e) => setForm((prev) => ({ ...prev, demoUrl: e.target.value }))}
-            placeholder="https://..."
-          />
-        </div>
-      </div>
 
-      <div className="flex flex-col gap-2">
-        <Label htmlFor="techStack">Tech stack (comma-separated)</Label>
-        <Input
-          id="techStack"
-          value={techStackText}
-          onChange={(e) => setTechStackText(e.target.value)}
-          placeholder="React, TypeScript, Prisma"
-        />
-      </div>
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="description">Description</Label>
+          <Textarea
+            id="description"
+            rows={2}
+            value={form.description}
+            onChange={(e) => setForm((prev) => ({ ...prev, description: e.target.value }))}
+            required
+          />
+        </div>
 
-      <div className="flex items-center gap-8">
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="content">Content (Markdown)</Label>
+          <Textarea
+            id="content"
+            rows={12}
+            value={form.content}
+            onChange={(e) => setForm((prev) => ({ ...prev, content: e.target.value }))}
+            required
+          />
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-6">
+        <SectionLabel>Media &amp; Links</SectionLabel>
+
+        <div className="grid sm:grid-cols-2 gap-6">
+          <div className="flex flex-col gap-2">
+            <Label>Image</Label>
+            <ImageUploadField
+              folder="projects"
+              value={form.imageUrl ?? ''}
+              onChange={(url) => setForm((prev) => ({ ...prev, imageUrl: url }))}
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="category">Category</Label>
+            <Input
+              id="category"
+              value={form.category}
+              onChange={(e) => setForm((prev) => ({ ...prev, category: e.target.value }))}
+              placeholder="Web App"
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="githubUrl">GitHub URL</Label>
+            <Input
+              id="githubUrl"
+              value={form.githubUrl}
+              onChange={(e) => setForm((prev) => ({ ...prev, githubUrl: e.target.value }))}
+              placeholder="https://github.com/..."
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="demoUrl">Demo URL</Label>
+            <Input
+              id="demoUrl"
+              value={form.demoUrl}
+              onChange={(e) => setForm((prev) => ({ ...prev, demoUrl: e.target.value }))}
+              placeholder="https://..."
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="techStack">Tech stack (comma-separated)</Label>
+          <Input
+            id="techStack"
+            value={techStackText}
+            onChange={(e) => setTechStackText(e.target.value)}
+            placeholder="React, TypeScript, Prisma"
+          />
+        </div>
+      </section>
+
+      <section className="flex flex-col rounded-2xl border border-gray-200 dark:border-white/10 overflow-hidden">
+        <div className="flex items-center justify-between gap-4 px-5 py-4">
+          <div>
+            <p className="text-sm font-medium text-gray-900 dark:text-white">Featured</p>
+            <p className="text-xs text-gray-500 dark:text-[#888]">
+              Show at the top of the public list
+            </p>
+          </div>
           <Switch
             id="isFeatured"
             checked={form.isFeatured}
@@ -150,9 +172,12 @@ export function ProjectForm({ action, defaultValues, submitLabel }: ProjectFormP
               setForm((prev) => ({ ...prev, isFeatured: checked }))
             }
           />
-          <Label htmlFor="isFeatured">Featured</Label>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between gap-4 px-5 py-4 border-t border-gray-200 dark:border-white/10">
+          <div>
+            <p className="text-sm font-medium text-gray-900 dark:text-white">Published</p>
+            <p className="text-xs text-gray-500 dark:text-[#888]">Visible on the public site</p>
+          </div>
           <Switch
             id="isPublished"
             checked={form.isPublished}
@@ -160,9 +185,8 @@ export function ProjectForm({ action, defaultValues, submitLabel }: ProjectFormP
               setForm((prev) => ({ ...prev, isPublished: checked }))
             }
           />
-          <Label htmlFor="isPublished">Published</Label>
         </div>
-      </div>
+      </section>
 
       {error && (
         <div className="bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 px-4 py-3 rounded-xl text-sm">
@@ -170,13 +194,15 @@ export function ProjectForm({ action, defaultValues, submitLabel }: ProjectFormP
         </div>
       )}
 
-      <Button
-        type="submit"
-        disabled={isSubmitting}
-        className="w-fit bg-gray-900 dark:bg-white text-white dark:text-black font-bold px-6 py-3 hover:bg-gray-800 dark:hover:bg-gray-200"
-      >
-        {isSubmitting ? 'Saving...' : submitLabel}
-      </Button>
+      <div className="flex items-center gap-3 pt-2 border-t border-gray-200 dark:border-white/10">
+        <Button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-fit mt-6 bg-gray-900 dark:bg-white text-white dark:text-black font-bold px-6 py-3 hover:bg-gray-800 dark:hover:bg-gray-200"
+        >
+          {isSubmitting ? 'Saving...' : submitLabel}
+        </Button>
+      </div>
     </form>
   );
 }

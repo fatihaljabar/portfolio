@@ -25,7 +25,7 @@ export function DeleteAchievementButton({ id }: { id: string }) {
       type="button"
       onClick={handleDelete}
       disabled={isPending}
-      className="text-xs font-medium px-3 py-1.5 rounded-lg text-red-500 hover:bg-red-500/10 transition-colors disabled:opacity-50"
+      className="text-xs font-medium px-3 py-2 rounded-lg text-red-500 hover:bg-red-500/10 transition-colors disabled:opacity-50"
     >
       Delete
     </button>
