@@ -52,6 +52,7 @@ export default async function EditAchievementPage({
           certificateNumber: achievement.certificateNumber ?? '',
           credentialUrl: achievement.credentialUrl ?? '',
           imageUrl: achievement.imageUrl ?? '',
+          additionalImages: achievement.additionalImages,
           issuedDate: achievement.issuedDate.toISOString().slice(0, 10),
           type: achievement.type,
           category: achievement.category ?? '',
