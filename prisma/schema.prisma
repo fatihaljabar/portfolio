@@ -81,9 +81,11 @@ model Message {
   email     String
   message   String   @db.Text
   isRead    Boolean  @default(false)
+  ipAddress String?
   createdAt DateTime @default(now())
 
   @@index([createdAt])
+  @@index([ipAddress])
 }
 
 // ========================================
