@@ -12,6 +12,7 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import type { AchievementInput } from '@/lib/actions/admin-achievements';
+import { ImageUploadField } from '../image-upload-field';
 
 interface AchievementFormProps {
   action: (data: AchievementInput) => Promise<{ success: boolean; error?: string } | undefined>;
@@ -146,12 +147,11 @@ export function AchievementForm({ action, defaultValues, submitLabel }: Achievem
           />
         </div>
         <div className="flex flex-col gap-2">
-          <Label htmlFor="imageUrl">Image URL</Label>
-          <Input
-            id="imageUrl"
-            value={form.imageUrl}
-            onChange={(e) => setForm((prev) => ({ ...prev, imageUrl: e.target.value }))}
-            placeholder="https://..."
+          <Label>Image</Label>
+          <ImageUploadField
+            folder="achievements"
+            value={form.imageUrl ?? ''}
+            onChange={(url) => setForm((prev) => ({ ...prev, imageUrl: url }))}
           />
         </div>
       </div>
