@@ -5,6 +5,7 @@
 
 'use client';
 
+import { ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -12,6 +13,7 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import type { AchievementInput } from '@/lib/actions/admin-achievements';
+import { cn } from '@/lib/utils';
 import { AdditionalImagesField } from '../additional-images-field';
 import { ImageUploadField } from '../image-upload-field';
 
@@ -109,20 +111,29 @@ export function AchievementForm({ action, defaultValues, submitLabel }: Achievem
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="type">Type</Label>
-            <select
-              id="type"
-              value={form.type}
-              onChange={(e) =>
-                setForm((prev) => ({ ...prev, type: e.target.value as AchievementInput['type'] }))
-              }
-              className={inputClassName}
-            >
-              {typeOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
+            <div className="relative">
+              <select
+                id="type"
+                value={form.type}
+                onChange={(e) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    type: e.target.value as AchievementInput['type'],
+                  }))
+                }
+                className={cn(inputClassName, 'appearance-none pr-8')}
+              >
+                {typeOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown
+                size={16}
+                className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-[#666]"
+              />
+            </div>
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="issuedDate">Issued date</Label>
@@ -131,6 +142,7 @@ export function AchievementForm({ action, defaultValues, submitLabel }: Achievem
               type="date"
               value={form.issuedDate}
               onChange={(e) => setForm((prev) => ({ ...prev, issuedDate: e.target.value }))}
+              className="[&::-webkit-calendar-picker-indicator]:ml-auto"
               required
             />
           </div>
