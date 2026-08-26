@@ -72,6 +72,64 @@ enum AchievementType {
 }
 
 // ========================================
+// CAREER & EDUCATION MODELS (About page)
+// ========================================
+
+model Career {
+  id                 String    @id @default(cuid())
+  positionEn         String
+  positionId         String
+  company            String
+  companyLogoUrl     String?
+  employmentTypeEn   String
+  employmentTypeId   String
+  location           String
+  startDate          DateTime
+  endDate            DateTime?
+  responsibilitiesEn String    @db.Text
+  responsibilitiesId String    @db.Text
+  learnedEn          String    @db.Text
+  learnedId          String    @db.Text
+  impactEn           String    @db.Text
+  impactId           String    @db.Text
+  isPublished        Boolean   @default(true)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  @@index([isPublished])
+  @@index([startDate])
+}
+
+model Education {
+  id                   String    @id @default(cuid())
+  university           String
+  degreeEn             String
+  degreeId             String
+  gpaEn                String?
+  gpaId                String?
+  location             String
+  logoUrl              String?
+  startDate            DateTime
+  endDate              DateTime?
+  thesisLabelEn        String?
+  thesisLabelId        String?
+  thesisProjectTitleEn String?
+  thesisProjectTitleId String?
+  thesisDetailsEn      String?   @db.Text
+  thesisDetailsId      String?   @db.Text
+  thesisProjectSlug    String?
+  thesisJournalUrl     String?
+  thesisJournalLabelEn String?
+  thesisJournalLabelId String?
+  isPublished          Boolean   @default(true)
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  @@index([isPublished])
+  @@index([startDate])
+}
+
+// ========================================
 // MESSAGE MODELS (Contact Form)
 // ========================================
 

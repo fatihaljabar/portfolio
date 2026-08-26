@@ -1,6 +1,7 @@
 /**
  * About Client Component
- * Profile, Career (toggle), and Education sections
+ * Profile intro (static), plus Career and Education sections rendered
+ * from DB-backed lists with per-entry expand/collapse
  */
 
 'use client';
@@ -9,41 +10,273 @@ import { motion } from 'framer-motion';
 import {
   Briefcase,
   Calendar,
-  Check,
-  CheckCircle,
   ExternalLink,
   FileText,
   GraduationCap,
-  Lightbulb,
   List,
   MapPin,
-  Rocket,
-  TrendingUp,
-  Trophy,
-  Users,
 } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { Link } from '@/lib/i18n/navigation';
+
+export interface CareerView {
+  id: string;
+  position: string;
+  company: string;
+  companyLogoUrl: string | null;
+  employmentType: string;
+  location: string;
+  dateRange: string;
+  duration: string;
+  responsibilities: string;
+  learned: string;
+  impact: string;
+}
+
+export interface EducationView {
+  id: string;
+  university: string;
+  degree: string;
+  gpa: string | null;
+  location: string;
+  logoUrl: string | null;
+  dateRange: string;
+  thesis: {
+    label: string;
+    projectTitle: string;
+    details: string;
+    projectSlug: string | null;
+    journalUrl: string | null;
+    journalLabel: string | null;
+  } | null;
+}
+
+interface AboutClientProps {
+  career: CareerView[];
+  education: EducationView[];
+}
 
 const iconHoverProps = {
   whileHover: { scale: 1.15, rotate: [0, -5, 5, -5, 0] },
   transition: { duration: 0.4, ease: 'easeInOut' as const },
 };
 
-export function AboutClient() {
+const proseClasses =
+  'prose prose-sm prose-neutral dark:prose-invert max-w-none prose-headings:font-bold prose-a:text-accent-blue prose-strong:text-gray-900 dark:prose-strong:text-white';
+
+function LogoBadge({ src, alt }: { src: string | null; alt: string }) {
+  return (
+    <div className="w-14 h-14 min-w-[56px] rounded-xl bg-gray-200 dark:bg-[#1a1a1a] overflow-hidden flex items-center justify-center border border-gray-300 dark:border-white/10">
+      {src ? (
+        <Image src={src} alt={alt} width={56} height={56} className="w-full h-full object-cover" />
+      ) : (
+        <span className="text-gray-400 dark:text-[#666] text-lg font-bold">{alt.charAt(0)}</span>
+      )}
+    </div>
+  );
+}
+
+function CareerCard({ entry, t }: { entry: CareerView; t: ReturnType<typeof useTranslations> }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <div className="rounded-2xl border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-[#121212] p-6 transition-all hover:border-gray-300 dark:hover:border-white/10">
+      <div className="flex flex-col md:flex-row gap-5 items-start">
+        <LogoBadge src={entry.companyLogoUrl} alt={entry.company} />
+
+        <div className="flex-1 w-full">
+          <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-1">{entry.position}</h4>
+          <div className="text-gray-500 dark:text-[#888] font-medium text-sm mb-4">
+            {entry.company}
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3 mb-6 text-xs text-gray-500 dark:text-[#888] font-medium">
+            <div className="flex items-center gap-1.5 bg-gray-200 dark:bg-white/5 px-2.5 py-1 rounded-md border border-gray-300 dark:border-white/10">
+              <motion.div {...iconHoverProps}>
+                <Calendar className="text-accent-blue" size={12} />
+              </motion.div>
+              <span>{entry.dateRange}</span>
+            </div>
+
+            <span className="text-gray-400 dark:text-[#888]">•</span>
+            <span className="text-gray-600 dark:text-[#999]">{entry.duration}</span>
+
+            <span className="text-gray-400 dark:text-[#888]">•</span>
+            <div className="flex items-center gap-1.5">
+              <motion.div {...iconHoverProps}>
+                <Briefcase className="text-gray-400 dark:text-[#666]" size={14} />
+              </motion.div>
+              <span>{entry.employmentType}</span>
+            </div>
+
+            <span className="text-gray-400 dark:text-[#888]">•</span>
+            <div className="flex items-center gap-1.5">
+              <motion.div {...iconHoverProps}>
+                <MapPin className="text-gray-400 dark:text-[#666]" size={14} />
+              </motion.div>
+              <span>{entry.location}</span>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setIsExpanded((prev) => !prev)}
+            className="flex items-center gap-2 text-sm text-gray-500 dark:text-[#888] hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer select-none group"
+          >
+            <motion.div
+              {...iconHoverProps}
+              className={`transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+            >
+              <List className="group-hover:text-accent-yellow" size={16} />
+            </motion.div>
+            <span>{isExpanded ? t('career.hide_details') : t('career.show_details')}</span>
+          </button>
+
+          {isExpanded && (
+            <div className="mt-6 space-y-8 border-t border-gray-200 dark:border-white/5 pt-6 animate-fade-in">
+              <div>
+                <div className="text-accent-yellow text-xs font-bold tracking-widest uppercase mb-4">
+                  {t('career.responsibilities_title')}
+                </div>
+                <div className={proseClasses}>
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {entry.responsibilities}
+                  </ReactMarkdown>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8 items-start">
+                <div>
+                  <div className="text-accent-yellow text-xs font-bold tracking-widest uppercase mb-4">
+                    {t('career.learned_title')}
+                  </div>
+                  <div className={proseClasses}>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{entry.learned}</ReactMarkdown>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="text-accent-yellow text-xs font-bold tracking-widest uppercase mb-4">
+                    {t('career.impact_title')}
+                  </div>
+                  <div className={proseClasses}>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{entry.impact}</ReactMarkdown>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function EducationCard({
+  entry,
+  t,
+}: {
+  entry: EducationView;
+  t: ReturnType<typeof useTranslations>;
+}) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <div className="rounded-2xl border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-[#121212] p-6 transition-all hover:border-gray-300 dark:hover:border-white/10">
+      <div className="flex flex-col md:flex-row gap-5 items-start">
+        <LogoBadge src={entry.logoUrl} alt={entry.university} />
+
+        <div className="w-full">
+          <h4 className="text-lg font-bold text-gray-900 dark:text-white">{entry.university}</h4>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-gray-600 dark:text-[#999] text-sm mt-1">
+            <span>{entry.degree}</span>
+            {entry.gpa && (
+              <>
+                <span className="hidden sm:inline text-gray-400 dark:text-[#444]">&bull;</span>
+                <span className="text-gray-500 dark:text-[#ddd]">{entry.gpa}</span>
+              </>
+            )}
+          </div>
+          <div className="flex items-center gap-2 text-xs text-gray-400 dark:text-[#666] mt-3 font-mono">
+            <span>{entry.dateRange}</span>
+            <span className="w-1 h-1 rounded-full bg-gray-300 dark:bg-[#444]"></span>
+            <span>{entry.location}</span>
+          </div>
+
+          {entry.thesis && (
+            <>
+              <button
+                type="button"
+                onClick={() => setIsExpanded((prev) => !prev)}
+                className="flex items-center gap-2 text-sm text-gray-500 dark:text-[#888] hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer select-none group mt-6"
+              >
+                <motion.div
+                  {...iconHoverProps}
+                  className={`transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+                >
+                  <List className="group-hover:text-accent-yellow" size={16} />
+                </motion.div>
+                <span>
+                  {isExpanded
+                    ? t('education.thesis_hide_details')
+                    : t('education.thesis_show_details')}
+                </span>
+              </button>
+
+              {isExpanded && (
+                <div className="mt-6 space-y-4 border-t border-gray-200 dark:border-white/5 pt-6 animate-fade-in">
+                  <div className="flex items-center gap-2 text-accent-yellow text-xs font-bold tracking-widest uppercase mb-1">
+                    <motion.div {...iconHoverProps}>
+                      <FileText size={16} />
+                    </motion.div>
+                    {entry.thesis.label}
+                  </div>
+                  <div className="text-gray-900 dark:text-white font-semibold text-sm italic">
+                    {entry.thesis.projectTitle}
+                  </div>
+                  <div className={proseClasses}>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {entry.thesis.details}
+                    </ReactMarkdown>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-4 pt-2 text-sm">
+                    {entry.thesis.projectSlug && (
+                      <Link
+                        href={`/projects/${entry.thesis.projectSlug}`}
+                        className="inline-flex items-center gap-1.5 text-gray-900 dark:text-white hover:text-accent-yellow dark:hover:text-accent-yellow transition-colors font-medium"
+                      >
+                        {t('education.thesis_read_more')}
+                        <ExternalLink size={14} />
+                      </Link>
+                    )}
+                    {entry.thesis.journalUrl && (
+                      <a
+                        href={entry.thesis.journalUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-gray-900 dark:text-white hover:text-accent-yellow dark:hover:text-accent-yellow transition-colors font-medium"
+                      >
+                        {entry.thesis.journalLabel}
+                        <ExternalLink size={14} />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function AboutClient({ career, education }: AboutClientProps) {
   const t = useTranslations('about');
-  const [isCareerExpanded, setIsCareerExpanded] = useState(false);
-  const [isThesisExpanded, setIsThesisExpanded] = useState(false);
-
-  const toggleCareerDetails = () => {
-    setIsCareerExpanded((prev) => !prev);
-  };
-
-  const toggleThesisDetails = () => {
-    setIsThesisExpanded((prev) => !prev);
-  };
 
   return (
     <>
@@ -56,12 +289,12 @@ export function AboutClient() {
 
         <div className="h-[1px] border-t border-dashed border-gray-300 dark:border-[#333] w-full mb-8"></div>
 
-        <div
-          className="space-y-6 text-gray-600 dark:text-[#999] leading-loose text-lg"
-          dangerouslySetInnerHTML={{
-            __html: t.raw('content').replace('{location}', `<strong>${t('location')}</strong>`),
-          }}
-        />
+        <div className="space-y-6 text-gray-600 dark:text-[#999] leading-loose text-lg">
+          {t.rich('content', {
+            location: t('location'),
+            strong: (chunks) => <strong>{chunks}</strong>,
+          })}
+        </div>
 
         <div className="mt-12">
           <div className="text-gray-500 dark:text-[#888] text-sm mb-2">{t('best_regards')}</div>
@@ -72,325 +305,54 @@ export function AboutClient() {
       <div className="h-[1px] bg-gray-300 dark:bg-white/20 mb-20"></div>
 
       {/* Career Section */}
-      <section id="career" className="mb-20">
-        <div className="flex items-center gap-3 mb-8">
-          <motion.div {...iconHoverProps}>
-            <Briefcase className="text-2xl text-gray-700 dark:text-white" />
-          </motion.div>
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{t('career.title')}</h3>
-        </div>
-        <div className="text-[11px] font-bold text-gray-500 dark:text-[#888] tracking-widest mb-6 uppercase">
-          {t('career.subtitle')}
-        </div>
-
-        <div className="rounded-2xl border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-[#121212] p-6 transition-all hover:border-gray-300 dark:hover:border-white/10">
-          <div className="flex flex-col md:flex-row gap-5 items-start">
-            <div className="w-14 h-14 min-w-[56px] rounded-xl bg-gray-200 dark:bg-[#1a1a1a] overflow-hidden flex items-center justify-center border border-gray-300 dark:border-white/10">
-              <Image
-                src="/img/dicoding-logo.png"
-                alt="Dicoding"
-                width={56}
-                height={56}
-                className="w-full h-full object-cover"
-              />
+      {career.length > 0 && (
+        <>
+          <section id="career" className="mb-20">
+            <div className="flex items-center gap-3 mb-8">
+              <motion.div {...iconHoverProps}>
+                <Briefcase className="text-2xl text-gray-700 dark:text-white" />
+              </motion.div>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                {t('career.title')}
+              </h3>
+            </div>
+            <div className="text-[11px] font-bold text-gray-500 dark:text-[#888] tracking-widest mb-6 uppercase">
+              {t('career.subtitle')}
             </div>
 
-            <div className="flex-1 w-full">
-              <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
-                {t('career.position')}
-              </h4>
-              <div className="text-gray-500 dark:text-[#888] font-medium text-sm mb-4">
-                {t('career.company')}
-              </div>
-
-              <div className="flex flex-wrap items-center gap-3 mb-6 text-xs text-gray-500 dark:text-[#888] font-medium">
-                <div className="flex items-center gap-1.5 bg-gray-200 dark:bg-white/5 px-2.5 py-1 rounded-md border border-gray-300 dark:border-white/10">
-                  <motion.div {...iconHoverProps}>
-                    <Calendar className="text-accent-blue" size={12} />
-                  </motion.div>
-                  <span>{t('career.duration')}</span>
-                </div>
-
-                <span className="text-gray-400 dark:text-[#888]">•</span>
-                <span className="text-gray-600 dark:text-[#999]">{t('career.length')}</span>
-
-                <span className="text-gray-400 dark:text-[#888]">•</span>
-                <div className="flex items-center gap-1.5">
-                  <motion.div {...iconHoverProps}>
-                    <Briefcase className="text-gray-400 dark:text-[#666]" size={14} />
-                  </motion.div>
-                  <span>{t('career.employment_type')}</span>
-                </div>
-
-                <span className="text-gray-400 dark:text-[#888]">•</span>
-                <div className="flex items-center gap-1.5">
-                  <motion.div {...iconHoverProps}>
-                    <MapPin className="text-gray-400 dark:text-[#666]" size={14} />
-                  </motion.div>
-                  <span>{t('career.location')}</span>
-                </div>
-              </div>
-
-              <button
-                onClick={toggleCareerDetails}
-                className="flex items-center gap-2 text-sm text-gray-500 dark:text-[#888] hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer select-none group"
-              >
-                <motion.div
-                  {...iconHoverProps}
-                  className={`transition-transform duration-300 ${isCareerExpanded ? 'rotate-180' : ''}`}
-                >
-                  <List className={`group-hover:text-accent-yellow`} size={16} />
-                </motion.div>
-                <span>
-                  {isCareerExpanded ? t('career.hide_details') : t('career.show_details')}
-                </span>
-              </button>
-
-              <div
-                className={`mt-6 space-y-8 border-t border-gray-200 dark:border-white/5 pt-6 animate-fade-in ${isCareerExpanded ? '' : 'hidden'}`}
-              >
-                <div>
-                  <div className="flex items-center gap-2 text-accent-yellow text-xs font-bold tracking-widest uppercase mb-4">
-                    <motion.div {...iconHoverProps}>
-                      <List size={16} />
-                    </motion.div>
-                    {t('career.responsibilities.title')}
-                  </div>
-                  <ul className="space-y-3 text-gray-600 dark:text-[#999] text-sm leading-relaxed">
-                    <li className="flex items-start gap-3">
-                      <motion.div {...iconHoverProps}>
-                        <CheckCircle className="text-accent-blue mt-0.5 shrink-0" size={16} />
-                      </motion.div>
-                      <span
-                        dangerouslySetInnerHTML={{
-                          __html: t
-                            .raw('career.responsibilities.item_1')
-                            .replace('{project}', '<strong>S-TIX</strong>'),
-                        }}
-                      />
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <motion.div {...iconHoverProps}>
-                        <CheckCircle className="text-accent-blue mt-0.5 shrink-0" size={16} />
-                      </motion.div>
-                      <span
-                        dangerouslySetInnerHTML={{
-                          __html: t
-                            .raw('career.responsibilities.item_2')
-                            .replace('{tech1}', '<strong>React.js</strong>')
-                            .replace('{tech2}', '<strong>Tailwind CSS</strong>'),
-                        }}
-                      />
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <motion.div {...iconHoverProps}>
-                        <CheckCircle className="text-accent-blue mt-0.5 shrink-0" size={16} />
-                      </motion.div>
-                      <span
-                        dangerouslySetInnerHTML={{
-                          __html: t
-                            .raw('career.responsibilities.item_3')
-                            .replace('{tech}', '<strong>Node.js, Express.js, and MongoDB</strong>'),
-                        }}
-                      />
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <motion.div {...iconHoverProps}>
-                        <CheckCircle className="text-accent-blue mt-0.5 shrink-0" size={16} />
-                      </motion.div>
-                      <span>{t('career.responsibilities.item_4')}</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <motion.div {...iconHoverProps}>
-                        <CheckCircle className="text-accent-blue mt-0.5 shrink-0" size={16} />
-                      </motion.div>
-                      <span>{t('career.responsibilities.item_5')}</span>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-8 items-start">
-                  <div>
-                    <div className="flex items-center gap-2 text-accent-yellow text-xs font-bold tracking-widest uppercase mb-4">
-                      <motion.div {...iconHoverProps}>
-                        <Lightbulb size={16} />
-                      </motion.div>
-                      {t('career.learned.title')}
-                    </div>
-                    <ul className="space-y-3 text-gray-600 dark:text-[#999] text-sm leading-relaxed">
-                      <li className="flex items-start gap-3">
-                        <motion.div {...iconHoverProps}>
-                          <Check className="text-green-500 mt-0.5 shrink-0" size={14} />
-                        </motion.div>
-                        <span>{t('career.learned.item_1')}</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <motion.div {...iconHoverProps}>
-                          <Check className="text-green-500 mt-0.5 shrink-0" size={14} />
-                        </motion.div>
-                        <span>{t('career.learned.item_2')}</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <motion.div {...iconHoverProps}>
-                          <Check className="text-green-500 mt-0.5 shrink-0" size={14} />
-                        </motion.div>
-                        <span>{t('career.learned.item_3')}</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <div className="flex items-center gap-2 text-accent-yellow text-xs font-bold tracking-widest uppercase mb-4">
-                      <motion.div {...iconHoverProps}>
-                        <Rocket size={16} />
-                      </motion.div>
-                      {t('career.impact.title')}
-                    </div>
-                    <ul className="space-y-3 text-gray-600 dark:text-[#999] text-sm leading-relaxed">
-                      <li className="flex items-start gap-3">
-                        <motion.div {...iconHoverProps}>
-                          <Trophy className="text-orange-500 mt-0.5 shrink-0" size={16} />
-                        </motion.div>
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: t
-                              .raw('career.impact.item_1')
-                              .replace('{award}', '<strong>Best Capstone Project</strong>'),
-                          }}
-                        />
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <motion.div {...iconHoverProps}>
-                          <TrendingUp className="text-blue-500 mt-0.5 shrink-0" size={16} />
-                        </motion.div>
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: t
-                              .raw('career.impact.item_2')
-                              .replace(
-                                '{link}',
-                                '<a href="https://s-ticket.online/" target="_blank" rel="noopener noreferrer" class="text-gray-900 dark:text-white hover:underline decoration-accent-yellow underline-offset-4">s-ticket.online</a>',
-                              ),
-                          }}
-                        />
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <motion.div {...iconHoverProps}>
-                          <Users className="text-purple-500 mt-0.5 shrink-0" size={16} />
-                        </motion.div>
-                        <span>{t('career.impact.item_3')}</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+            <div className="flex flex-col gap-6">
+              {career.map((entry) => (
+                <CareerCard key={entry.id} entry={entry} t={t} />
+              ))}
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
 
-      <div className="h-[1px] bg-gray-300 dark:bg-white/20 mb-20"></div>
+          <div className="h-[1px] bg-gray-300 dark:bg-white/20 mb-20"></div>
+        </>
+      )}
 
       {/* Education Section */}
-      <section id="education">
-        <div className="flex items-center gap-3 mb-8">
-          <motion.div {...iconHoverProps}>
-            <GraduationCap className="text-2xl text-gray-700 dark:text-white" />
-          </motion.div>
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-            {t('education.title')}
-          </h3>
-        </div>
-        <div className="text-[11px] font-bold text-gray-500 dark:text-[#888] tracking-widest mb-6 uppercase">
-          {t('education.subtitle')}
-        </div>
-
-        <div className="rounded-2xl border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-[#121212] p-6 transition-all hover:border-gray-300 dark:hover:border-white/10">
-          <div className="flex flex-col md:flex-row gap-5 items-start">
-            <div className="w-14 h-14 min-w-[56px] rounded-xl bg-gray-200 dark:bg-[#1a1a1a] overflow-hidden flex items-center justify-center border border-gray-300 dark:border-white/10">
-              <Image
-                src="/img/untag-logo.png"
-                alt="Untag Surabaya"
-                width={56}
-                height={56}
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            <div className="w-full">
-              <h4 className="text-lg font-bold text-gray-900 dark:text-white">
-                {t('education.university')}
-              </h4>
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-gray-600 dark:text-[#999] text-sm mt-1">
-                <span>{t('education.degree')}</span>
-                <span className="hidden sm:inline text-gray-400 dark:text-[#444]">&bull;</span>
-                <span className="text-gray-500 dark:text-[#ddd]">{t('education.gpa')}</span>
-              </div>
-              <div className="flex items-center gap-2 text-xs text-gray-400 dark:text-[#666] mt-3 font-mono">
-                <span>{t('education.period')}</span>
-                <span className="w-1 h-1 rounded-full bg-gray-300 dark:bg-[#444]"></span>
-                <span>{t('education.location')}</span>
-              </div>
-
-              <button
-                type="button"
-                onClick={toggleThesisDetails}
-                className="flex items-center gap-2 text-sm text-gray-500 dark:text-[#888] hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer select-none group mt-6"
-              >
-                <motion.div
-                  {...iconHoverProps}
-                  className={`transition-transform duration-300 ${isThesisExpanded ? 'rotate-180' : ''}`}
-                >
-                  <List className="group-hover:text-accent-yellow" size={16} />
-                </motion.div>
-                <span>
-                  {isThesisExpanded
-                    ? t('education.thesis.hide_details')
-                    : t('education.thesis.show_details')}
-                </span>
-              </button>
-
-              <div
-                className={`mt-6 space-y-4 border-t border-gray-200 dark:border-white/5 pt-6 animate-fade-in ${isThesisExpanded ? '' : 'hidden'}`}
-              >
-                <div className="flex items-center gap-2 text-accent-yellow text-xs font-bold tracking-widest uppercase mb-1">
-                  <motion.div {...iconHoverProps}>
-                    <FileText size={16} />
-                  </motion.div>
-                  {t('education.thesis.title')}
-                </div>
-                <div className="text-gray-900 dark:text-white font-semibold text-sm italic">
-                  {t('education.thesis.project_title')}
-                </div>
-                <p className="text-gray-600 dark:text-[#999] text-sm leading-relaxed">
-                  {t('education.thesis.description')}
-                </p>
-                <p className="text-gray-600 dark:text-[#999] text-sm leading-relaxed">
-                  {t('education.thesis.result')}
-                </p>
-                <div className="flex flex-wrap items-center gap-4 pt-2 text-sm">
-                  <Link
-                    href="/projects/sentiment-analysis-electric-vehicles"
-                    className="inline-flex items-center gap-1.5 text-gray-900 dark:text-white hover:text-accent-yellow dark:hover:text-accent-yellow transition-colors font-medium"
-                  >
-                    {t('education.thesis.read_more')}
-                    <ExternalLink size={14} />
-                  </Link>
-                  <a
-                    href="https://doi.org/10.36040/jati.v10i1.17094"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-gray-900 dark:text-white hover:text-accent-yellow dark:hover:text-accent-yellow transition-colors font-medium"
-                  >
-                    {t('education.thesis.published_journal')}
-                    <ExternalLink size={14} />
-                  </a>
-                </div>
-              </div>
-            </div>
+      {education.length > 0 && (
+        <section id="education">
+          <div className="flex items-center gap-3 mb-8">
+            <motion.div {...iconHoverProps}>
+              <GraduationCap className="text-2xl text-gray-700 dark:text-white" />
+            </motion.div>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+              {t('education.title')}
+            </h3>
           </div>
-        </div>
-      </section>
+          <div className="text-[11px] font-bold text-gray-500 dark:text-[#888] tracking-widest mb-6 uppercase">
+            {t('education.subtitle')}
+          </div>
+
+          <div className="flex flex-col gap-6">
+            {education.map((entry) => (
+              <EducationCard key={entry.id} entry={entry} t={t} />
+            ))}
+          </div>
+        </section>
+      )}
     </>
   );
 }

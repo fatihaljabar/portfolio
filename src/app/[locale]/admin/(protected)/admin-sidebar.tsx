@@ -7,7 +7,15 @@
 
 'use client';
 
-import { Award, FolderKanban, LayoutDashboard, LogOut, Mail } from 'lucide-react';
+import {
+  Award,
+  Briefcase,
+  FolderKanban,
+  GraduationCap,
+  LayoutDashboard,
+  LogOut,
+  Mail,
+} from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
@@ -17,6 +25,8 @@ const navItems = [
   { path: 'admin', label: 'Dashboard', icon: LayoutDashboard },
   { path: 'admin/projects', label: 'Projects', icon: FolderKanban },
   { path: 'admin/achievements', label: 'Achievements', icon: Award },
+  { path: 'admin/career', label: 'Career', icon: Briefcase },
+  { path: 'admin/education', label: 'Education', icon: GraduationCap },
   { path: 'admin/messages', label: 'Messages', icon: Mail },
 ];
 
