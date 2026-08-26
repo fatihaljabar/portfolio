@@ -6,7 +6,8 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -31,6 +32,13 @@ export function ProfileForm({ action, defaultValues }: ProfileFormProps) {
   const [form, setForm] = useState<ProfileInput>(defaultValues);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const toastParam = useSearchParams().get('toast');
+
+  useEffect(() => {
+    if (toastParam) {
+      setIsSubmitting(false);
+    }
+  }, [toastParam]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

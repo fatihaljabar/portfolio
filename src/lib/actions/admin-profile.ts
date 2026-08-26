@@ -10,6 +10,7 @@
 import { revalidatePath } from 'next/cache';
 import { getLocale } from 'next-intl/server';
 import { z } from 'zod';
+import { deleteStorageImage } from '@/lib/actions/upload';
 import { getAdminUser } from '@/lib/auth/server';
 import { redirect } from '@/lib/i18n/navigation';
 import { prisma } from '@/lib/prisma/client';
@@ -43,11 +44,21 @@ export async function updateSiteProfile(data: ProfileInput) {
     return { success: false, error: parsed.error.issues[0]?.message || 'Validation failed' };
   }
 
+  const existing = await prisma.siteProfile.findUnique({
+    where: { id: 'singleton' },
+    select: { photoUrl: true },
+  });
+  const newPhotoUrl = parsed.data.photoUrl || null;
+
   await prisma.siteProfile.upsert({
     where: { id: 'singleton' },
-    create: { id: 'singleton', ...parsed.data, photoUrl: parsed.data.photoUrl || null },
-    update: { ...parsed.data, photoUrl: parsed.data.photoUrl || null },
+    create: { id: 'singleton', ...parsed.data, photoUrl: newPhotoUrl },
+    update: { ...parsed.data, photoUrl: newPhotoUrl },
   });
+
+  if (existing?.photoUrl && existing.photoUrl !== newPhotoUrl) {
+    await deleteStorageImage(existing.photoUrl);
+  }
 
   revalidatePath('/[locale]', 'page');
   revalidatePath('/[locale]/about', 'page');
