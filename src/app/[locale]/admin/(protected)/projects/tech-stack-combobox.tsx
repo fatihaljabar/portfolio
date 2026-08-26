@@ -11,64 +11,14 @@
 import { X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { TechIconGlyph } from '@/components/components/tech-icon-glyph';
-import { ensureContrast, TECH_ICON_FALLBACKS, type TechIconResult } from '@/lib/tech-icon-data';
+import {
+  getCachedSearchableTechIcons,
+  loadSearchableTechIcons,
+  type SearchableTechIcon,
+} from '@/lib/searchable-tech-icons';
+import type { TechIconResult } from '@/lib/tech-icon-data';
 
-interface SearchEntry {
-  name: string;
-  result: TechIconResult;
-}
-
-let cachedEntries: SearchEntry[] | null = null;
-let loadPromise: Promise<SearchEntry[]> | null = null;
-
-async function loadSearchableIcons(): Promise<SearchEntry[]> {
-  if (cachedEntries) {
-    return cachedEntries;
-  }
-  if (!loadPromise) {
-    loadPromise = import('simple-icons').then((mod) => {
-      const entries: SearchEntry[] = [];
-      const seen = new Set<string>();
-
-      for (const icon of Object.values(mod)) {
-        if (
-          icon &&
-          typeof icon === 'object' &&
-          'title' in icon &&
-          'path' in icon &&
-          'hex' in icon
-        ) {
-          const title = icon.title as string;
-          if (seen.has(title)) continue;
-          seen.add(title);
-          entries.push({
-            name: title,
-            result: {
-              kind: 'svg',
-              path: icon.path as string,
-              color: ensureContrast(`#${icon.hex as string}`),
-            },
-          });
-        }
-      }
-
-      for (const [name, fallback] of Object.entries(TECH_ICON_FALLBACKS)) {
-        entries.push({
-          name,
-          result: {
-            kind: 'fallback',
-            iconName: fallback.iconName,
-            color: ensureContrast(fallback.hex),
-          },
-        });
-      }
-
-      cachedEntries = entries;
-      return entries;
-    });
-  }
-  return loadPromise;
-}
+type SearchEntry = SearchableTechIcon;
 
 interface TechStackComboboxProps {
   value: string[];
@@ -78,7 +28,7 @@ interface TechStackComboboxProps {
 
 export function TechStackCombobox({ value, onChange, initialIcons = {} }: TechStackComboboxProps) {
   const [query, setQuery] = useState('');
-  const [entries, setEntries] = useState<SearchEntry[] | null>(cachedEntries);
+  const [entries, setEntries] = useState<SearchEntry[] | null>(getCachedSearchableTechIcons());
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -98,7 +48,7 @@ export function TechStackCombobox({ value, onChange, initialIcons = {} }: TechSt
       return;
     }
     setIsLoading(true);
-    const loaded = await loadSearchableIcons();
+    const loaded = await loadSearchableTechIcons();
     setEntries(loaded);
     setIsLoading(false);
   };

@@ -15,6 +15,7 @@ import {
   LayoutDashboard,
   LogOut,
   Mail,
+  Sparkles,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -25,6 +26,7 @@ const navItems = [
   { path: 'admin', label: 'Dashboard', icon: LayoutDashboard },
   { path: 'admin/projects', label: 'Projects', icon: FolderKanban },
   { path: 'admin/achievements', label: 'Achievements', icon: Award },
+  { path: 'admin/skills', label: 'Skills', icon: Sparkles },
   { path: 'admin/career', label: 'Career', icon: Briefcase },
   { path: 'admin/education', label: 'Education', icon: GraduationCap },
   { path: 'admin/messages', label: 'Messages', icon: Mail },
