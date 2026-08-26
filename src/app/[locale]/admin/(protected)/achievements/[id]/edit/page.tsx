@@ -32,6 +32,14 @@ export default async function EditAchievementPage({
 
   const boundUpdateAchievement = updateAchievement.bind(null, achievement.id);
 
+  const categories = await prisma.achievement.findMany({
+    where: { category: { not: null } },
+    select: { category: true },
+    distinct: ['category'],
+    orderBy: { category: 'asc' },
+  });
+  const existingCategories = categories.map((c) => c.category).filter((c): c is string => !!c);
+
   return (
     <div>
       <Link
@@ -45,6 +53,7 @@ export default async function EditAchievementPage({
       <AchievementForm
         action={boundUpdateAchievement}
         submitLabel="Save Changes"
+        existingCategories={existingCategories}
         defaultValues={{
           title: achievement.title,
           description: achievement.description ?? '',

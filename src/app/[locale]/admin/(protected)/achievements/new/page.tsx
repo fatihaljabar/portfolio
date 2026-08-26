@@ -7,6 +7,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { createAchievement } from '@/lib/actions/admin-achievements';
 import type { Locale } from '@/lib/i18n/config';
+import { prisma } from '@/lib/prisma/client';
 import { AchievementForm } from '../achievement-form';
 
 export const metadata: Metadata = {
@@ -21,6 +22,14 @@ export default async function NewAchievementPage({
 }) {
   const { locale } = await params;
 
+  const categories = await prisma.achievement.findMany({
+    where: { category: { not: null } },
+    select: { category: true },
+    distinct: ['category'],
+    orderBy: { category: 'asc' },
+  });
+  const existingCategories = categories.map((c) => c.category).filter((c): c is string => !!c);
+
   return (
     <div>
       <Link
@@ -31,7 +40,11 @@ export default async function NewAchievementPage({
         Achievements
       </Link>
       <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-10">New Achievement</h1>
-      <AchievementForm action={createAchievement} submitLabel="Create Achievement" />
+      <AchievementForm
+        action={createAchievement}
+        submitLabel="Create Achievement"
+        existingCategories={existingCategories}
+      />
     </div>
   );
 }

@@ -13,8 +13,8 @@ import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import type { ProjectInput } from '@/lib/actions/admin-projects';
 import type { TechIconResult } from '@/lib/tech-icon-data';
+import { CategorySelect } from '../category-select';
 import { ImageUploadField } from '../image-upload-field';
-import { CategorySelect } from './category-select';
 import { ContentImageUploader } from './content-image-uploader';
 import { TechStackCombobox } from './tech-stack-combobox';
 
