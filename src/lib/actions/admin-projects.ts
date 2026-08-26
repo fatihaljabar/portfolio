@@ -83,7 +83,7 @@ export async function createProject(data: ProjectInput) {
 
   revalidateProjectPaths();
   const locale = await getLocale();
-  redirect({ href: '/admin/projects', locale });
+  redirect({ href: `/admin/projects?toast=${encodeURIComponent('Project created')}`, locale });
 }
 
 export async function updateProject(id: string, data: ProjectInput) {
@@ -116,7 +116,7 @@ export async function updateProject(id: string, data: ProjectInput) {
 
   revalidateProjectPaths();
   const locale = await getLocale();
-  redirect({ href: '/admin/projects', locale });
+  redirect({ href: `/admin/projects?toast=${encodeURIComponent('Project updated')}`, locale });
 }
 
 export async function deleteProject(id: string) {
