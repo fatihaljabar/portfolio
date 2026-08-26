@@ -29,7 +29,8 @@ export async function uploadImage(formData: FormData) {
   if (!(file instanceof File)) {
     return { success: false as const, error: 'No file provided' };
   }
-  if (folder !== 'projects' && folder !== 'achievements') {
+  const validFolders = ['projects', 'achievements', 'career', 'education'];
+  if (typeof folder !== 'string' || !validFolders.includes(folder)) {
     return { success: false as const, error: 'Invalid folder' };
   }
 

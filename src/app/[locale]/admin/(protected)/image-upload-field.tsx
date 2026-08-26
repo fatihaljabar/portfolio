@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { uploadImage } from '@/lib/actions/upload';
 
 interface ImageUploadFieldProps {
-  folder: 'projects' | 'achievements';
+  folder: 'projects' | 'achievements' | 'career' | 'education';
   value: string;
   onChange: (url: string) => void;
 }

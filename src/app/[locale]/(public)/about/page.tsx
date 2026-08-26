@@ -1,13 +1,16 @@
 /**
  * About Page
- * Server wrapper — carries metadata, renders the interactive client UI
+ * Server wrapper — fetches Career/Education from the DB, resolves the
+ * locale-specific fields, carries metadata, renders the interactive UI
  */
 
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { buildMetadata } from '@/lib/seo/metadata';
+import { formatDateRange, formatDuration } from '@/lib/format-date-range';
 import type { Locale } from '@/lib/i18n/config';
-import { AboutClient } from './about-client';
+import { prisma } from '@/lib/prisma/client';
+import { buildMetadata } from '@/lib/seo/metadata';
+import { AboutClient, type CareerView, type EducationView } from './about-client';
 
 export const revalidate = 60;
 
@@ -26,5 +29,51 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   const { locale } = await params;
   setRequestLocale(locale);
 
-  return <AboutClient />;
+  const [careerEntries, educationEntries] = await Promise.all([
+    prisma.career.findMany({ where: { isPublished: true }, orderBy: { startDate: 'desc' } }),
+    prisma.education.findMany({ where: { isPublished: true }, orderBy: { startDate: 'desc' } }),
+  ]);
+
+  const career: CareerView[] = careerEntries.map((entry) => ({
+    id: entry.id,
+    position: locale === 'id' ? entry.positionId : entry.positionEn,
+    company: entry.company,
+    companyLogoUrl: entry.companyLogoUrl,
+    employmentType: locale === 'id' ? entry.employmentTypeId : entry.employmentTypeEn,
+    location: entry.location,
+    dateRange: formatDateRange(entry.startDate, entry.endDate, locale),
+    duration: formatDuration(entry.startDate, entry.endDate, locale),
+    responsibilities: locale === 'id' ? entry.responsibilitiesId : entry.responsibilitiesEn,
+    learned: locale === 'id' ? entry.learnedId : entry.learnedEn,
+    impact: locale === 'id' ? entry.impactId : entry.impactEn,
+  }));
+
+  const education: EducationView[] = educationEntries.map((entry) => {
+    const hasThesis = Boolean(
+      locale === 'id' ? entry.thesisProjectTitleId : entry.thesisProjectTitleEn,
+    );
+    return {
+      id: entry.id,
+      university: entry.university,
+      degree: locale === 'id' ? entry.degreeId : entry.degreeEn,
+      gpa: (locale === 'id' ? entry.gpaId : entry.gpaEn) ?? null,
+      location: entry.location,
+      logoUrl: entry.logoUrl,
+      dateRange: formatDateRange(entry.startDate, entry.endDate, locale),
+      thesis: hasThesis
+        ? {
+            label: (locale === 'id' ? entry.thesisLabelId : entry.thesisLabelEn) ?? '',
+            projectTitle:
+              (locale === 'id' ? entry.thesisProjectTitleId : entry.thesisProjectTitleEn) ?? '',
+            details: (locale === 'id' ? entry.thesisDetailsId : entry.thesisDetailsEn) ?? '',
+            projectSlug: entry.thesisProjectSlug,
+            journalUrl: entry.thesisJournalUrl,
+            journalLabel:
+              (locale === 'id' ? entry.thesisJournalLabelId : entry.thesisJournalLabelEn) ?? null,
+          }
+        : null,
+    };
+  });
+
+  return <AboutClient career={career} education={education} />;
 }

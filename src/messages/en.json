@@ -24,53 +24,18 @@
     "career": {
       "title": "Career",
       "subtitle": "My professional journey.",
-      "position": "Front-End and Back-End Developer Internship",
-      "company": "Dicoding Indonesia",
-      "duration": "Sep 2024 – Dec 2024",
-      "length": "4 Months",
-      "employment_type": "Part-time",
-      "location": "Remote",
       "show_details": "Show details",
       "hide_details": "Hide details",
-      "responsibilities": {
-        "title": "Responsibilities",
-        "item_1": "Collaborated in a team of 4 to develop {project}, a web-based concert ticket management platform.",
-        "item_2": "Designed and implemented a responsive Front-End user interface using {tech1} and {tech2}.",
-        "item_3": "Developed RESTful APIs and managed server-side logic using {tech}.",
-        "item_4": "Implemented features such as ticket search, booking system, user authentication, and data management.",
-        "item_5": "Managed version control and team collaboration using Git and GitHub."
-      },
-      "learned": {
-        "title": "What I Learned",
-        "item_1": "Mastered web fundamentals (HTML, CSS, JS) and advanced concepts like DOM Manipulation & Async JS.",
-        "item_2": "Gained hands-on experience in building scalable RESTful APIs and database schema design.",
-        "item_3": "Enhanced soft skills: Time Management, Effective Communication, and Growth Mindset."
-      },
-      "impact": {
-        "title": "Impact",
-        "item_1": "Awarded {award} for S-TIX.",
-        "item_2": "Successfully launched the platform accessible at {link}.",
-        "item_3": "Received positive feedback from mentors regarding UI/UX design and functionality."
-      }
+      "responsibilities_title": "Responsibilities",
+      "learned_title": "What I Learned",
+      "impact_title": "Impact"
     },
     "education": {
       "title": "Education",
       "subtitle": "My educational journey.",
-      "university": "Universitas 17 Agustus 1945 Surabaya",
-      "degree": "Bachelor's degree • Informatics Engineering (S.Kom)",
-      "gpa": "GPA: 3.63/4.00",
-      "period": "2021 - 2026",
-      "location": "Surabaya, Indonesia 🇮🇩",
-      "thesis": {
-        "title": "Undergraduate Thesis",
-        "project_title": "Sentiment Analysis on Online Reviews of Electric Vehicles Using Deep Learning on Platform X",
-        "description": "My capstone project: comparing four deep learning architectures (CNN, LSTM, BiLSTM, and a hybrid CNN+BiLSTM with Attention) to classify Indonesian-language sentiment toward electric vehicles from real public discussion on Platform X (2023–2025). Labels were assigned with a quantile-based lexicon threshold rather than a fixed cutoff, and the best model was deployed as a live web demo.",
-        "result": "The hybrid CNN+BiLSTM model won on every metric, reaching 75% accuracy and a 0.76 macro F1-score, while a single-direction LSTM collapsed entirely and performed no better than chance.",
-        "show_details": "Show thesis details",
-        "hide_details": "Hide thesis details",
-        "read_more": "Read the full write-up",
-        "published_journal": "Published in JATI (Jurnal Mahasiswa Teknik Informatika), Vol. 10 No. 1 (2026)"
-      }
+      "thesis_show_details": "Show thesis details",
+      "thesis_hide_details": "Hide thesis details",
+      "thesis_read_more": "Read the full write-up"
     }
   },
   "achievements": {
