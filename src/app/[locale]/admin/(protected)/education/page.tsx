@@ -44,7 +44,7 @@ export default async function AdminEducationPage({
           href={`/${locale}/admin/education/new`}
           className="shrink-0 bg-gray-900 dark:bg-white text-white dark:text-black text-sm font-bold px-4 py-2.5 rounded-xl hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
         >
-          New Education Entry
+          New Education
         </Link>
       </div>
 

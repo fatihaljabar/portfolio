@@ -1,5 +1,5 @@
 /**
- * New Career Entry
+ * New Career
  */
 
 import { ArrowLeft } from 'lucide-react';
@@ -10,7 +10,7 @@ import type { Locale } from '@/lib/i18n/config';
 import { CareerForm } from '../career-form';
 
 export const metadata: Metadata = {
-  title: 'New Career Entry',
+  title: 'New Career',
   robots: { index: false, follow: false },
 };
 
@@ -26,8 +26,8 @@ export default async function NewCareerPage({ params }: { params: Promise<{ loca
         <ArrowLeft size={16} />
         Career
       </Link>
-      <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-10">New Career Entry</h1>
-      <CareerForm action={createCareer} submitLabel="Create Career Entry" />
+      <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-10">New Career</h1>
+      <CareerForm action={createCareer} submitLabel="Create Career" />
     </div>
   );
 }

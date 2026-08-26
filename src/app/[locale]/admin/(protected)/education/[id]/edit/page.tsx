@@ -1,5 +1,5 @@
 /**
- * Edit Education Entry
+ * Edit Education
  */
 
 import { ArrowLeft } from 'lucide-react';
@@ -14,7 +14,7 @@ import { EducationForm } from '../../education-form';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Edit Education Entry',
+  title: 'Edit Education',
   robots: { index: false, follow: false },
 };
 
@@ -41,9 +41,7 @@ export default async function EditEducationPage({
         <ArrowLeft size={16} />
         Education
       </Link>
-      <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-10">
-        Edit Education Entry
-      </h1>
+      <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-10">Edit Education</h1>
       <EducationForm
         action={boundUpdateEducation}
         submitLabel="Save Changes"

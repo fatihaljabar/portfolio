@@ -40,7 +40,7 @@ export default async function AdminCareerPage({ params }: { params: Promise<{ lo
           href={`/${locale}/admin/career/new`}
           className="shrink-0 bg-gray-900 dark:bg-white text-white dark:text-black text-sm font-bold px-4 py-2.5 rounded-xl hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
         >
-          New Career Entry
+          New Career
         </Link>
       </div>
 

@@ -1,5 +1,5 @@
 /**
- * Edit Career Entry
+ * Edit Career
  */
 
 import { ArrowLeft } from 'lucide-react';
@@ -14,7 +14,7 @@ import { CareerForm } from '../../career-form';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Edit Career Entry',
+  title: 'Edit Career',
   robots: { index: false, follow: false },
 };
 
@@ -41,7 +41,7 @@ export default async function EditCareerPage({
         <ArrowLeft size={16} />
         Career
       </Link>
-      <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-10">Edit Career Entry</h1>
+      <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-10">Edit Career</h1>
       <CareerForm
         action={boundUpdateCareer}
         submitLabel="Save Changes"
