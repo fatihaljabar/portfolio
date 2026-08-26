@@ -7,16 +7,14 @@
 
 import { useTransition } from 'react';
 import { deleteAchievement } from '@/lib/actions/admin-achievements';
+import { ConfirmDeleteDialog } from '../confirm-delete-dialog';
 import { useToast } from '../toast-provider';
 
-export function DeleteAchievementButton({ id }: { id: string }) {
+export function DeleteAchievementButton({ id, title }: { id: string; title: string }) {
   const [isPending, startTransition] = useTransition();
   const { showToast } = useToast();
 
   const handleDelete = () => {
-    if (!window.confirm('Delete this achievement? This cannot be undone.')) {
-      return;
-    }
     startTransition(async () => {
       const result = await deleteAchievement(id);
       if (result.success) {
@@ -28,13 +26,11 @@ export function DeleteAchievementButton({ id }: { id: string }) {
   };
 
   return (
-    <button
-      type="button"
-      onClick={handleDelete}
-      disabled={isPending}
-      className="text-xs font-medium px-3 py-2 rounded-lg text-red-500 hover:bg-red-500/10 transition-colors disabled:opacity-50"
-    >
-      Delete
-    </button>
+    <ConfirmDeleteDialog
+      itemLabel="achievement"
+      itemName={title}
+      onConfirm={handleDelete}
+      isPending={isPending}
+    />
   );
 }

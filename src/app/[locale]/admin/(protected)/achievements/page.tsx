@@ -100,7 +100,7 @@ export default async function AdminAchievementsPage({
                 >
                   Edit
                 </Link>
-                <DeleteAchievementButton id={achievement.id} />
+                <DeleteAchievementButton id={achievement.id} title={achievement.title} />
               </div>
             </li>
           ))}

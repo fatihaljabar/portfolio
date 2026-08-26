@@ -100,7 +100,7 @@ export default async function AdminProjectsPage({
                 >
                   Edit
                 </Link>
-                <DeleteProjectButton id={project.id} />
+                <DeleteProjectButton id={project.id} title={project.title} />
               </div>
             </li>
           ))}
