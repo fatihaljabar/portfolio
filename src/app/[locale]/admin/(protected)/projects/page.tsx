@@ -5,9 +5,11 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { Badge } from '@/components/ui/badge';
 import type { Locale } from '@/lib/i18n/config';
 import { prisma } from '@/lib/prisma/client';
+import { ToastFromSearchParams } from '../toast-from-search-params';
 import { DeleteProjectButton } from './delete-project-button';
 
 export const dynamic = 'force-dynamic';
@@ -27,6 +29,9 @@ export default async function AdminProjectsPage({
 
   return (
     <div>
+      <Suspense fallback={null}>
+        <ToastFromSearchParams />
+      </Suspense>
       <div className="flex items-start justify-between gap-4 mb-10">
         <div>
           <p className="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-[#666] mb-2">

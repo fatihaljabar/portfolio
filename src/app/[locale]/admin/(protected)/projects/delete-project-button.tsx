@@ -7,16 +7,23 @@
 
 import { useTransition } from 'react';
 import { deleteProject } from '@/lib/actions/admin-projects';
+import { useToast } from '../toast-provider';
 
 export function DeleteProjectButton({ id }: { id: string }) {
   const [isPending, startTransition] = useTransition();
+  const { showToast } = useToast();
 
   const handleDelete = () => {
     if (!window.confirm('Delete this project? This cannot be undone.')) {
       return;
     }
     startTransition(async () => {
-      await deleteProject(id);
+      const result = await deleteProject(id);
+      if (result.success) {
+        showToast('Project deleted');
+      } else {
+        showToast(result.error ?? 'Failed to delete project', 'error');
+      }
     });
   };
 

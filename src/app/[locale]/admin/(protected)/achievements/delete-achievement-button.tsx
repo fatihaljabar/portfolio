@@ -7,16 +7,23 @@
 
 import { useTransition } from 'react';
 import { deleteAchievement } from '@/lib/actions/admin-achievements';
+import { useToast } from '../toast-provider';
 
 export function DeleteAchievementButton({ id }: { id: string }) {
   const [isPending, startTransition] = useTransition();
+  const { showToast } = useToast();
 
   const handleDelete = () => {
     if (!window.confirm('Delete this achievement? This cannot be undone.')) {
       return;
     }
     startTransition(async () => {
-      await deleteAchievement(id);
+      const result = await deleteAchievement(id);
+      if (result.success) {
+        showToast('Achievement deleted');
+      } else {
+        showToast(result.error ?? 'Failed to delete achievement', 'error');
+      }
     });
   };
 

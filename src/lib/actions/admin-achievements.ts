@@ -83,7 +83,10 @@ export async function createAchievement(data: AchievementInput) {
 
   revalidateAchievementPaths();
   const locale = await getLocale();
-  redirect({ href: '/admin/achievements', locale });
+  redirect({
+    href: `/admin/achievements?toast=${encodeURIComponent('Achievement created')}`,
+    locale,
+  });
 }
 
 export async function updateAchievement(id: string, data: AchievementInput) {
@@ -124,7 +127,10 @@ export async function updateAchievement(id: string, data: AchievementInput) {
 
   revalidateAchievementPaths();
   const locale = await getLocale();
-  redirect({ href: '/admin/achievements', locale });
+  redirect({
+    href: `/admin/achievements?toast=${encodeURIComponent('Achievement updated')}`,
+    locale,
+  });
 }
 
 export async function deleteAchievement(id: string) {
