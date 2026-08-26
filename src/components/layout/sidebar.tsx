@@ -8,36 +8,28 @@
 
 'use client';
 
-import { useTranslations } from 'next-intl';
-import Image from 'next/image';
-import {
-  Mail,
-  Globe,
-  X,
-  Instagram,
-  Linkedin,
-  Github,
-  Share2,
-  ShieldCheck,
-} from 'lucide-react';
-import { SiTiktok } from 'react-icons/si';
 import { motion } from 'framer-motion';
+import { Github, Globe, Instagram, Linkedin, Mail, Share2, ShieldCheck, X } from 'lucide-react';
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
+import { SiTiktok } from 'react-icons/si';
+import { LocaleToggle } from '@/components/components/locale-toggle';
+import { ModeToggle } from '@/components/components/theme-toggle';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { localeFlags, locales } from '@/lib/i18n/config';
-import { ModeToggle } from '@/components/components/theme-toggle';
-import { LocaleToggle } from '@/components/components/locale-toggle';
 
 const iconHoverProps = {
   whileHover: { scale: 1.15, rotate: [0, -5, 5, -5, 0] },
   transition: { duration: 0.4, ease: 'easeInOut' as const },
 };
 
-export function Sidebar() {
+export function Sidebar({ photoUrl }: { photoUrl: string | null }) {
   const t = useTranslations('sidebar');
+  const profileSrc = photoUrl || '/img/profile.jpg';
 
   const socialLinks = [
     { icon: X, href: 'https://x.com/fatihaljabar', label: 'X' },
@@ -54,7 +46,14 @@ export function Sidebar() {
       <div className="flex lg:hidden items-center justify-between w-full">
         <div className="flex items-center gap-3 min-w-0">
           <div className="relative w-10 h-10 shrink-0 rounded-full overflow-hidden border-2 border-gray-200 dark:border-dark-border">
-            <Image src="/img/profile.jpg" alt="Profile" fill sizes="40px" className="object-cover" priority />
+            <Image
+              src={profileSrc}
+              alt="Profile"
+              fill
+              sizes="40px"
+              className="object-cover"
+              priority
+            />
           </div>
           <span className="font-bold text-gray-900 dark:text-white truncate">Fatih</span>
         </div>
@@ -99,7 +98,14 @@ export function Sidebar() {
         {/* Profile Image */}
         <div className="mb-6">
           <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-gray-200 dark:border-dark-border shadow-2xl">
-            <Image src="/img/profile.jpg" alt="Profile" fill sizes="96px" className="object-cover" priority />
+            <Image
+              src={profileSrc}
+              alt="Profile"
+              fill
+              sizes="96px"
+              className="object-cover"
+              priority
+            />
           </div>
         </div>
 
@@ -135,7 +141,10 @@ export function Sidebar() {
               >
                 <div className="w-5 flex justify-center">
                   <motion.div {...iconHoverProps}>
-                    <Mail className="text-xl text-gray-400 dark:text-[#666] group-hover:text-gray-500 dark:group-hover:text-[#999] transition-colors" size={20} />
+                    <Mail
+                      className="text-xl text-gray-400 dark:text-[#666] group-hover:text-gray-500 dark:group-hover:text-[#999] transition-colors"
+                      size={20}
+                    />
                   </motion.div>
                 </div>
                 <span className="tracking-wide">fatihaljabar@gmail.com</span>
@@ -150,7 +159,10 @@ export function Sidebar() {
               >
                 <div className="w-5 flex justify-center">
                   <motion.div {...iconHoverProps}>
-                    <Globe className="text-xl text-gray-400 dark:text-[#666] group-hover:text-gray-500 dark:group-hover:text-[#999] transition-colors" size={20} />
+                    <Globe
+                      className="text-xl text-gray-400 dark:text-[#666] group-hover:text-gray-500 dark:group-hover:text-[#999] transition-colors"
+                      size={20}
+                    />
                   </motion.div>
                 </div>
                 <span className="tracking-wide">fatihaljabar.com</span>
@@ -168,8 +180,12 @@ export function Sidebar() {
           </div>
           <div className="flex gap-6">
             {locales.map((loc) => (
-              <div key={loc} className="flex items-center gap-2 text-sm text-gray-600 dark:text-[#ddd]">
-                <span className="text-lg">{localeFlags[loc]}</span> {loc === 'en' ? 'English' : 'Indonesia'}
+              <div
+                key={loc}
+                className="flex items-center gap-2 text-sm text-gray-600 dark:text-[#ddd]"
+              >
+                <span className="text-lg">{localeFlags[loc]}</span>{' '}
+                {loc === 'en' ? 'English' : 'Indonesia'}
               </div>
             ))}
           </div>

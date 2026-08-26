@@ -11,6 +11,26 @@ datasource db {
 }
 
 // ========================================
+// SITE PROFILE MODEL (Home intro + About, singleton)
+// ========================================
+
+model SiteProfile {
+  id             String   @id @default("singleton")
+  photoUrl       String?
+  greetingEn     String
+  greetingId     String
+  basedInEn      String
+  basedInId      String
+  introEn        String   @db.Text
+  introId        String   @db.Text
+  aboutContentEn String   @db.Text
+  aboutContentId String   @db.Text
+  bestRegardsEn  String
+  bestRegardsId  String
+  updatedAt      DateTime @updatedAt
+}
+
+// ========================================
 // PROJECT MODELS
 // ========================================
 

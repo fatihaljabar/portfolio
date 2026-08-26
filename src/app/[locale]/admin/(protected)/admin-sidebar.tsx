@@ -16,6 +16,7 @@ import {
   LogOut,
   Mail,
   Sparkles,
+  UserCircle,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -24,6 +25,7 @@ import { logout } from '@/lib/actions/auth';
 
 const navItems = [
   { path: 'admin', label: 'Dashboard', icon: LayoutDashboard },
+  { path: 'admin/profile', label: 'Profile', icon: UserCircle },
   { path: 'admin/projects', label: 'Projects', icon: FolderKanban },
   { path: 'admin/achievements', label: 'Achievements', icon: Award },
   { path: 'admin/skills', label: 'Skills', icon: Sparkles },

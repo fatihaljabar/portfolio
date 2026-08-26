@@ -6,10 +6,13 @@
 import { Code, MapPin } from 'lucide-react';
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { type SkillCategoryView, SkillsGrid } from '@/components/sections/skills-grid';
 import type { Locale } from '@/lib/i18n/config';
 import { prisma } from '@/lib/prisma/client';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { getSiteProfile } from '@/lib/site-profile';
 import { getTechIcon } from '@/lib/tech-icon';
 
 export const revalidate = 60;
@@ -22,7 +25,9 @@ export async function generateMetadata({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations('home');
-  const description = t('description').replace('{techStack}', t('tech_stack_list'));
+  const profile = await getSiteProfile();
+  const rawIntro = (locale === 'id' ? profile?.introId : profile?.introEn) ?? '';
+  const description = rawIntro.replace(/\*\*/g, '');
   return buildMetadata({ locale, path: '', title: t('tagline'), description });
 }
 
@@ -30,6 +35,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations('home');
+
+  const profile = await getSiteProfile();
+  const greeting = (locale === 'id' ? profile?.greetingId : profile?.greetingEn) ?? '';
+  const basedIn = (locale === 'id' ? profile?.basedInId : profile?.basedInEn) ?? '';
+  const intro = (locale === 'id' ? profile?.introId : profile?.introEn) ?? '';
 
   const skills = await prisma.skill.findMany({
     orderBy: { createdAt: 'asc' },
@@ -57,21 +67,16 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
           {t('intro')}
         </div>
         <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight text-gray-900 dark:text-white">
-          {t('greeting')}
+          {greeting}
         </h2>
         <div className="flex flex-wrap items-center gap-6 text-gray-500 dark:text-[#888] text-sm mb-10">
           <div className="flex items-center gap-2">
-            <MapPin className="text-gray-700 dark:text-white" size={16} /> {t('based_in')}
+            <MapPin className="text-gray-700 dark:text-white" size={16} /> {basedIn}
           </div>
         </div>
-        <p className="text-lg text-gray-600 dark:text-[#999] leading-relaxed max-w-3xl">
-          {t.rich('description', {
-            techStack: t('tech_stack_list'),
-            strong: (chunks) => (
-              <span className="text-gray-900 dark:text-white font-medium">{chunks}</span>
-            ),
-          })}
-        </p>
+        <div className="prose prose-neutral dark:prose-invert max-w-3xl prose-p:text-lg prose-p:leading-relaxed prose-p:text-gray-600 dark:prose-p:text-[#999] prose-strong:text-gray-900 dark:prose-strong:text-white prose-strong:font-medium">
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{intro}</ReactMarkdown>
+        </div>
       </section>
 
       <div className="h-[1px] bg-gray-300 dark:bg-white/20 mb-20"></div>
