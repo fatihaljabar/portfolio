@@ -289,12 +289,12 @@ export function AboutClient({ career, education }: AboutClientProps) {
 
         <div className="h-[1px] border-t border-dashed border-gray-300 dark:border-[#333] w-full mb-8"></div>
 
-        <div
-          className="space-y-6 text-gray-600 dark:text-[#999] leading-loose text-lg"
-          dangerouslySetInnerHTML={{
-            __html: t.raw('content').replace('{location}', `<strong>${t('location')}</strong>`),
-          }}
-        />
+        <div className="space-y-6 text-gray-600 dark:text-[#999] leading-loose text-lg">
+          {t.rich('content', {
+            location: t('location'),
+            strong: (chunks) => <strong>{chunks}</strong>,
+          })}
+        </div>
 
         <div className="mt-12">
           <div className="text-gray-500 dark:text-[#888] text-sm mb-2">{t('best_regards')}</div>
