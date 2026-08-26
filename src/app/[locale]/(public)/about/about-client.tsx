@@ -58,6 +58,8 @@ export interface EducationView {
 interface AboutClientProps {
   career: CareerView[];
   education: EducationView[];
+  aboutContent: string;
+  bestRegards: string;
 }
 
 const iconHoverProps = {
@@ -275,7 +277,7 @@ function EducationCard({
   );
 }
 
-export function AboutClient({ career, education }: AboutClientProps) {
+export function AboutClient({ career, education, aboutContent, bestRegards }: AboutClientProps) {
   const t = useTranslations('about');
 
   return (
@@ -289,15 +291,12 @@ export function AboutClient({ career, education }: AboutClientProps) {
 
         <div className="h-[1px] border-t border-dashed border-gray-300 dark:border-[#333] w-full mb-8"></div>
 
-        <div className="space-y-6 text-gray-600 dark:text-[#999] leading-loose text-lg">
-          {t.rich('content', {
-            location: t('location'),
-            strong: (chunks) => <strong>{chunks}</strong>,
-          })}
+        <div className="prose prose-neutral dark:prose-invert max-w-none prose-p:text-gray-600 dark:prose-p:text-[#999] prose-p:leading-loose prose-p:text-lg prose-strong:text-gray-900 dark:prose-strong:text-white">
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{aboutContent}</ReactMarkdown>
         </div>
 
         <div className="mt-12">
-          <div className="text-gray-500 dark:text-[#888] text-sm mb-2">{t('best_regards')}</div>
+          <div className="text-gray-500 dark:text-[#888] text-sm mb-2">{bestRegards}</div>
           <div className="font-signature text-5xl text-accent-yellow">Fatih</div>
         </div>
       </section>

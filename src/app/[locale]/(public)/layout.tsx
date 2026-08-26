@@ -5,7 +5,10 @@
  */
 
 import { MainLayout } from '@/components/layout/main-layout';
+import { getSiteProfile } from '@/lib/site-profile';
 
-export default function PublicLayout({ children }: { children: React.ReactNode }) {
-  return <MainLayout>{children}</MainLayout>;
+export default async function PublicLayout({ children }: { children: React.ReactNode }) {
+  const profile = await getSiteProfile();
+
+  return <MainLayout photoUrl={profile?.photoUrl ?? null}>{children}</MainLayout>;
 }
