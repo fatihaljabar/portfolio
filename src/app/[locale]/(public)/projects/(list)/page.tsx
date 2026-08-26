@@ -36,18 +36,28 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
   const t = await getTranslations('projects');
 
   // Fetch projects directly from Prisma
-  const projects = await prisma.project.findMany({
+  const rawProjects = await prisma.project.findMany({
     orderBy: [{ isFeatured: 'desc' }, { publishedAt: 'desc' }],
     select: {
       slug: true,
-      title: true,
-      description: true,
+      titleEn: true,
+      titleId: true,
+      descriptionEn: true,
+      descriptionId: true,
       imageUrl: true,
       isFeatured: true,
       techStack: true,
       category: true,
     },
   });
+
+  const projects = rawProjects.map(
+    ({ titleEn, titleId, descriptionEn, descriptionId, ...rest }) => ({
+      ...rest,
+      title: locale === 'id' ? titleId : titleEn,
+      description: locale === 'id' ? descriptionId : descriptionEn,
+    }),
+  );
 
   // Extract all needed translation strings
   const translations = {

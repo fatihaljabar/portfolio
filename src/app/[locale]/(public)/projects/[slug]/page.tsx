@@ -30,7 +30,7 @@ export async function generateMetadata({
 
   const project = await prisma.project.findUnique({
     where: { slug },
-    select: { title: true, description: true },
+    select: { titleEn: true, titleId: true, descriptionEn: true, descriptionId: true },
   });
 
   if (!project) {
@@ -45,8 +45,8 @@ export async function generateMetadata({
   return buildMetadata({
     locale,
     path: `/projects/${slug}`,
-    title: project.title,
-    description: project.description,
+    title: locale === 'id' ? project.titleId : project.titleEn,
+    description: locale === 'id' ? project.descriptionId : project.descriptionEn,
   });
 }
 
@@ -68,6 +68,10 @@ export default async function ProjectDetailPage({
     notFound();
   }
 
+  const title = locale === 'id' ? project.titleId : project.titleEn;
+  const description = locale === 'id' ? project.descriptionId : project.descriptionEn;
+  const content = locale === 'id' ? project.contentId : project.contentEn;
+
   return (
     <>
       <Link
@@ -82,11 +86,11 @@ export default async function ProjectDetailPage({
       </Link>
 
       <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
-        {project.title}
+        {title}
       </h2>
 
       <p className="text-gray-600 dark:text-[#888] leading-loose text-lg mb-10 max-w-4xl">
-        {project.description}
+        {description}
       </p>
 
       <div className="border-t border-dashed border-gray-300 dark:border-[#333] w-full py-6 mb-8 flex flex-wrap items-center gap-3">
@@ -133,7 +137,7 @@ export default async function ProjectDetailPage({
           <div className="relative w-full aspect-[16/9]">
             <Image
               src={project.imageUrl}
-              alt={project.title}
+              alt={title}
               fill
               className="object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
             />
@@ -146,9 +150,9 @@ export default async function ProjectDetailPage({
       )}
 
       {/* Full Content */}
-      {project.content && (
+      {content && (
         <div className="mt-12 prose prose-neutral dark:prose-invert max-w-none prose-headings:font-bold prose-a:text-accent-blue prose-code:before:content-none prose-code:after:content-none prose-code:bg-gray-100 dark:prose-code:bg-white/5 prose-code:rounded prose-code:px-1.5 prose-code:py-0.5 prose-pre:bg-gray-100 dark:prose-pre:bg-[#0a0a0a] prose-pre:border prose-pre:border-gray-200 dark:prose-pre:border-white/5 prose-img:rounded-xl prose-img:border prose-img:border-gray-200 dark:prose-img:border-white/5">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{project.content}</ReactMarkdown>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
         </div>
       )}
 

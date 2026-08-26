@@ -62,9 +62,12 @@ export default async function EditProjectPage({
         initialTechIcons={initialTechIcons}
         existingCategories={existingCategories}
         defaultValues={{
-          title: project.title,
-          description: project.description,
-          content: project.content,
+          titleEn: project.titleEn,
+          titleId: project.titleId,
+          descriptionEn: project.descriptionEn,
+          descriptionId: project.descriptionId,
+          contentEn: project.contentEn,
+          contentId: project.contentId,
           imageUrl: project.imageUrl ?? '',
           githubUrl: project.githubUrl ?? '',
           demoUrl: project.demoUrl ?? '',

@@ -15,21 +15,24 @@ datasource db {
 // ========================================
 
 model Project {
-  id          String   @id @default(cuid())
-  slug        String   @unique
-  title       String
-  description String
-  content     String   @db.Text
-  imageUrl    String?
-  isFeatured  Boolean  @default(false)
-  githubUrl   String?
-  demoUrl     String?
-  techStack   String[]
-  category    String?
-  isPublished Boolean  @default(true)
-  publishedAt DateTime @default(now())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  titleEn       String
+  titleId       String
+  descriptionEn String
+  descriptionId String
+  contentEn     String   @db.Text
+  contentId     String   @db.Text
+  imageUrl      String?
+  isFeatured    Boolean  @default(false)
+  githubUrl     String?
+  demoUrl       String?
+  techStack     String[]
+  category      String?
+  isPublished   Boolean  @default(true)
+  publishedAt   DateTime @default(now())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   @@index([slug])
   @@index([isFeatured])
@@ -43,8 +46,10 @@ model Project {
 model Achievement {
   id           String   @id @default(cuid())
   slug         String   @unique
-  title        String
-  description  String?
+  titleEn      String
+  titleId      String
+  descriptionEn String?
+  descriptionId String?
   issuer       String
   certificateNumber String?
   credentialUrl String?

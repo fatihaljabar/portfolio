@@ -25,8 +25,10 @@ interface AchievementFormProps {
 }
 
 const emptyValues: AchievementInput = {
-  title: '',
-  description: '',
+  titleEn: '',
+  titleId: '',
+  descriptionEn: '',
+  descriptionId: '',
   issuer: '',
   certificateNumber: '',
   credentialUrl: '',
@@ -82,23 +84,43 @@ export function AchievementForm({
       <section className="flex flex-col gap-6">
         <SectionLabel>Basics</SectionLabel>
 
-        <div className="flex flex-col gap-2">
-          <Label htmlFor="title">Title</Label>
-          <Input
-            id="title"
-            value={form.title}
-            onChange={(e) => setForm((prev) => ({ ...prev, title: e.target.value }))}
-            required
-          />
+        <div className="grid sm:grid-cols-2 gap-6">
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="titleEn">Title (English)</Label>
+            <Input
+              id="titleEn"
+              value={form.titleEn}
+              onChange={(e) => setForm((prev) => ({ ...prev, titleEn: e.target.value }))}
+              required
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="titleId">Title (Indonesian)</Label>
+            <Input
+              id="titleId"
+              value={form.titleId}
+              onChange={(e) => setForm((prev) => ({ ...prev, titleId: e.target.value }))}
+              required
+            />
+          </div>
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label htmlFor="description">Description</Label>
+          <Label htmlFor="descriptionEn">Description (English)</Label>
           <Textarea
-            id="description"
+            id="descriptionEn"
             rows={2}
-            value={form.description}
-            onChange={(e) => setForm((prev) => ({ ...prev, description: e.target.value }))}
+            value={form.descriptionEn}
+            onChange={(e) => setForm((prev) => ({ ...prev, descriptionEn: e.target.value }))}
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="descriptionId">Description (Indonesian)</Label>
+          <Textarea
+            id="descriptionId"
+            rows={2}
+            value={form.descriptionId}
+            onChange={(e) => setForm((prev) => ({ ...prev, descriptionId: e.target.value }))}
           />
         </div>
 

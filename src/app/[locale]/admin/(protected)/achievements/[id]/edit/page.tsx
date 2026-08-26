@@ -55,8 +55,10 @@ export default async function EditAchievementPage({
         submitLabel="Save Changes"
         existingCategories={existingCategories}
         defaultValues={{
-          title: achievement.title,
-          description: achievement.description ?? '',
+          titleEn: achievement.titleEn,
+          titleId: achievement.titleId,
+          descriptionEn: achievement.descriptionEn ?? '',
+          descriptionId: achievement.descriptionId ?? '',
           issuer: achievement.issuer,
           certificateNumber: achievement.certificateNumber ?? '',
           credentialUrl: achievement.credentialUrl ?? '',
