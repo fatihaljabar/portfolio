@@ -69,7 +69,7 @@ export default async function AdminProjectsPage({
                   />
                 ) : (
                   <span className="text-gray-300 dark:text-[#444] text-xs font-bold">
-                    {project.title.charAt(0)}
+                    {project.titleEn.charAt(0)}
                   </span>
                 )}
               </div>
@@ -77,7 +77,7 @@ export default async function AdminProjectsPage({
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2 flex-wrap">
                   <p className="font-bold text-gray-900 dark:text-white truncate">
-                    {project.title}
+                    {project.titleEn}
                   </p>
                   {project.isFeatured && (
                     <Badge variant="secondary" className="text-[10px]">
@@ -100,7 +100,7 @@ export default async function AdminProjectsPage({
                 >
                   Edit
                 </Link>
-                <DeleteProjectButton id={project.id} title={project.title} />
+                <DeleteProjectButton id={project.id} title={project.titleEn} />
               </div>
             </li>
           ))}

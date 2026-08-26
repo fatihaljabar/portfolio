@@ -16,9 +16,12 @@ import { prisma } from '@/lib/prisma/client';
 const urlField = z.string().url('Must be a valid URL').optional().or(z.literal(''));
 
 const projectSchema = z.object({
-  title: z.string().min(2, 'Title must be at least 2 characters'),
-  description: z.string().min(10, 'Description must be at least 10 characters'),
-  content: z.string().min(1, 'Content is required'),
+  titleEn: z.string().min(2, 'English title must be at least 2 characters'),
+  titleId: z.string().min(2, 'Indonesian title must be at least 2 characters'),
+  descriptionEn: z.string().min(10, 'English description must be at least 10 characters'),
+  descriptionId: z.string().min(10, 'Indonesian description must be at least 10 characters'),
+  contentEn: z.string().min(1, 'English content is required'),
+  contentId: z.string().min(1, 'Indonesian content is required'),
   imageUrl: urlField,
   githubUrl: urlField,
   demoUrl: urlField,
@@ -69,7 +72,7 @@ export async function createProject(data: ProjectInput) {
     return { success: false, error: parsed.error.issues[0]?.message || 'Validation failed' };
   }
 
-  const slug = await generateUniqueSlug(parsed.data.title);
+  const slug = await generateUniqueSlug(parsed.data.titleEn);
 
   await prisma.project.create({
     data: {

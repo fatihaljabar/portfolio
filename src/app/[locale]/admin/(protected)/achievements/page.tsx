@@ -69,7 +69,7 @@ export default async function AdminAchievementsPage({
                   />
                 ) : (
                   <span className="text-gray-300 dark:text-[#444] text-xs font-bold">
-                    {achievement.title.charAt(0)}
+                    {achievement.titleEn.charAt(0)}
                   </span>
                 )}
               </div>
@@ -77,7 +77,7 @@ export default async function AdminAchievementsPage({
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2 flex-wrap">
                   <p className="font-bold text-gray-900 dark:text-white truncate">
-                    {achievement.title}
+                    {achievement.titleEn}
                   </p>
                   <Badge variant="outline" className="text-[10px] shrink-0">
                     {achievement.type}
@@ -100,7 +100,7 @@ export default async function AdminAchievementsPage({
                 >
                   Edit
                 </Link>
-                <DeleteAchievementButton id={achievement.id} title={achievement.title} />
+                <DeleteAchievementButton id={achievement.id} title={achievement.titleEn} />
               </div>
             </li>
           ))}

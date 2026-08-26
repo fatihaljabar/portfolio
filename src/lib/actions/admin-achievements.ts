@@ -17,8 +17,10 @@ import { prisma } from '@/lib/prisma/client';
 const urlField = z.string().url('Must be a valid URL').optional().or(z.literal(''));
 
 const achievementSchema = z.object({
-  title: z.string().min(2, 'Title must be at least 2 characters'),
-  description: z.string().optional(),
+  titleEn: z.string().min(2, 'English title must be at least 2 characters'),
+  titleId: z.string().min(2, 'Indonesian title must be at least 2 characters'),
+  descriptionEn: z.string().optional(),
+  descriptionId: z.string().optional(),
   issuer: z.string().min(2, 'Issuer must be at least 2 characters'),
   certificateNumber: z.string().optional(),
   credentialUrl: urlField,
@@ -69,7 +71,7 @@ export async function createAchievement(data: AchievementInput) {
     return { success: false, error: parsed.error.issues[0]?.message || 'Validation failed' };
   }
 
-  const slug = await generateUniqueSlug(parsed.data.title);
+  const slug = await generateUniqueSlug(parsed.data.titleEn);
 
   await prisma.achievement.create({
     data: {
