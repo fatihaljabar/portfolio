@@ -77,6 +77,20 @@ enum AchievementType {
 }
 
 // ========================================
+// SKILL MODELS (Home page)
+// ========================================
+
+model Skill {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  category  String
+  color     String
+  createdAt DateTime @default(now())
+
+  @@index([category])
+}
+
+// ========================================
 // CAREER & EDUCATION MODELS (About page)
 // ========================================
 

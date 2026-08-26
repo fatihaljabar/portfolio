@@ -6,7 +6,15 @@
  * `simple-icons` actually gets loaded.
  */
 
-export type FallbackIconName = 'PawPrint' | 'CreditCard' | 'TestTube' | 'ScanText';
+export type FallbackIconName =
+  | 'PawPrint'
+  | 'CreditCard'
+  | 'TestTube'
+  | 'ScanText'
+  | 'KeyRound'
+  | 'Webhook'
+  | 'BarChart3'
+  | 'OpenAI';
 
 export type TechIconResult =
   | { kind: 'svg'; path: string; color: string }
@@ -16,6 +24,10 @@ export type TechIconResult =
 export const TECH_ICON_ALIASES: Record<string, string> = {
   'Framer Motion': 'Framer',
   'Cloudflare R2': 'Cloudflare',
+  'Google Identity': 'Google',
+  CSS3: 'CSS',
+  'TanStack Query': 'React Query',
+  'Drizzle ORM': 'Drizzle',
 };
 
 /** No official brand icon exists in simple-icons for these — representative icons instead. */
@@ -24,6 +36,10 @@ export const TECH_ICON_FALLBACKS: Record<string, { iconName: FallbackIconName; h
   Midtrans: { iconName: 'CreditCard', hex: '#00AAE4' },
   Playwright: { iconName: 'TestTube', hex: '#A3A3A3' },
   'Tesseract.js': { iconName: 'ScanText', hex: '#A3A3A3' },
+  'Auth.js': { iconName: 'KeyRound', hex: '#A3A3A3' },
+  aws4fetch: { iconName: 'Webhook', hex: '#A3A3A3' },
+  Recharts: { iconName: 'BarChart3', hex: '#A3A3A3' },
+  Codex: { iconName: 'OpenAI', hex: '#A3A3A3' },
 };
 
 const PAGE_BACKGROUND = '#0a0a0a';

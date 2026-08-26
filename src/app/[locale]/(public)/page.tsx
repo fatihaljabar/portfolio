@@ -3,12 +3,14 @@
  * Landing page with intro and skills sections
  */
 
+import { Code, MapPin } from 'lucide-react';
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { MapPin, Code } from 'lucide-react';
-import { SkillsGrid } from '@/components/sections/skills-grid';
-import { buildMetadata } from '@/lib/seo/metadata';
+import { type SkillCategoryView, SkillsGrid } from '@/components/sections/skills-grid';
 import type { Locale } from '@/lib/i18n/config';
+import { prisma } from '@/lib/prisma/client';
+import { buildMetadata } from '@/lib/seo/metadata';
+import { getTechIcon } from '@/lib/tech-icon';
 
 export const revalidate = 60;
 
@@ -29,6 +31,24 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
   setRequestLocale(locale);
   const t = await getTranslations('home');
 
+  const skills = await prisma.skill.findMany({
+    orderBy: { createdAt: 'asc' },
+  });
+  const skillCategories: SkillCategoryView[] = [];
+  for (const skill of skills) {
+    let group = skillCategories.find((c) => c.label === skill.category);
+    if (!group) {
+      group = { label: skill.category, skills: [] };
+      skillCategories.push(group);
+    }
+    const icon = getTechIcon(skill.name);
+    group.skills.push({
+      name: skill.name,
+      color: skill.color,
+      icon: icon ? { ...icon, color: skill.color } : null,
+    });
+  }
+
   return (
     <>
       {/* Intro Section */}
@@ -44,12 +64,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
             <MapPin className="text-gray-700 dark:text-white" size={16} /> {t('based_in')}
           </div>
         </div>
-        <p
-          className="text-lg text-gray-600 dark:text-[#999] leading-relaxed max-w-3xl"
-          dangerouslySetInnerHTML={{
-            __html: t.raw('description').replace('{techStack}', `<span class="text-gray-900 dark:text-white font-medium">${t('tech_stack_list')}</span>`),
-          }}
-        />
+        <p className="text-lg text-gray-600 dark:text-[#999] leading-relaxed max-w-3xl">
+          {t.rich('description', {
+            techStack: t('tech_stack_list'),
+            strong: (chunks) => (
+              <span className="text-gray-900 dark:text-white font-medium">{chunks}</span>
+            ),
+          })}
+        </p>
       </section>
 
       <div className="h-[1px] bg-gray-300 dark:bg-white/20 mb-20"></div>
@@ -61,7 +83,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
           <h3 className="text-xl font-bold text-gray-900 dark:text-white">Skills</h3>
         </div>
 
-        <SkillsGrid />
+        <SkillsGrid categories={skillCategories} />
       </section>
     </>
   );

@@ -5,14 +5,27 @@
  * Components. Falls back to the tech name's first letter when unresolved.
  */
 
-import { CreditCard, PawPrint, ScanText, TestTube } from 'lucide-react';
+import {
+  BarChart3,
+  CreditCard,
+  KeyRound,
+  PawPrint,
+  ScanText,
+  TestTube,
+  Webhook,
+} from 'lucide-react';
+import { BsOpenai } from 'react-icons/bs';
 import type { FallbackIconName, TechIconResult } from '@/lib/tech-icon-data';
 
-const FALLBACK_ICONS: Record<FallbackIconName, typeof PawPrint> = {
+const FALLBACK_ICONS: Record<FallbackIconName, typeof PawPrint | typeof BsOpenai> = {
   PawPrint,
   CreditCard,
   TestTube,
   ScanText,
+  KeyRound,
+  Webhook,
+  BarChart3,
+  OpenAI: BsOpenai,
 };
 
 interface TechIconGlyphProps {
