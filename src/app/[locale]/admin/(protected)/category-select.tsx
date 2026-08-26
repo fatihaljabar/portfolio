@@ -1,7 +1,7 @@
 /**
  * Category Select
- * Dropdown over existing project categories, styled to match the rest of
- * the form, with an inline "add new category" affordance
+ * Dropdown over existing categories, styled to match the rest of the
+ * form, with an inline "add new category" affordance
  */
 
 'use client';

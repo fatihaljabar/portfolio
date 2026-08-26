@@ -13,6 +13,7 @@ import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import type { AchievementInput } from '@/lib/actions/admin-achievements';
 import { AdditionalImagesField } from '../additional-images-field';
+import { CategorySelect } from '../category-select';
 import { ImageUploadField } from '../image-upload-field';
 import { SelectDropdown } from '../select-dropdown';
 
@@ -20,6 +21,7 @@ interface AchievementFormProps {
   action: (data: AchievementInput) => Promise<{ success: boolean; error?: string } | undefined>;
   defaultValues?: AchievementInput;
   submitLabel: string;
+  existingCategories?: string[];
 }
 
 const emptyValues: AchievementInput = {
@@ -52,7 +54,12 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function AchievementForm({ action, defaultValues, submitLabel }: AchievementFormProps) {
+export function AchievementForm({
+  action,
+  defaultValues,
+  submitLabel,
+  existingCategories = [],
+}: AchievementFormProps) {
   const [form, setForm] = useState<AchievementInput>(defaultValues ?? emptyValues);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -130,10 +137,10 @@ export function AchievementForm({ action, defaultValues, submitLabel }: Achievem
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="category">Category</Label>
-            <Input
-              id="category"
-              value={form.category}
-              onChange={(e) => setForm((prev) => ({ ...prev, category: e.target.value }))}
+            <CategorySelect
+              value={form.category ?? ''}
+              onChange={(category) => setForm((prev) => ({ ...prev, category }))}
+              existingCategories={existingCategories}
             />
           </div>
         </div>
