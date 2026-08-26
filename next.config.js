@@ -14,6 +14,11 @@ function getDeploymentId() {
 
 const nextConfig = {
   deploymentId: getDeploymentId(),
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '3mb',
+    },
+  },
   images: {
     remotePatterns: [
       {
