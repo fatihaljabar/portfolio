@@ -37,14 +37,6 @@
   /* Base styles - default dark mode (matches next-themes defaultTheme="dark") */
   html {
     background-color: #080808;
-    /* scrollbar-gutter has no effect while overflow is visible (the
-       default), and overflow-y: auto alone isn't enough to make Chrome
-       actually reserve the gutter — only overflow-y: scroll reliably
-       keeps the scrollbar's width reserved at all times, so a page that
-       becomes short enough to lose its scrollbar (e.g. filtering to a
-       small category) never shifts the centered layout right. */
-    overflow-y: scroll;
-    scrollbar-gutter: stable;
   }
 
   :is(html:not(.dark)) {
@@ -53,6 +45,20 @@
 
   body {
     @apply text-gray-900 font-sans antialiased;
+    /* scrollbar-gutter has no effect while overflow is visible (the
+       default), and overflow-y: auto alone isn't enough to make Chrome
+       actually reserve the gutter — only overflow-y: scroll reliably
+       keeps the scrollbar's width reserved at all times, so a page that
+       becomes short enough to lose its scrollbar (e.g. filtering to a
+       small category) never shifts the centered layout right.
+       This lives on body, not html: Radix Dialog's scroll lock sets
+       overflow:hidden on body when a modal opens, and that must land on
+       whichever element actually owns the scroll — otherwise body
+       becomes the new sticky-positioning containment box with a
+       scrollTop of 0, and any position:sticky descendant (the sidebar)
+       snaps to the top of the document instead of staying pinned. */
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
   }
 
   :is(.dark) body {
