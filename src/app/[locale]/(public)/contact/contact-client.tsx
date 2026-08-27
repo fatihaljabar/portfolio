@@ -5,23 +5,15 @@
 
 'use client';
 
+import { motion } from 'framer-motion';
+import { ExternalLink, Github, Instagram, Linkedin, Mail, Send, Video } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
-import {
-  Mail,
-  Send,
-  ExternalLink,
-  Instagram,
-  Linkedin,
-  Github,
-  Video,
-} from 'lucide-react';
 import { z } from 'zod';
-import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import { submitContactForm } from '@/lib/actions/contact';
 
 const contactSchema = z.object({
@@ -44,7 +36,8 @@ const socialCards = [
     email: 'mailto:fatihaljabar@gmail.com',
     buttonText: 'send_email',
     buttonIcon: Send,
-    gradient: 'from-red-900/20 dark:from-red-900/40 via-gray-100 dark:via-[#1a1a1a] to-white dark:to-[#121212]',
+    gradient:
+      'from-red-900/20 dark:from-red-900/40 via-gray-100 dark:via-[#1a1a1a] to-white dark:to-[#121212]',
     hoverBorder: 'hover:border-red-500/30',
     hoverShadow: 'hover:shadow-[0_0_30px_-10px_rgba(239,68,68,0.2)]',
     icon: Mail,
@@ -57,7 +50,8 @@ const socialCards = [
     description: 'instagram_desc',
     buttonText: 'go_to_instagram',
     buttonIcon: ExternalLink,
-    gradient: 'from-pink-900/20 dark:from-pink-900/30 via-gray-100 dark:via-[#1a1a1a] to-white dark:to-[#121212]',
+    gradient:
+      'from-pink-900/20 dark:from-pink-900/30 via-gray-100 dark:via-[#1a1a1a] to-white dark:to-[#121212]',
     hoverBorder: 'hover:border-pink-500/30',
     icon: Instagram,
     iconColor: 'text-pink-500/5',
@@ -69,7 +63,8 @@ const socialCards = [
     description: 'linkedin_desc',
     buttonText: 'go_to_linkedin',
     buttonIcon: ExternalLink,
-    gradient: 'from-blue-900/20 dark:from-blue-900/30 via-gray-100 dark:via-[#1a1a1a] to-white dark:to-[#121212]',
+    gradient:
+      'from-blue-900/20 dark:from-blue-900/30 via-gray-100 dark:via-[#1a1a1a] to-white dark:to-[#121212]',
     hoverBorder: 'hover:border-blue-500/30',
     icon: Linkedin,
     iconColor: 'text-blue-500/5',
@@ -81,7 +76,8 @@ const socialCards = [
     description: 'tiktok_desc',
     buttonText: 'go_to_tiktok',
     buttonIcon: ExternalLink,
-    gradient: 'from-teal-900/20 dark:from-teal-900/30 via-gray-100 dark:via-[#1a1a1a] to-white dark:to-[#121212]',
+    gradient:
+      'from-teal-900/20 dark:from-teal-900/30 via-gray-100 dark:via-[#1a1a1a] to-white dark:to-[#121212]',
     hoverBorder: 'hover:border-teal-500/30',
     icon: Video,
     iconColor: 'text-teal-500/5',
@@ -93,7 +89,8 @@ const socialCards = [
     description: 'github_desc',
     buttonText: 'go_to_github',
     buttonIcon: ExternalLink,
-    gradient: 'from-slate-800/20 dark:from-slate-800/40 via-gray-100 dark:via-[#1a1a1a] to-white dark:to-[#121212]',
+    gradient:
+      'from-slate-800/20 dark:from-slate-800/40 via-gray-100 dark:via-[#1a1a1a] to-white dark:to-[#121212]',
     hoverBorder: 'hover:border-gray-300 dark:hover:border-white/20',
     icon: Github,
     iconColor: 'text-gray-400/5 dark:text-white/5',
@@ -169,28 +166,38 @@ export function ContactClient() {
     <>
       <div className="mb-10">
         <h2 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">{t('title')}</h2>
-        <p className="text-gray-500 dark:text-[#888] text-sm max-w-2xl leading-relaxed">{t('subtitle')}</p>
+        <p className="text-gray-500 dark:text-[#888] text-sm max-w-2xl leading-relaxed">
+          {t('subtitle')}
+        </p>
       </div>
 
       <div className="h-[1px] border-t border-dashed border-gray-300 dark:border-[#333] w-full mb-10"></div>
 
-      <div className="text-[11px] font-bold text-gray-500 dark:text-[#888] tracking-widest mb-6 uppercase">{t('social_media')}</div>
+      <div className="text-[11px] font-bold text-gray-500 dark:text-[#888] tracking-widest mb-6 uppercase">
+        {t('social_media')}
+      </div>
 
       {/* Social Media Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
-        {socialCards.map((card, index) => {
+        {socialCards.map((card) => {
           const Icon = card.icon;
           const ButtonIcon = card.buttonIcon;
           return (
             <div
-              key={index}
+              key={card.title}
               className={`group relative overflow-hidden rounded-2xl p-6 md:p-8 bg-gradient-to-br ${card.gradient} border border-gray-200 dark:border-white/5 transition-all duration-300 ${card.hoverBorder} ${card.hoverShadow || ''} ${card.mdColSpan === 2 ? 'md:col-span-2' : ''}`}
             >
-              <Icon className={`absolute -right-6 -bottom-6 text-[180px] ${card.iconColor} rotate-12 pointer-events-none group-hover:scale-110 transition-transform duration-500 ${card.largeIcon ? '' : 'text-[120px]'}`} />
+              <Icon
+                className={`absolute -right-6 -bottom-6 text-[180px] ${card.iconColor} rotate-12 pointer-events-none group-hover:scale-110 transition-transform duration-500 ${card.largeIcon ? '' : 'text-[120px]'}`}
+              />
               <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{t(card.title)}</h3>
-                  <p className="text-gray-600 dark:text-[#999] text-sm max-w-md leading-relaxed">{t(card.description)}</p>
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                    {t(card.title)}
+                  </h3>
+                  <p className="text-gray-600 dark:text-[#999] text-sm max-w-md leading-relaxed">
+                    {t(card.description)}
+                  </p>
                 </div>
                 {card.email ? (
                   <a
@@ -222,7 +229,9 @@ export function ContactClient() {
       </div>
 
       {/* Contact Form */}
-      <div className="text-[11px] font-bold text-gray-500 dark:text-[#888] tracking-widest mb-6 uppercase">{t('send_message')}</div>
+      <div className="text-[11px] font-bold text-gray-500 dark:text-[#888] tracking-widest mb-6 uppercase">
+        {t('send_message')}
+      </div>
 
       <form className="space-y-6" onSubmit={handleSubmit}>
         <div className="grid md:grid-cols-2 gap-6">

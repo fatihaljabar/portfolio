@@ -5,8 +5,8 @@
 
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { buildMetadata } from '@/lib/seo/metadata';
 import type { Locale } from '@/lib/i18n/config';
+import { buildMetadata } from '@/lib/seo/metadata';
 import { ContactClient } from './contact-client';
 
 export const revalidate = 60;
