@@ -64,13 +64,5 @@ export default async function AchievementsPage({
     }),
   );
 
-  const categoriesResult = await prisma.achievement.findMany({
-    where: { category: { not: null } },
-    select: { category: true },
-    distinct: ['category'],
-  });
-
-  const categories = categoriesResult.map((c) => c.category!).filter(Boolean);
-
-  return <AchievementsClient initialAchievements={achievements} categories={categories} />;
+  return <AchievementsClient initialAchievements={achievements} />;
 }

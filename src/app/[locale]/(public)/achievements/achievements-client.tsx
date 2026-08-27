@@ -30,7 +30,6 @@ import type { AchievementCardData, AchievementType } from '@/types';
 
 interface AchievementsClientProps {
   initialAchievements: AchievementCardData[];
-  categories: string[];
 }
 
 const iconHoverProps = {
@@ -46,7 +45,7 @@ const typeLabels: Record<AchievementType, string> = {
   CERTIFICATION: 'Certification',
 };
 
-export function AchievementsClient({ initialAchievements, categories }: AchievementsClientProps) {
+export function AchievementsClient({ initialAchievements }: AchievementsClientProps) {
   const t = useTranslations('achievements');
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -63,11 +62,29 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
   }, [selectedAchievement]);
 
   const categoryOptions = useMemo(() => {
+    const availableCategories = [
+      ...new Set(
+        initialAchievements
+          .filter((a) => selectedType === 'ALL' || a.type === selectedType)
+          .map((a) => a.category)
+          .filter((cat): cat is string => Boolean(cat)),
+      ),
+    ];
     return [
       { value: 'ALL', label: 'All Categories' },
-      ...categories.map((cat) => ({ value: cat, label: cat })),
+      ...availableCategories.map((cat) => ({ value: cat, label: cat })),
     ];
-  }, [categories]);
+  }, [initialAchievements, selectedType]);
+
+  const handleTypeChange = (type: AchievementType | 'ALL') => {
+    setSelectedType(type);
+    const stillValid =
+      selectedCategory === 'ALL' ||
+      initialAchievements.some(
+        (a) => (type === 'ALL' || a.type === type) && a.category === selectedCategory,
+      );
+    if (!stillValid) setSelectedCategory('ALL');
+  };
 
   const typeOptions = useMemo(() => {
     const usedTypes = [...new Set(initialAchievements.map((a) => a.type))];
@@ -148,7 +165,7 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
           <div className="relative group w-full sm:w-40">
             <select
               value={selectedType}
-              onChange={(e) => setSelectedType(e.target.value as AchievementType | 'ALL')}
+              onChange={(e) => handleTypeChange(e.target.value as AchievementType | 'ALL')}
               className="w-full bg-gray-100 dark:bg-[#151515] border border-gray-300 dark:border-white/10 rounded-xl py-3 pl-4 pr-10 text-sm text-gray-500 dark:text-[#888] focus:outline-none focus:border-gray-400 dark:focus:border-white/20 focus:text-gray-900 dark:focus:text-white appearance-none cursor-pointer"
             >
               {typeOptions.map((option) => (
