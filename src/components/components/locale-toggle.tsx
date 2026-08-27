@@ -42,7 +42,7 @@ export function LocaleToggle() {
       router.replace(
         // @ts-expect-error -- pathname is a template like "/projects/[slug]"; params fills in the dynamic segments
         { pathname, params },
-        { locale: nextLocale },
+        { locale: nextLocale, scroll: false },
       );
     });
   };
