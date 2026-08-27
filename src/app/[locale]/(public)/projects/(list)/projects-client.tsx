@@ -10,7 +10,9 @@ import { ArrowUpRight, Folder } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 import { ScrollableFilterBar } from '@/components/components/scrollable-filter-bar';
+import { ScrollableIconRow } from '@/components/components/scrollable-icon-row';
 import { TechIconGlyph } from '@/components/components/tech-icon-glyph';
+import { Tooltip } from '@/components/components/tooltip';
 import { Link } from '@/lib/i18n/navigation';
 import type { TechIconResult } from '@/lib/tech-icon-data';
 
@@ -176,16 +178,20 @@ export function ProjectsClient({ projects, translations: t, techIconMap }: Proje
                       {project.description}
                     </p>
 
-                    <div className="mt-auto flex items-center gap-3">
-                      {project.techStack?.map((tech) => (
-                        <div
-                          key={tech}
-                          className="w-8 h-8 rounded-full bg-gray-200 dark:bg-[#1a1a1a] border border-gray-300 dark:border-white/5 flex items-center justify-center"
-                          title={tech}
-                        >
-                          <TechIconGlyph result={techIconMap[tech] ?? null} name={tech} size={16} />
-                        </div>
-                      ))}
+                    <div className="mt-auto">
+                      <ScrollableIconRow>
+                        {project.techStack?.map((tech) => (
+                          <Tooltip key={tech} label={tech} className="shrink-0">
+                            <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-[#1a1a1a] border border-gray-300 dark:border-white/5 flex items-center justify-center">
+                              <TechIconGlyph
+                                result={techIconMap[tech] ?? null}
+                                name={tech}
+                                size={16}
+                              />
+                            </div>
+                          </Tooltip>
+                        ))}
+                      </ScrollableIconRow>
                     </div>
                   </div>
                 </Link>

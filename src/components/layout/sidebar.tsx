@@ -15,6 +15,7 @@ import { useTranslations } from 'next-intl';
 import { SiTiktok } from 'react-icons/si';
 import { LocaleToggle } from '@/components/components/locale-toggle';
 import { ModeToggle } from '@/components/components/theme-toggle';
+import { Tooltip } from '@/components/components/tooltip';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -70,21 +71,22 @@ export function Sidebar({ photoUrl }: { photoUrl: string | null }) {
                 <Share2 size={16} />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-auto p-2">
+            <DropdownMenuContent align="end" className="w-auto overflow-visible p-2">
               <div className="flex items-center gap-1">
                 {socialLinks.map((social) => {
                   const Icon = social.icon;
                   return (
-                    <a
-                      key={social.label}
-                      href={social.href}
-                      target={social.href.startsWith('mailto:') ? undefined : '_blank'}
-                      rel={social.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-                      aria-label={social.label}
-                      className="flex items-center justify-center h-11 w-11 rounded-full text-gray-500 dark:text-[#888] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5 transition-colors"
-                    >
-                      <Icon size={18} />
-                    </a>
+                    <Tooltip key={social.label} label={social.label}>
+                      <a
+                        href={social.href}
+                        target={social.href.startsWith('mailto:') ? undefined : '_blank'}
+                        rel={social.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+                        aria-label={social.label}
+                        className="flex items-center justify-center h-11 w-11 rounded-full text-gray-500 dark:text-[#888] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5 transition-colors"
+                      >
+                        <Icon size={18} />
+                      </a>
+                    </Tooltip>
                   );
                 })}
               </div>
@@ -197,18 +199,19 @@ export function Sidebar({ photoUrl }: { photoUrl: string | null }) {
         {socialLinks.map((social) => {
           const Icon = social.icon;
           return (
-            <a
-              key={social.label}
-              href={social.href}
-              target={social.href.startsWith('mailto:') ? undefined : '_blank'}
-              rel={social.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-              className="cursor-arrow-circle text-gray-400 dark:text-[#666] hover:text-gray-700 dark:hover:text-white transition-colors duration-300"
-              aria-label={social.label}
-            >
-              <motion.div {...iconHoverProps}>
-                <Icon size={24} />
-              </motion.div>
-            </a>
+            <Tooltip key={social.label} label={social.label}>
+              <a
+                href={social.href}
+                target={social.href.startsWith('mailto:') ? undefined : '_blank'}
+                rel={social.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+                className="cursor-arrow-circle text-gray-400 dark:text-[#666] hover:text-gray-700 dark:hover:text-white transition-colors duration-300"
+                aria-label={social.label}
+              >
+                <motion.div {...iconHoverProps}>
+                  <Icon size={24} />
+                </motion.div>
+              </a>
+            </Tooltip>
           );
         })}
       </div>
