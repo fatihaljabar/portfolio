@@ -140,6 +140,7 @@ export default async function ProjectDetailPage({
               alt={title}
               fill
               sizes="(max-width: 1023px) 100vw, (max-width: 1299px) calc(100vw - 540px), 760px"
+              loading="eager"
               className="object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
             />
           </div>

@@ -207,7 +207,7 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {filteredAchievements.map((achievement) => (
+          {filteredAchievements.map((achievement, index) => (
             <button
               key={achievement.id}
               type="button"
@@ -225,6 +225,7 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
                       alt={achievement.title}
                       fill
                       sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 237px"
+                      loading={index === 0 ? 'eager' : 'lazy'}
                       className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-500 ease-out"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-100 dark:from-[#121212] via-transparent to-transparent opacity-80"></div>
