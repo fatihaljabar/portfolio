@@ -6,12 +6,7 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": [
-      "src/**",
-      "prisma/**",
-      "*.ts",
-      "*.js"
-    ]
+    "includes": ["src/**", "prisma/**", "*.ts", "*.js"]
   },
   "formatter": {
     "enabled": true,
@@ -51,9 +46,7 @@
   },
   "overrides": [
     {
-      "includes": [
-        "**/*.css"
-      ],
+      "includes": ["**/*.css"],
       "linter": {
         "rules": {
           "suspicious": {
