@@ -134,6 +134,7 @@ export function ProjectsClient({ projects, translations: t, techIconMap }: Proje
                         src={project.imageUrl}
                         alt={project.title}
                         fill
+                        sizes="(max-width: 767px) 100vw, (max-width: 1299px) 50vw, 368px"
                         className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-500 ease-out"
                       />
                     ) : (

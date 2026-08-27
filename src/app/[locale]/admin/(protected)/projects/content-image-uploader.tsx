@@ -80,7 +80,7 @@ export function ContentImageUploader() {
               className="flex items-center gap-3 rounded-xl border border-gray-200 dark:border-white/10 p-2"
             >
               <div className="relative w-12 h-12 rounded-lg overflow-hidden shrink-0 bg-gray-100 dark:bg-white/5">
-                <Image src={item.url} alt="" fill className="object-cover" />
+                <Image src={item.url} alt="" fill sizes="48px" className="object-cover" />
               </div>
               <code className="flex-1 min-w-0 truncate text-xs text-gray-500 dark:text-[#888]">
                 {item.markdown}

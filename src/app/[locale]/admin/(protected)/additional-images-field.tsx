@@ -74,7 +74,13 @@ export function AdditionalImagesField({ folder, value, onChange }: AdditionalIma
               key={url}
               className="relative w-24 h-24 rounded-lg overflow-hidden border border-gray-200 dark:border-white/10"
             >
-              <Image src={url} alt="Additional preview" fill className="object-cover" />
+              <Image
+                src={url}
+                alt="Additional preview"
+                fill
+                sizes="96px"
+                className="object-cover"
+              />
               <button
                 type="button"
                 onClick={() => handleRemove(url)}
