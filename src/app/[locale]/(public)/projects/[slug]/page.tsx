@@ -5,11 +5,11 @@
 
 import { ArrowLeft, Box, ExternalLink, Github } from 'lucide-react';
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { ImageWithSkeleton } from '@/components/components/image-with-skeleton';
 import { TechIconGlyph } from '@/components/components/tech-icon-glyph';
 import { Tooltip } from '@/components/components/tooltip';
 import type { Locale } from '@/lib/i18n/config';
@@ -134,7 +134,7 @@ export default async function ProjectDetailPage({
       {project.imageUrl ? (
         <div className="w-full rounded-2xl overflow-hidden border border-gray-200 dark:border-white/5 bg-gray-100 dark:bg-[#0d2d2a] relative group shadow-2xl">
           <div className="relative w-full aspect-[16/9]">
-            <Image
+            <ImageWithSkeleton
               src={project.imageUrl}
               alt={title}
               fill

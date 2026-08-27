@@ -16,9 +16,9 @@ import {
   Search,
   ShieldCheck,
 } from 'lucide-react';
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
+import { ImageWithSkeleton } from '@/components/components/image-with-skeleton';
 import {
   Dialog,
   DialogContent,
@@ -252,7 +252,7 @@ export function AchievementsClient({ initialAchievements }: AchievementsClientPr
                   <div className="relative w-full aspect-[16/10] bg-gray-200 dark:bg-[#0a0a0a] overflow-hidden">
                     {achievement.imageUrl ? (
                       <>
-                        <Image
+                        <ImageWithSkeleton
                           src={achievement.imageUrl}
                           alt={achievement.title}
                           fill
@@ -354,7 +354,7 @@ export function AchievementsClient({ initialAchievements }: AchievementsClientPr
             <>
               <div className="relative w-full aspect-[3/2] max-h-[45dvh] shrink-0 bg-gray-200 dark:bg-[#0a0a0a] overflow-hidden">
                 {slides.length > 0 ? (
-                  <Image
+                  <ImageWithSkeleton
                     key={slides[slideIndex]}
                     src={slides[slideIndex]}
                     alt={`${selectedAchievement.title} — page ${slideIndex + 1}`}
