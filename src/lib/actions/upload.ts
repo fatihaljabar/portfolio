@@ -6,15 +6,13 @@
 'use server';
 
 import { randomUUID } from 'node:crypto';
-import { createSupabaseServerClient, getAdminUser } from '@/lib/auth/server';
+import { createSupabaseServiceClient, getAdminUser } from '@/lib/auth/server';
 
 const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
 
 const EXTENSION_BY_TYPE: Record<string, string> = {
   'image/jpeg': 'jpg',
   'image/png': 'png',
-  'image/webp': 'webp',
-  'image/gif': 'gif',
 };
 
 export async function uploadImage(formData: FormData) {
@@ -36,7 +34,7 @@ export async function uploadImage(formData: FormData) {
 
   const extension = EXTENSION_BY_TYPE[file.type];
   if (!extension) {
-    return { success: false as const, error: 'Only JPEG, PNG, WebP, or GIF images are allowed' };
+    return { success: false as const, error: 'Only JPEG or PNG images are allowed' };
   }
   if (file.size > MAX_FILE_SIZE) {
     return { success: false as const, error: 'Image must be 2MB or smaller' };
@@ -44,7 +42,7 @@ export async function uploadImage(formData: FormData) {
 
   const path = `${folder}/${randomUUID()}.${extension}`;
 
-  const supabase = await createSupabaseServerClient();
+  const supabase = createSupabaseServiceClient();
   const { error } = await supabase.storage.from('portfolio').upload(path, file, {
     contentType: file.type,
   });
@@ -62,13 +60,18 @@ const STORAGE_PATH_PREFIX = '/storage/v1/object/public/portfolio/';
 
 /** Removes an old `portfolio` bucket image so replaced/deleted uploads don't pile up. */
 export async function deleteStorageImage(url: string) {
+  const user = await getAdminUser();
+  if (!user) {
+    return;
+  }
+
   const index = url.indexOf(STORAGE_PATH_PREFIX);
   if (index === -1) {
     return;
   }
 
   const path = url.slice(index + STORAGE_PATH_PREFIX.length);
-  const supabase = await createSupabaseServerClient();
+  const supabase = createSupabaseServiceClient();
   const { error } = await supabase.storage.from('portfolio').remove([path]);
 
   if (error) {
