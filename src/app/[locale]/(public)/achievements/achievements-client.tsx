@@ -38,14 +38,13 @@ const iconHoverProps = {
   transition: { duration: 0.4, ease: 'easeInOut' as const },
 };
 
-const typeOptions: { value: AchievementType | 'ALL'; label: string }[] = [
-  { value: 'ALL', label: 'All' },
-  { value: 'PROFESSIONAL', label: 'Professional' },
-  { value: 'ACADEMIC', label: 'Academic' },
-  { value: 'COURSE', label: 'Course' },
-  { value: 'BOOTCAMP', label: 'Bootcamp' },
-  { value: 'CERTIFICATION', label: 'Certification' },
-];
+const typeLabels: Record<AchievementType, string> = {
+  PROFESSIONAL: 'Professional',
+  ACADEMIC: 'Academic',
+  COURSE: 'Course',
+  BOOTCAMP: 'Bootcamp',
+  CERTIFICATION: 'Certification',
+};
 
 export function AchievementsClient({ initialAchievements, categories }: AchievementsClientProps) {
   const t = useTranslations('achievements');
@@ -69,6 +68,14 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
       ...categories.map((cat) => ({ value: cat, label: cat })),
     ];
   }, [categories]);
+
+  const typeOptions = useMemo(() => {
+    const usedTypes = [...new Set(initialAchievements.map((a) => a.type))];
+    return [
+      { value: 'ALL' as const, label: 'All' },
+      ...usedTypes.map((type) => ({ value: type, label: typeLabels[type] })),
+    ];
+  }, [initialAchievements]);
 
   const filteredAchievements = useMemo(() => {
     return initialAchievements.filter((achievement) => {
