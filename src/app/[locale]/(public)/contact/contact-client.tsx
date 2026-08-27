@@ -6,10 +6,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Instagram, Linkedin, Mail, Send, Video } from 'lucide-react';
+import { ArrowUpRight, Github, Instagram, Linkedin, Mail } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
+import { SiTiktok } from 'react-icons/si';
 import { z } from 'zod';
+import { Tooltip } from '@/components/components/tooltip';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -29,73 +31,30 @@ const iconHoverProps = {
   transition: { duration: 0.4, ease: 'easeInOut' as const },
 };
 
-const socialCards = [
+const socialLinks = [
   {
-    title: 'project_inquiry_title',
-    description: 'project_inquiry_desc',
-    email: 'mailto:fatihaljabar@gmail.com',
-    buttonText: 'send_email',
-    buttonIcon: Send,
-    gradient:
-      'from-red-900/20 dark:from-red-900/40 via-gray-100 dark:via-[#1a1a1a] to-white dark:to-[#121212]',
-    hoverBorder: 'hover:border-red-500/30',
-    hoverShadow: 'hover:shadow-[0_0_30px_-10px_rgba(239,68,68,0.2)]',
-    icon: Mail,
-    iconColor: 'text-red-500/5',
-    mdColSpan: 2,
-    largeIcon: true,
-  },
-  {
+    label: 'Instagram',
     title: 'instagram_title',
-    description: 'instagram_desc',
-    buttonText: 'go_to_instagram',
-    buttonIcon: ExternalLink,
-    gradient:
-      'from-pink-900/20 dark:from-pink-900/30 via-gray-100 dark:via-[#1a1a1a] to-white dark:to-[#121212]',
-    hoverBorder: 'hover:border-pink-500/30',
     icon: Instagram,
-    iconColor: 'text-pink-500/5',
     href: 'https://www.instagram.com/fatihaljabar/',
-    target: true,
   },
   {
+    label: 'LinkedIn',
     title: 'linkedin_title',
-    description: 'linkedin_desc',
-    buttonText: 'go_to_linkedin',
-    buttonIcon: ExternalLink,
-    gradient:
-      'from-blue-900/20 dark:from-blue-900/30 via-gray-100 dark:via-[#1a1a1a] to-white dark:to-[#121212]',
-    hoverBorder: 'hover:border-blue-500/30',
     icon: Linkedin,
-    iconColor: 'text-blue-500/5',
     href: 'https://www.linkedin.com/in/fatihaljabar/',
-    target: true,
   },
   {
+    label: 'TikTok',
     title: 'tiktok_title',
-    description: 'tiktok_desc',
-    buttonText: 'go_to_tiktok',
-    buttonIcon: ExternalLink,
-    gradient:
-      'from-teal-900/20 dark:from-teal-900/30 via-gray-100 dark:via-[#1a1a1a] to-white dark:to-[#121212]',
-    hoverBorder: 'hover:border-teal-500/30',
-    icon: Video,
-    iconColor: 'text-teal-500/5',
+    icon: SiTiktok,
     href: 'https://www.tiktok.com/@fatihaljabarr',
-    target: true,
   },
   {
+    label: 'GitHub',
     title: 'github_title',
-    description: 'github_desc',
-    buttonText: 'go_to_github',
-    buttonIcon: ExternalLink,
-    gradient:
-      'from-slate-800/20 dark:from-slate-800/40 via-gray-100 dark:via-[#1a1a1a] to-white dark:to-[#121212]',
-    hoverBorder: 'hover:border-gray-300 dark:hover:border-white/20',
     icon: Github,
-    iconColor: 'text-gray-400/5 dark:text-white/5',
     href: 'https://github.com/fatihaljabar',
-    target: true,
   },
 ];
 
@@ -177,55 +136,57 @@ export function ContactClient() {
         {t('social_media')}
       </div>
 
-      {/* Social Media Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
-        {socialCards.map((card) => {
-          const Icon = card.icon;
-          const ButtonIcon = card.buttonIcon;
-          return (
-            <div
-              key={card.title}
-              className={`group relative overflow-hidden rounded-2xl p-6 md:p-8 bg-gradient-to-br ${card.gradient} border border-gray-200 dark:border-white/5 transition-all duration-300 ${card.hoverBorder} ${card.hoverShadow || ''} ${card.mdColSpan === 2 ? 'md:col-span-2' : ''}`}
-            >
-              <Icon
-                className={`absolute -right-6 -bottom-6 text-[180px] ${card.iconColor} rotate-12 pointer-events-none group-hover:scale-110 transition-transform duration-500 ${card.largeIcon ? '' : 'text-[120px]'}`}
-              />
-              <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                    {t(card.title)}
-                  </h3>
-                  <p className="text-gray-600 dark:text-[#999] text-sm max-w-md leading-relaxed">
-                    {t(card.description)}
-                  </p>
-                </div>
-                {card.email ? (
-                  <a
-                    href={card.email}
-                    className="shrink-0 flex items-center gap-2 bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-black border border-gray-300 dark:border-transparent px-6 py-3 rounded-xl font-bold text-sm hover:bg-gray-200 dark:hover:bg-gray-200 transition-colors shadow-lg"
-                  >
-                    <motion.div {...iconHoverProps}>
-                      <ButtonIcon size={16} />
-                    </motion.div>
-                    {t(card.buttonText)}
-                  </a>
-                ) : (
-                  <a
-                    href={card.href}
-                    target={card.target ? '_blank' : undefined}
-                    rel={card.target ? 'noopener noreferrer' : undefined}
-                    className="inline-flex items-center gap-2 bg-gray-200 dark:bg-white/10 text-gray-900 dark:text-white border border-gray-300 dark:border-white/10 px-4 py-2 rounded-lg text-xs font-bold hover:bg-gray-300 dark:hover:bg-white dark:hover:text-black transition-all"
-                  >
-                    {t(card.buttonText)}{' '}
-                    <motion.div {...iconHoverProps}>
-                      <ButtonIcon size={14} />
-                    </motion.div>
-                  </a>
-                )}
-              </div>
+      {/* Social Media */}
+      <div className="mb-16 space-y-3">
+        <a
+          href="mailto:fatihaljabar@gmail.com"
+          className="group flex items-center justify-between gap-4 rounded-2xl border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-[#121212] p-5 sm:p-6 transition-all duration-300 hover:border-accent-blue/30 hover:-translate-y-0.5"
+        >
+          <div className="flex items-center gap-4 min-w-0">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gray-200 dark:bg-white/10 text-gray-700 dark:text-white transition-colors group-hover:bg-accent-blue/10 group-hover:text-accent-blue">
+              <motion.div {...iconHoverProps}>
+                <Mail size={18} />
+              </motion.div>
             </div>
-          );
-        })}
+            <div className="min-w-0">
+              <h3 className="font-bold text-gray-900 dark:text-white truncate">
+                {t('project_inquiry_title')}
+              </h3>
+              <p className="text-gray-500 dark:text-[#888] text-sm truncate">
+                {t('project_inquiry_desc')}
+              </p>
+            </div>
+          </div>
+          <ArrowUpRight
+            className="shrink-0 text-gray-400 dark:text-[#666] group-hover:text-accent-blue transition-colors"
+            size={18}
+          />
+        </a>
+
+        <div className="grid grid-cols-1 min-[400px]:grid-cols-2 sm:grid-cols-4 gap-3">
+          {socialLinks.map((social) => {
+            const Icon = social.icon;
+            return (
+              <Tooltip key={social.label} label={t(social.title)} className="w-full">
+                <a
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex w-full items-center gap-3 rounded-2xl border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-[#121212] p-4 transition-all duration-300 hover:border-accent-blue/30 hover:-translate-y-0.5"
+                >
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gray-200 dark:bg-white/10 text-gray-600 dark:text-[#ccc] transition-colors group-hover:bg-accent-blue/10 group-hover:text-accent-blue">
+                    <motion.div {...iconHoverProps}>
+                      <Icon size={16} />
+                    </motion.div>
+                  </div>
+                  <span className="text-sm font-medium text-gray-700 dark:text-[#ccc] truncate">
+                    {social.label}
+                  </span>
+                </a>
+              </Tooltip>
+            );
+          })}
+        </div>
       </div>
 
       {/* Contact Form */}
