@@ -7,8 +7,8 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
-import { uploadImage } from '@/lib/actions/upload';
+import { useRef, useState } from 'react';
+import { deleteStorageImage, uploadImage } from '@/lib/actions/upload';
 
 interface ImageUploadFieldProps {
   folder: 'projects' | 'achievements' | 'career' | 'education' | 'profile';
@@ -19,6 +19,7 @@ interface ImageUploadFieldProps {
 export function ImageUploadField({ folder, value, onChange }: ImageUploadFieldProps) {
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const savedValueRef = useRef(value);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -38,6 +39,9 @@ export function ImageUploadField({ folder, value, onChange }: ImageUploadFieldPr
     setIsUploading(false);
 
     if (result.success) {
+      if (value && value !== savedValueRef.current) {
+        await deleteStorageImage(value);
+      }
       onChange(result.url);
     } else {
       setError(result.error);

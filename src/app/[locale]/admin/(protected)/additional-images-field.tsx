@@ -8,8 +8,8 @@
 
 import { X } from 'lucide-react';
 import Image from 'next/image';
-import { useState } from 'react';
-import { uploadImage } from '@/lib/actions/upload';
+import { useRef, useState } from 'react';
+import { deleteStorageImage, uploadImage } from '@/lib/actions/upload';
 
 interface AdditionalImagesFieldProps {
   folder: 'projects' | 'achievements';
@@ -20,6 +20,7 @@ interface AdditionalImagesFieldProps {
 export function AdditionalImagesField({ folder, value, onChange }: AdditionalImagesFieldProps) {
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const savedValuesRef = useRef(value);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -46,6 +47,9 @@ export function AdditionalImagesField({ folder, value, onChange }: AdditionalIma
   };
 
   const handleRemove = (url: string) => {
+    if (!savedValuesRef.current.includes(url)) {
+      deleteStorageImage(url);
+    }
     onChange(value.filter((existing) => existing !== url));
   };
 
