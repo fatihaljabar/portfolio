@@ -5,7 +5,7 @@
  */
 
 import type { Metadata } from 'next';
-import { locales, type Locale } from '@/lib/i18n/config';
+import { type Locale, locales } from '@/lib/i18n/config';
 
 const siteUrl = (process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000').replace(/\/$/, '');
 const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'Portfolio';
@@ -18,7 +18,12 @@ interface BuildMetadataOptions {
   description: string;
 }
 
-export function buildMetadata({ locale, path, title, description }: BuildMetadataOptions): Metadata {
+export function buildMetadata({
+  locale,
+  path,
+  title,
+  description,
+}: BuildMetadataOptions): Metadata {
   const fullTitle = `${title} — ${siteName}`;
   const url = `${siteUrl}/${locale}${path}`;
 
@@ -28,7 +33,9 @@ export function buildMetadata({ locale, path, title, description }: BuildMetadat
   }
 
   return {
-    title: fullTitle,
+    // Bare page title for the browser tab — the site name still appears in
+    // OpenGraph/Twitter titles below, for context when a link is shared.
+    title,
     description,
     alternates: {
       canonical: url,
