@@ -5,19 +5,28 @@
 
 'use client';
 
-import { useTranslations } from 'next-intl';
-import { useState, useMemo } from 'react';
-import { Search, ChevronDown, ShieldCheck, Calendar, Eye, ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
+import {
+  ArrowUpRight,
+  Calendar,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Eye,
+  Search,
+  ShieldCheck,
+} from 'lucide-react';
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
+import { useMemo, useState } from 'react';
 import {
   Dialog,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
 } from '@/components/ui/dialog';
-import type { AchievementType, AchievementCardData } from '@/types';
+import type { AchievementCardData, AchievementType } from '@/types';
 
 interface AchievementsClientProps {
   initialAchievements: AchievementCardData[];
@@ -68,7 +77,8 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
         achievement.issuer.toLowerCase().includes(searchQuery.toLowerCase());
 
       const matchesType = selectedType === 'ALL' || achievement.type === selectedType;
-      const matchesCategory = selectedCategory === 'ALL' || achievement.category === selectedCategory;
+      const matchesCategory =
+        selectedCategory === 'ALL' || achievement.category === selectedCategory;
 
       return matchesSearch && matchesType && matchesCategory;
     });
@@ -79,7 +89,11 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
   };
 
   const formatFullDate = (date: Date) => {
-    return new Intl.DateTimeFormat('en-US', { day: '2-digit', month: 'long', year: 'numeric' }).format(date);
+    return new Intl.DateTimeFormat('en-US', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+    }).format(date);
   };
 
   const openDetails = (achievement: AchievementCardData) => {
@@ -95,7 +109,9 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
     <>
       <div className="mb-10">
         <h2 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">{t('title')}</h2>
-        <p className="text-gray-500 dark:text-[#888] text-sm max-w-2xl leading-relaxed">{t('subtitle')}</p>
+        <p className="text-gray-500 dark:text-[#888] text-sm max-w-2xl leading-relaxed">
+          {t('subtitle')}
+        </p>
       </div>
 
       <div className="h-[1px] border-t border-dashed border-gray-300 dark:border-[#333] w-full mb-10"></div>
@@ -103,8 +119,14 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
       {/* Filters */}
       <div className="flex flex-col md:flex-row gap-4 mb-8">
         <div className="flex-1 relative group">
-          <motion.div {...iconHoverProps} className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
-            <Search className="text-gray-400 dark:text-[#666] group-focus-within:text-gray-900 dark:group-focus-within:text-white transition-colors" size={20} />
+          <motion.div
+            {...iconHoverProps}
+            className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none"
+          >
+            <Search
+              className="text-gray-400 dark:text-[#666] group-focus-within:text-gray-900 dark:group-focus-within:text-white transition-colors"
+              size={20}
+            />
           </motion.div>
           <input
             type="text"
@@ -128,7 +150,10 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
                 </option>
               ))}
             </select>
-            <motion.div {...iconHoverProps} className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+            <motion.div
+              {...iconHoverProps}
+              className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none"
+            >
               <ChevronDown className="text-gray-400 dark:text-[#666]" size={16} />
             </motion.div>
           </div>
@@ -144,7 +169,10 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
                 </option>
               ))}
             </select>
-            <motion.div {...iconHoverProps} className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+            <motion.div
+              {...iconHoverProps}
+              className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none"
+            >
               <ChevronDown className="text-gray-400 dark:text-[#666]" size={16} />
             </motion.div>
           </div>
@@ -159,16 +187,27 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
       {filteredAchievements.length === 0 ? (
         <div className="text-center py-20">
           <div className="mx-auto text-gray-300 dark:text-[#333] mb-4 w-12 h-12 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="m22 19-8.5-8.5"/>
-              <circle cx="9" cy="9" r="6"/>
+            <svg
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="48"
+              height="48"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="m22 19-8.5-8.5" />
+              <circle cx="9" cy="9" r="6" />
             </svg>
           </div>
           <p className="text-gray-400 dark:text-[#666] text-sm">{t('no_achievements')}</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {filteredAchievements.map((achievement) => (
+          {filteredAchievements.map((achievement, index) => (
             <button
               key={achievement.id}
               type="button"
@@ -185,6 +224,8 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
                       src={achievement.imageUrl}
                       alt={achievement.title}
                       fill
+                      sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 237px"
+                      loading={index < 3 ? 'eager' : 'lazy'}
                       className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-500 ease-out"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-100 dark:from-[#121212] via-transparent to-transparent opacity-80"></div>
@@ -217,7 +258,15 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
                 </div>
 
                 {/* Title */}
-                <div className="mb-3" style={{ minHeight: '42px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <div
+                  className="mb-3"
+                  style={{
+                    minHeight: '42px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                  }}
+                >
                   <h3 className="text-gray-900 dark:text-white font-bold text-lg leading-tight line-clamp-2 group-hover:text-accent-blue transition-colors">
                     {achievement.title}
                   </h3>
@@ -273,6 +322,7 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
                     src={slides[slideIndex]}
                     alt={`${selectedAchievement.title} — page ${slideIndex + 1}`}
                     fill
+                    sizes="(max-width: 672px) 100vw, 672px"
                     className="object-contain"
                   />
                 ) : (

@@ -62,7 +62,7 @@ export function ImageUploadField({ folder, value, onChange }: ImageUploadFieldPr
       {error && <p className="text-xs text-red-500">{error}</p>}
       {value && (
         <div className="relative w-32 h-32 rounded-lg overflow-hidden border border-gray-200 dark:border-white/10">
-          <Image src={value} alt="Preview" fill className="object-cover" />
+          <Image src={value} alt="Preview" fill sizes="128px" className="object-cover" />
         </div>
       )}
     </div>

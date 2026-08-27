@@ -107,7 +107,7 @@ export function ProjectsClient({ projects, translations: t, techIconMap }: Proje
             transition={{ duration: 0.2, ease: 'easeOut' }}
             className="grid grid-cols-1 md:grid-cols-2 gap-6"
           >
-            {filteredProjects.map((project) => {
+            {filteredProjects.map((project, index) => {
               const firstTech = project.techStack?.[0] || 'default';
               const hoverColor = hoverColors[firstTech] || hoverColors.default;
 
@@ -134,6 +134,8 @@ export function ProjectsClient({ projects, translations: t, techIconMap }: Proje
                         src={project.imageUrl}
                         alt={project.title}
                         fill
+                        sizes="(max-width: 767px) 100vw, (max-width: 1299px) 50vw, 368px"
+                        loading={index < 2 ? 'eager' : 'lazy'}
                         className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-500 ease-out"
                       />
                     ) : (
