@@ -5,8 +5,9 @@
 
 import type { CookieOptions } from '@supabase/ssr';
 import { createServerClient } from '@supabase/ssr';
+import { createClient } from '@supabase/supabase-js';
 import { cookies } from 'next/headers';
-import { supabaseAnonKey, supabaseUrl } from './config';
+import { supabaseAnonKey, supabaseServiceRoleKey, supabaseUrl } from './config';
 
 export async function createSupabaseServerClient() {
   const cookieStore = await cookies();
@@ -27,6 +28,15 @@ export async function createSupabaseServerClient() {
       },
     },
   });
+}
+
+/**
+ * Service-role Supabase client — bypasses RLS entirely. Only call this from
+ * code that has already checked `getAdminUser()`; it carries no session or
+ * user-scoped authorization of its own. Never import this into client code.
+ */
+export function createSupabaseServiceClient() {
+  return createClient(supabaseUrl, supabaseServiceRoleKey);
 }
 
 export async function getAdminUser() {
