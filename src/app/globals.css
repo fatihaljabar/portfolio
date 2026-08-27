@@ -37,6 +37,13 @@
   /* Base styles - default dark mode (matches next-themes defaultTheme="dark") */
   html {
     background-color: #080808;
+    /* scrollbar-gutter has no effect while overflow is visible (the
+       default), and overflow-y: auto alone isn't enough to make Chrome
+       actually reserve the gutter — only overflow-y: scroll reliably
+       keeps the scrollbar's width reserved at all times, so a page that
+       becomes short enough to lose its scrollbar (e.g. filtering to a
+       small category) never shifts the centered layout right. */
+    overflow-y: scroll;
     scrollbar-gutter: stable;
   }
 
