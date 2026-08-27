@@ -5,7 +5,7 @@
 
 'use client';
 
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
   ArrowUpRight,
   Calendar,
@@ -184,128 +184,141 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
       </div>
 
       {/* Achievements Grid */}
-      {filteredAchievements.length === 0 ? (
-        <div className="text-center py-20">
-          <div className="mx-auto text-gray-300 dark:text-[#333] mb-4 w-12 h-12 flex items-center justify-center">
-            <svg
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="48"
-              height="48"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="m22 19-8.5-8.5" />
-              <circle cx="9" cy="9" r="6" />
-            </svg>
-          </div>
-          <p className="text-gray-400 dark:text-[#666] text-sm">{t('no_achievements')}</p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {filteredAchievements.map((achievement, index) => (
-            <button
-              key={achievement.id}
-              type="button"
-              onClick={() => openDetails(achievement)}
-              aria-haspopup="dialog"
-              aria-label={`${t('view_details')}: ${achievement.title}`}
-              className="group relative flex flex-col text-left w-full bg-gray-100 dark:bg-[#121212] border border-gray-200 dark:border-white/5 rounded-2xl overflow-hidden hover:border-accent-blue/30 hover:-translate-y-1 hover:shadow-2xl hover:shadow-accent-blue/5 transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue/50"
-            >
-              {/* Image Area */}
-              <div className="relative w-full aspect-[16/10] bg-gray-200 dark:bg-[#0a0a0a] overflow-hidden">
-                {achievement.imageUrl ? (
-                  <>
-                    <Image
-                      src={achievement.imageUrl}
-                      alt={achievement.title}
-                      fill
-                      sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 237px"
-                      loading={index < 3 ? 'eager' : 'lazy'}
-                      className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-500 ease-out"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-100 dark:from-[#121212] via-transparent to-transparent opacity-80"></div>
-                  </>
-                ) : (
-                  <div className="absolute inset-0 bg-gray-200 dark:bg-[#0a0a0a] flex items-center justify-center">
-                    <motion.div {...iconHoverProps}>
-                      <ShieldCheck className="text-gray-300 dark:text-[#333]" size={48} />
-                    </motion.div>
-                  </div>
-                )}
-
-                <span
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={`${selectedType}-${selectedCategory}`}
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -6 }}
+          transition={{ duration: 0.2, ease: 'easeOut' }}
+        >
+          {filteredAchievements.length === 0 ? (
+            <div className="text-center py-20">
+              <div className="mx-auto text-gray-300 dark:text-[#333] mb-4 w-12 h-12 flex items-center justify-center">
+                <svg
                   aria-hidden="true"
-                  className="absolute top-3 right-3 flex items-center justify-center w-8 h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm border border-black/5 dark:border-white/10 text-gray-700 dark:text-white opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 ease-out shadow-sm"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="48"
+                  height="48"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
-                  <Eye size={14} />
-                </span>
+                  <path d="m22 19-8.5-8.5" />
+                  <circle cx="9" cy="9" r="6" />
+                </svg>
               </div>
-
-              {/* Content */}
-              <div className="p-6 flex flex-col flex-1 relative">
-                {/* Badge */}
-                <div className="h-4 mb-2 flex items-center">
-                  {achievement.certificateNumber && (
-                    <span className="text-[10px] text-blue-600 dark:text-accent-blue font-mono">
-                      {achievement.certificateNumber}
-                    </span>
-                  )}
-                </div>
-
-                {/* Title */}
-                <div
-                  className="mb-3"
-                  style={{
-                    minHeight: '42px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                  }}
+              <p className="text-gray-400 dark:text-[#666] text-sm">{t('no_achievements')}</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              {filteredAchievements.map((achievement, index) => (
+                <button
+                  key={achievement.id}
+                  type="button"
+                  onClick={() => openDetails(achievement)}
+                  aria-haspopup="dialog"
+                  aria-label={`${t('view_details')}: ${achievement.title}`}
+                  className="group relative flex flex-col text-left w-full bg-gray-100 dark:bg-[#121212] border border-gray-200 dark:border-white/5 rounded-2xl overflow-hidden hover:border-accent-blue/30 hover:-translate-y-1 hover:shadow-2xl hover:shadow-accent-blue/5 transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue/50"
                 >
-                  <h3 className="text-gray-900 dark:text-white font-bold text-lg leading-tight line-clamp-2 group-hover:text-accent-blue transition-colors">
-                    {achievement.title}
-                  </h3>
-                </div>
+                  {/* Image Area */}
+                  <div className="relative w-full aspect-[16/10] bg-gray-200 dark:bg-[#0a0a0a] overflow-hidden">
+                    {achievement.imageUrl ? (
+                      <>
+                        <Image
+                          src={achievement.imageUrl}
+                          alt={achievement.title}
+                          fill
+                          sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 237px"
+                          loading={index < 3 ? 'eager' : 'lazy'}
+                          className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-500 ease-out"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-gray-100 dark:from-[#121212] via-transparent to-transparent opacity-80"></div>
+                      </>
+                    ) : (
+                      <div className="absolute inset-0 bg-gray-200 dark:bg-[#0a0a0a] flex items-center justify-center">
+                        <motion.div {...iconHoverProps}>
+                          <ShieldCheck className="text-gray-300 dark:text-[#333]" size={48} />
+                        </motion.div>
+                      </div>
+                    )}
 
-                {/* Issuer */}
-                <div className="flex items-center gap-2 text-gray-600 dark:text-[#888] text-xs mb-3">
-                  <motion.div {...iconHoverProps}>
-                    <ShieldCheck className="text-gray-400 dark:text-[#888] shrink-0" size={14} />
-                  </motion.div>
-                  <span>{achievement.issuer}</span>
-                </div>
-
-                {/* Tags */}
-                <div className="mt-auto flex flex-wrap gap-2">
-                  <span className="text-[9px] font-medium bg-gray-200 dark:bg-[#1a1a1a] text-gray-600 dark:text-[#999] px-2 py-0.5 rounded-md border border-gray-300 dark:border-white/10">
-                    {achievement.type}
-                  </span>
-                  {achievement.category && (
-                    <span className="text-[9px] font-medium bg-gray-200 dark:bg-[#1a1a1a] text-gray-600 dark:text-[#999] px-2 py-0.5 rounded-md border border-gray-300 dark:border-white/10">
-                      {achievement.category}
+                    <span
+                      aria-hidden="true"
+                      className="absolute top-3 right-3 flex items-center justify-center w-8 h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm border border-black/5 dark:border-white/10 text-gray-700 dark:text-white opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 ease-out shadow-sm"
+                    >
+                      <Eye size={14} />
                     </span>
-                  )}
-                </div>
+                  </div>
 
-                {/* Date */}
-                <div className="mt-3">
-                  <span className="text-[10px] text-gray-500 dark:text-[#666] font-mono flex items-center gap-2">
-                    <motion.div {...iconHoverProps}>
-                      <Calendar size={14} className="shrink-0 text-gray-400 dark:text-[#888]" />
-                    </motion.div>
-                    {formatDate(achievement.issuedDate)}
-                  </span>
-                </div>
-              </div>
-            </button>
-          ))}
-        </div>
-      )}
+                  {/* Content */}
+                  <div className="p-6 flex flex-col flex-1 relative">
+                    {/* Badge */}
+                    <div className="h-4 mb-2 flex items-center">
+                      {achievement.certificateNumber && (
+                        <span className="text-[10px] text-blue-600 dark:text-accent-blue font-mono">
+                          {achievement.certificateNumber}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Title */}
+                    <div
+                      className="mb-3"
+                      style={{
+                        minHeight: '42px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <h3 className="text-gray-900 dark:text-white font-bold text-lg leading-tight line-clamp-2 group-hover:text-accent-blue transition-colors">
+                        {achievement.title}
+                      </h3>
+                    </div>
+
+                    {/* Issuer */}
+                    <div className="flex items-center gap-2 text-gray-600 dark:text-[#888] text-xs mb-3">
+                      <motion.div {...iconHoverProps}>
+                        <ShieldCheck
+                          className="text-gray-400 dark:text-[#888] shrink-0"
+                          size={14}
+                        />
+                      </motion.div>
+                      <span>{achievement.issuer}</span>
+                    </div>
+
+                    {/* Tags */}
+                    <div className="mt-auto flex flex-wrap gap-2">
+                      <span className="text-[9px] font-medium bg-gray-200 dark:bg-[#1a1a1a] text-gray-600 dark:text-[#999] px-2 py-0.5 rounded-md border border-gray-300 dark:border-white/10">
+                        {achievement.type}
+                      </span>
+                      {achievement.category && (
+                        <span className="text-[9px] font-medium bg-gray-200 dark:bg-[#1a1a1a] text-gray-600 dark:text-[#999] px-2 py-0.5 rounded-md border border-gray-300 dark:border-white/10">
+                          {achievement.category}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Date */}
+                    <div className="mt-3">
+                      <span className="text-[10px] text-gray-500 dark:text-[#666] font-mono flex items-center gap-2">
+                        <motion.div {...iconHoverProps}>
+                          <Calendar size={14} className="shrink-0 text-gray-400 dark:text-[#888]" />
+                        </motion.div>
+                        {formatDate(achievement.issuedDate)}
+                      </span>
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
+        </motion.div>
+      </AnimatePresence>
 
       {/* Detail Modal */}
       <Dialog

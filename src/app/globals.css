@@ -37,6 +37,7 @@
   /* Base styles - default dark mode (matches next-themes defaultTheme="dark") */
   html {
     background-color: #080808;
+    scrollbar-gutter: stable;
   }
 
   :is(html:not(.dark)) {
