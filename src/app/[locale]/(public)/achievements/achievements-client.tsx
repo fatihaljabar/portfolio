@@ -137,8 +137,8 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
           />
         </div>
 
-        <div className="flex gap-4">
-          <div className="relative group min-w-[160px]">
+        <div className="flex flex-col sm:flex-row gap-4">
+          <div className="relative group w-full sm:w-40">
             <select
               value={selectedType}
               onChange={(e) => setSelectedType(e.target.value as AchievementType | 'ALL')}
@@ -157,7 +157,7 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
               <ChevronDown className="text-gray-400 dark:text-[#666]" size={16} />
             </motion.div>
           </div>
-          <div className="relative group min-w-[160px]">
+          <div className="relative group w-full sm:w-40">
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
@@ -312,10 +312,10 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
         open={selectedAchievement !== null}
         onOpenChange={(open) => !open && setSelectedAchievement(null)}
       >
-        <DialogContent className="max-w-2xl p-0 gap-0 bg-white dark:bg-[#121212] border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden">
+        <DialogContent className="w-[calc(100%-2rem)] sm:w-full max-w-2xl max-h-[92dvh] flex flex-col p-0 gap-0 bg-white dark:bg-[#121212] border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden">
           {selectedAchievement && (
             <>
-              <div className="relative w-full aspect-[3/2] bg-gray-200 dark:bg-[#0a0a0a] overflow-hidden">
+              <div className="relative w-full aspect-[3/2] max-h-[45dvh] shrink-0 bg-gray-200 dark:bg-[#0a0a0a] overflow-hidden">
                 {slides.length > 0 ? (
                   <Image
                     key={slides[slideIndex]}
@@ -368,7 +368,7 @@ export function AchievementsClient({ initialAchievements, categories }: Achievem
                 )}
               </div>
 
-              <div className="p-6 sm:p-8">
+              <div className="p-6 sm:p-8 overflow-y-auto min-h-0 flex-1">
                 <DialogHeader className="text-left space-y-3">
                   {selectedAchievement.certificateNumber && (
                     <span className="text-[11px] text-blue-600 dark:text-accent-blue font-mono">

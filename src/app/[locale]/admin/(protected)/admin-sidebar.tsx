@@ -75,16 +75,15 @@ export function AdminSidebar({ unreadMessageCount }: { unreadMessageCount: numbe
               aria-label={
                 item.badgeCount > 0 ? `${item.label} (${item.badgeCount} unread)` : item.label
               }
-              className={`relative flex flex-1 flex-col items-center justify-center gap-1 h-14 text-[10px] font-medium transition-colors ${
+              className={`relative flex flex-1 items-center justify-center h-14 transition-colors ${
                 item.isActive ? 'text-gray-900 dark:text-white' : 'text-gray-400 dark:text-[#666]'
               }`}
             >
-              <Icon size={20} />
-              {item.label}
+              <Icon size={22} />
               {item.badgeCount > 0 && (
                 <Badge
                   variant="destructive"
-                  className="absolute top-1 right-1/2 translate-x-3 h-4 min-w-[16px] px-1 py-0 text-[9px] leading-none items-center justify-center"
+                  className="absolute top-2.5 right-1/2 translate-x-3 h-4 min-w-[16px] px-1 py-0 text-[9px] leading-none items-center justify-center"
                 >
                   {item.badgeCount}
                 </Badge>
