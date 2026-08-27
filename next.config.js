@@ -14,6 +14,11 @@ function getDeploymentId() {
 
 const nextConfig = {
   deploymentId: getDeploymentId(),
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '3mb',
+    },
+  },
   images: {
     remotePatterns: [
       {
@@ -23,6 +28,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'pcceukssvjwurbpgjtun.supabase.co',
+      },
+      {
+        protocol: 'https',
+        hostname: 'gennxwnbivmnbsxxnrvp.supabase.co',
       },
     ],
   },

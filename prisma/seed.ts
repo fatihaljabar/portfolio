@@ -1,5 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-import { AchievementType } from '@prisma/client';
+import { AchievementType, PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -18,9 +17,16 @@ async function main() {
     prisma.project.create({
       data: {
         slug: 's-ticket-booking',
-        title: 'S-Ticket Online Booking',
-        description: 'A comprehensive train ticket booking platform with real-time seat selection and payment integration.',
-        content: 'Full-stack train ticket booking system with seat selection, payment gateway integration, and real-time availability updates.',
+        titleEn: 'S-Ticket Online Booking',
+        titleId: 'S-Ticket Online Booking',
+        descriptionEn:
+          'A comprehensive train ticket booking platform with real-time seat selection and payment integration.',
+        descriptionId:
+          'A comprehensive train ticket booking platform with real-time seat selection and payment integration.',
+        contentEn:
+          'Full-stack train ticket booking system with seat selection, payment gateway integration, and real-time availability updates.',
+        contentId:
+          'Full-stack train ticket booking system with seat selection, payment gateway integration, and real-time availability updates.',
         imageUrl: null,
         isFeatured: true,
         githubUrl: 'https://github.com/fatihaljabar/s-ticket',
@@ -32,9 +38,16 @@ async function main() {
     prisma.project.create({
       data: {
         slug: 'portfolio-website',
-        title: 'Personal Portfolio',
-        description: 'Modern portfolio website with dark mode, i18n support, and smooth animations.',
-        content: 'Built with Next.js 16, TypeScript, and Tailwind CSS. Features internationalization, theme switching, and optimized performance.',
+        titleEn: 'Personal Portfolio',
+        titleId: 'Personal Portfolio',
+        descriptionEn:
+          'Modern portfolio website with dark mode, i18n support, and smooth animations.',
+        descriptionId:
+          'Modern portfolio website with dark mode, i18n support, and smooth animations.',
+        contentEn:
+          'Built with Next.js 16, TypeScript, and Tailwind CSS. Features internationalization, theme switching, and optimized performance.',
+        contentId:
+          'Built with Next.js 16, TypeScript, and Tailwind CSS. Features internationalization, theme switching, and optimized performance.',
         imageUrl: null,
         isFeatured: true,
         githubUrl: 'https://github.com/fatihaljabar/portfolio',
@@ -46,9 +59,14 @@ async function main() {
     prisma.project.create({
       data: {
         slug: 'ecommerce-dashboard',
-        title: 'E-Commerce Admin Dashboard',
-        description: 'Admin panel for managing products, orders, and analytics.',
-        content: 'React-based admin dashboard with data visualization, order management, and inventory tracking.',
+        titleEn: 'E-Commerce Admin Dashboard',
+        titleId: 'E-Commerce Admin Dashboard',
+        descriptionEn: 'Admin panel for managing products, orders, and analytics.',
+        descriptionId: 'Admin panel for managing products, orders, and analytics.',
+        contentEn:
+          'React-based admin dashboard with data visualization, order management, and inventory tracking.',
+        contentId:
+          'React-based admin dashboard with data visualization, order management, and inventory tracking.',
         imageUrl: null,
         isFeatured: false,
         githubUrl: 'https://github.com/fatihaljabar/ecommerce-admin',
@@ -60,9 +78,14 @@ async function main() {
     prisma.project.create({
       data: {
         slug: 'weather-app',
-        title: 'Weather Forecast App',
-        description: 'Real-time weather application with location-based forecasts.',
-        content: 'Weather app that uses OpenWeather API to provide current conditions and 7-day forecasts based on user location.',
+        titleEn: 'Weather Forecast App',
+        titleId: 'Weather Forecast App',
+        descriptionEn: 'Real-time weather application with location-based forecasts.',
+        descriptionId: 'Real-time weather application with location-based forecasts.',
+        contentEn:
+          'Weather app that uses OpenWeather API to provide current conditions and 7-day forecasts based on user location.',
+        contentId:
+          'Weather app that uses OpenWeather API to provide current conditions and 7-day forecasts based on user location.',
         imageUrl: null,
         isFeatured: false,
         githubUrl: 'https://github.com/fatihaljabar/weather-app',
@@ -74,9 +97,14 @@ async function main() {
     prisma.project.create({
       data: {
         slug: 'task-manager',
-        title: 'Task Management System',
-        description: 'Collaborative task management with real-time updates.',
-        content: 'Team task manager with drag-and-drop functionality, real-time updates, and team collaboration features.',
+        titleEn: 'Task Management System',
+        titleId: 'Task Management System',
+        descriptionEn: 'Collaborative task management with real-time updates.',
+        descriptionId: 'Collaborative task management with real-time updates.',
+        contentEn:
+          'Team task manager with drag-and-drop functionality, real-time updates, and team collaboration features.',
+        contentId:
+          'Team task manager with drag-and-drop functionality, real-time updates, and team collaboration features.',
         imageUrl: null,
         isFeatured: false,
         githubUrl: 'https://github.com/fatihaljabar/task-manager',
@@ -94,8 +122,10 @@ async function main() {
     prisma.achievement.create({
       data: {
         slug: 'best-capstone-project',
-        title: 'Best Capstone Project Award',
-        description: 'Awarded for developing the most innovative capstone project in the cohort.',
+        titleEn: 'Best Capstone Project Award',
+        titleId: 'Best Capstone Project Award',
+        descriptionEn: 'Awarded for developing the most innovative capstone project in the cohort.',
+        descriptionId: 'Awarded for developing the most innovative capstone project in the cohort.',
         issuer: 'Dicoding Academy',
         certificateNumber: 'DIC-2024-001',
         credentialUrl: 'https://www.dicoding.com/certificates',
@@ -108,8 +138,10 @@ async function main() {
     prisma.achievement.create({
       data: {
         slug: 'fullstack-dicoding',
-        title: 'Full-Stack Developer Expert',
-        description: 'Mastered both frontend and backend technologies with hands-on projects.',
+        titleEn: 'Full-Stack Developer Expert',
+        titleId: 'Full-Stack Developer Expert',
+        descriptionEn: 'Mastered both frontend and backend technologies with hands-on projects.',
+        descriptionId: 'Mastered both frontend and backend technologies with hands-on projects.',
         issuer: 'Dicoding Academy',
         certificateNumber: 'DIC-FS-2024-123',
         credentialUrl: 'https://www.dicoding.com/certificates',
@@ -122,8 +154,10 @@ async function main() {
     prisma.achievement.create({
       data: {
         slug: 'react-specialist',
-        title: 'React JS Specialist',
-        description: 'Deep understanding of React ecosystem and modern frontend development.',
+        titleEn: 'React JS Specialist',
+        titleId: 'React JS Specialist',
+        descriptionEn: 'Deep understanding of React ecosystem and modern frontend development.',
+        descriptionId: 'Deep understanding of React ecosystem and modern frontend development.',
         issuer: 'Dicoding Academy',
         certificateNumber: 'DIC-REACT-2024-456',
         credentialUrl: 'https://www.dicoding.com/certificates',
@@ -136,8 +170,10 @@ async function main() {
     prisma.achievement.create({
       data: {
         slug: 'typescript-master',
-        title: 'TypeScript Fundamentals',
-        description: 'Type-safe programming with TypeScript for scalable applications.',
+        titleEn: 'TypeScript Fundamentals',
+        titleId: 'TypeScript Fundamentals',
+        descriptionEn: 'Type-safe programming with TypeScript for scalable applications.',
+        descriptionId: 'Type-safe programming with TypeScript for scalable applications.',
         issuer: 'Dicoding Academy',
         certificateNumber: 'DIC-TS-2024-789',
         credentialUrl: 'https://www.dicoding.com/certificates',
@@ -150,8 +186,10 @@ async function main() {
     prisma.achievement.create({
       data: {
         slug: 'tailwind-css',
-        title: 'Tailwind CSS Styling',
-        description: 'Modern utility-first CSS framework for rapid UI development.',
+        titleEn: 'Tailwind CSS Styling',
+        titleId: 'Tailwind CSS Styling',
+        descriptionEn: 'Modern utility-first CSS framework for rapid UI development.',
+        descriptionId: 'Modern utility-first CSS framework for rapid UI development.',
         issuer: 'Dicoding Academy',
         certificateNumber: 'DIC-TW-2024-321',
         credentialUrl: 'https://www.dicoding.com/certificates',
@@ -164,8 +202,10 @@ async function main() {
     prisma.achievement.create({
       data: {
         slug: 'nodejs-backend',
-        title: 'Node.js Backend Development',
-        description: 'Building scalable server-side applications with Node.js and Express.',
+        titleEn: 'Node.js Backend Development',
+        titleId: 'Node.js Backend Development',
+        descriptionEn: 'Building scalable server-side applications with Node.js and Express.',
+        descriptionId: 'Building scalable server-side applications with Node.js and Express.',
         issuer: 'Dicoding Academy',
         certificateNumber: 'DIC-NODE-2024-654',
         credentialUrl: 'https://www.dicoding.com/certificates',
@@ -178,8 +218,10 @@ async function main() {
     prisma.achievement.create({
       data: {
         slug: 'sarjana-komputer',
-        title: 'Sarjana Komputer (S.Kom)',
-        description: 'Bachelor degree in Computer Science with GPA 3.8/4.0',
+        titleEn: 'Sarjana Komputer (S.Kom)',
+        titleId: 'Sarjana Komputer (S.Kom)',
+        descriptionEn: 'Bachelor degree in Computer Science with GPA 3.8/4.0',
+        descriptionId: 'Bachelor degree in Computer Science with GPA 3.8/4.0',
         issuer: 'Universitas Trunojoyo Madura',
         certificateNumber: 'SK-2023-987',
         credentialUrl: null,
@@ -192,8 +234,10 @@ async function main() {
     prisma.achievement.create({
       data: {
         slug: 'aws-cloud-practitioner',
-        title: 'AWS Cloud Practitioner',
-        description: 'Foundational understanding of AWS Cloud concepts and services.',
+        titleEn: 'AWS Cloud Practitioner',
+        titleId: 'AWS Cloud Practitioner',
+        descriptionEn: 'Foundational understanding of AWS Cloud concepts and services.',
+        descriptionId: 'Foundational understanding of AWS Cloud concepts and services.',
         issuer: 'Amazon Web Services',
         certificateNumber: 'AWS-CP-2024-111',
         credentialUrl: 'https://aws.amazon.com/certification',

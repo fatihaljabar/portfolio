@@ -9,68 +9,26 @@
   },
   "home": {
     "intro": "Perkenalan",
-    "greeting": "Hai, saya Fatih",
-    "based_in": "Bertempat di Sidoarjo, Indonesia 🇮🇩",
-    "description": "Seorang Software Engineer dan spesialis Front-End yang berdedikasi untuk membangun solusi digital yang berdampak. Saya mengkhususkan diri dalam mengembangkan platform web yang skalabel menggunakan teknologi modern, terutama {techStack}. Fokus saya adalah menciptakan arsitektur perangkat lunak yang terstruktur dengan baik, mudah dirawat, dan selaras dengan tujuan bisnis.",
-    "tech_stack_list": "React, Tailwind CSS, dan TypeScript",
-    "tagline": "Software Engineer & Spesialis Front-End"
+    "tagline": "Front-end & Fullstack Developer"
   },
   "about": {
     "title": "Tentang",
     "subtitle": "Perkenalan singkat tentang saya.",
-    "content": "Saya Fatih Al Jabar H.M., seorang Software Engineer berbasis di {location} yang berdedikasi untuk membangun solusi digital yang berdampak. Saya mengkhususkan diri dalam mengembangkan platform web dan aplikasi mobile menggunakan teknologi modern, termasuk Next.js, TypeScript, dan pengembangan Android native. Fokus utama saya adalah menciptakan arsitektur perangkat lunak yang tidak hanya berfungsi, tetapi juga terstruktur dengan baik, mudah dirawat, dan skalabel untuk memenuhi kebutuhan bisnis. Saya percaya bahwa kode berkualitas tinggi harus berjalan beriringan dengan efisiensi sistem dan kejelasan logis. Saya menggabungkan keahlian teknis dengan komunikasi proaktif, berpikir kritis, dan manajemen waktu yang efektif. Saya berkembang dalam lingkungan kolaboratif dan memanfaatkan keterampilan kepemimpinan untuk memastikan setiap proyek memberikan hasil optimal dan dampak nyata.",
-    "location": "Sidoarjo",
-    "best_regards": "Salam hangat,",
     "career": {
       "title": "Karir",
       "subtitle": "Perjalanan profesional saya.",
-      "position": "Front-End dan Back-End Developer Magang",
-      "company": "Dicoding Indonesia",
-      "duration": "Sep 2024 – Des 2024",
-      "length": "4 Bulan",
-      "employment_type": "Paruh waktu",
-      "location": "Remote",
       "show_details": "Lihat detail",
       "hide_details": "Sembunyikan detail",
-      "responsibilities": {
-        "title": "Tanggung Jawab",
-        "item_1": "Berkolaborasi dalam tim beranggotakan 4 orang untuk mengembangkan {project}, platform manajemen tiket konser berbasis web.",
-        "item_2": "Merancang dan mengimplementasikan antarmuka pengguna Front-End yang responsif menggunakan {tech1} dan {tech2}.",
-        "item_3": "Mengembangkan RESTful APIs dan mengelola logika sisi server menggunakan {tech}.",
-        "item_4": "Mengimplementasikan fitur seperti pencarian tiket, sistem pemesanan, autentikasi pengguna, dan manajemen data.",
-        "item_5": "Mengelola kontrol versi dan kolaborasi tim menggunakan Git dan GitHub."
-      },
-      "learned": {
-        "title": "Yang Saya Pelajari",
-        "item_1": "Menguasai fundamental web (HTML, CSS, JS) dan konsep lanjutan seperti Manipulasi DOM & Async JS.",
-        "item_2": "Mendapatkan pengalaman praktis dalam membangun RESTful APIs yang skalabel dan desain skema database.",
-        "item_3": "Meningkatkan soft skills: Manajemen Waktu, Komunikasi Efektif, dan Pola Pikir Pertumbuhan."
-      },
-      "impact": {
-        "title": "Dampak",
-        "item_1": "Menerima penghargaan {award} untuk S-TIX.",
-        "item_2": "Berhasil meluncurkan platform yang dapat diakses di {link}.",
-        "item_3": "Menerima umpan balik positif dari mentor mengenai desain UI/UX dan fungsionalitas."
-      }
+      "responsibilities_title": "Tanggung Jawab",
+      "learned_title": "Yang Saya Pelajari",
+      "impact_title": "Dampak"
     },
     "education": {
       "title": "Pendidikan",
       "subtitle": "Perjalanan pendidikan saya.",
-      "university": "Universitas 17 Agustus 1945 Surabaya",
-      "degree": "Sarjana Teknik • Teknik Informatika (S.Kom)",
-      "gpa": "IPK: 3.63/4.00",
-      "period": "2021 - 2026",
-      "location": "Surabaya, Indonesia 🇮🇩",
-      "thesis": {
-        "title": "Tugas Akhir",
-        "project_title": "Analisis Sentimen terhadap Ulasan Online untuk Kendaraan Listrik Menggunakan Deep Learning di Platform X",
-        "description": "Proyek tugas akhir saya: membandingkan empat arsitektur deep learning (CNN, LSTM, BiLSTM, dan hybrid CNN+BiLSTM dengan Attention) untuk mengklasifikasikan sentimen berbahasa Indonesia terhadap kendaraan listrik dari diskusi publik asli di Platform X (2023–2025). Pelabelan menggunakan ambang batas leksikon berbasis kuantil, bukan ambang tetap, dan model terbaik diimplementasikan sebagai demo web langsung.",
-        "result": "Model hybrid CNN+BiLSTM unggul di semua metrik, mencapai akurasi 75% dan macro F1-score 0.76, sementara LSTM satu arah gagal total dan kinerjanya tidak lebih baik dari tebakan acak.",
-        "show_details": "Tampilkan detail tugas akhir",
-        "hide_details": "Sembunyikan detail tugas akhir",
-        "read_more": "Baca dokumentasi lengkapnya",
-        "published_journal": "Dipublikasikan di jurnal JATI (Jurnal Mahasiswa Teknik Informatika), Vol. 10 No. 1 (2026)"
-      }
+      "thesis_show_details": "Tampilkan detail tugas akhir",
+      "thesis_hide_details": "Sembunyikan detail tugas akhir",
+      "thesis_read_more": "Baca dokumentasi lengkapnya"
     }
   },
   "achievements": {

@@ -6,12 +6,15 @@
  */
 
 import { headers } from 'next/headers';
+import { getVisitorId } from '@/lib/get-visitor-id';
 import { prisma } from '@/lib/prisma/client';
+import { isRateLimited } from '@/lib/rate-limit';
 
 export interface LoveResponse {
   success: boolean;
   isLoved: boolean;
   totalLoves?: number;
+  error?: string;
 }
 
 /**
@@ -19,8 +22,13 @@ export interface LoveResponse {
  */
 export async function toggleLove(): Promise<LoveResponse> {
   try {
+    const ipAddress = await getVisitorId();
+
+    if (isRateLimited(`love:${ipAddress}`, 10, 10_000)) {
+      return { success: false, isLoved: false, error: 'Too many requests. Please slow down.' };
+    }
+
     const headersList = await headers();
-    const ipAddress = headersList.get('x-forwarded-for') || headersList.get('x-real-ip') || 'unknown';
     const userAgent = headersList.get('user-agent') || null;
 
     // Check if user already loved
@@ -79,8 +87,7 @@ export async function toggleLove(): Promise<LoveResponse> {
  */
 export async function hasLoved(): Promise<boolean> {
   try {
-    const headersList = await headers();
-    const ipAddress = headersList.get('x-forwarded-for') || headersList.get('x-real-ip') || 'unknown';
+    const ipAddress = await getVisitorId();
 
     const love = await prisma.love.findUnique({
       where: { ipAddress },
