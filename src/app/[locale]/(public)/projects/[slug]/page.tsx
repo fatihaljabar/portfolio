@@ -98,8 +98,8 @@ export default async function ProjectDetailPage({
         <span className="text-gray-900 dark:text-white font-bold text-sm">{t('tech_stack')} :</span>
         {project.techStack?.map((tech) => (
           <Tooltip key={tech} label={tech}>
-            <div className="w-9 h-9 rounded-full bg-gray-100 dark:bg-[#1a1a1a] border border-gray-200 dark:border-white/5 flex items-center justify-center shrink-0">
-              <TechIconGlyph result={getTechIcon(tech)} name={tech} size={18} />
+            <div className="w-9 h-9 flex items-center justify-center shrink-0">
+              <TechIconGlyph result={getTechIcon(tech)} name={tech} size={22} />
             </div>
           </Tooltip>
         ))}
