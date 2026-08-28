@@ -10,9 +10,9 @@
 
 import { motion } from 'framer-motion';
 import { Github, Globe, Instagram, Linkedin, Mail, Share2, ShieldCheck, X } from 'lucide-react';
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { SiTiktok } from 'react-icons/si';
+import { ImageWithSkeleton } from '@/components/components/image-with-skeleton';
 import { LocaleToggle } from '@/components/components/locale-toggle';
 import { ModeToggle } from '@/components/components/theme-toggle';
 import { Tooltip } from '@/components/components/tooltip';
@@ -47,7 +47,7 @@ export function Sidebar({ photoUrl }: { photoUrl: string | null }) {
       <div className="flex lg:hidden items-center justify-between w-full">
         <div className="flex items-center gap-3 min-w-0">
           <div className="relative w-10 h-10 shrink-0 rounded-full overflow-hidden border-2 border-gray-200 dark:border-dark-border">
-            <Image
+            <ImageWithSkeleton
               src={profileSrc}
               alt="Profile"
               fill
@@ -100,7 +100,7 @@ export function Sidebar({ photoUrl }: { photoUrl: string | null }) {
         {/* Profile Image */}
         <div className="mb-6">
           <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-gray-200 dark:border-dark-border shadow-2xl">
-            <Image
+            <ImageWithSkeleton
               src={profileSrc}
               alt="Profile"
               fill

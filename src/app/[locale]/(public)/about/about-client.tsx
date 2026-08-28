@@ -16,11 +16,11 @@ import {
   List,
   MapPin,
 } from 'lucide-react';
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { ImageWithSkeleton } from '@/components/components/image-with-skeleton';
 import { Link } from '@/lib/i18n/navigation';
 
 export interface CareerView {
@@ -72,9 +72,15 @@ const proseClasses =
 
 function LogoBadge({ src, alt }: { src: string | null; alt: string }) {
   return (
-    <div className="w-14 h-14 min-w-[56px] rounded-xl bg-gray-200 dark:bg-[#1a1a1a] overflow-hidden flex items-center justify-center border border-gray-300 dark:border-white/10">
+    <div className="relative w-14 h-14 min-w-[56px] rounded-xl bg-gray-200 dark:bg-[#1a1a1a] overflow-hidden flex items-center justify-center border border-gray-300 dark:border-white/10">
       {src ? (
-        <Image src={src} alt={alt} width={56} height={56} className="w-full h-full object-cover" />
+        <ImageWithSkeleton
+          src={src}
+          alt={alt}
+          width={56}
+          height={56}
+          className="w-full h-full object-cover"
+        />
       ) : (
         <span className="text-gray-400 dark:text-[#666] text-lg font-bold">{alt.charAt(0)}</span>
       )}

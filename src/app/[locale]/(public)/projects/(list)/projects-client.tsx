@@ -7,8 +7,8 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUpRight, Folder } from 'lucide-react';
-import Image from 'next/image';
 import { useState } from 'react';
+import { ImageWithSkeleton } from '@/components/components/image-with-skeleton';
 import { ScrollableFilterBar } from '@/components/components/scrollable-filter-bar';
 import { ScrollableIconRow } from '@/components/components/scrollable-icon-row';
 import { TechIconGlyph } from '@/components/components/tech-icon-glyph';
@@ -132,7 +132,7 @@ export function ProjectsClient({ projects, translations: t, techIconMap }: Proje
 
                   <div className="relative w-full aspect-video bg-gray-200 dark:bg-[#0a0a0a] overflow-hidden">
                     {project.imageUrl ? (
-                      <Image
+                      <ImageWithSkeleton
                         src={project.imageUrl}
                         alt={project.title}
                         fill
