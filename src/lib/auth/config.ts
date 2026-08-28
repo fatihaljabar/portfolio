@@ -22,3 +22,9 @@ export const supabaseServiceRoleKey = requireEnv(
   'SUPABASE_SERVICE_ROLE_KEY',
   process.env.SUPABASE_SERVICE_ROLE_KEY,
 );
+export const adminEmails = new Set(
+  requireEnv('ADMIN_EMAILS', process.env.ADMIN_EMAILS)
+    .split(',')
+    .map((email) => email.trim().toLowerCase())
+    .filter(Boolean),
+);
