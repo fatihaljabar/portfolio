@@ -7,7 +7,10 @@ const siteUrl = (process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000').rep
 const staticPaths = ['', '/about', '/achievements', '/projects', '/contact'];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const projects = await prisma.project.findMany({ select: { slug: true, updatedAt: true } });
+  const projects = await prisma.project.findMany({
+    where: { isPublished: true },
+    select: { slug: true, updatedAt: true },
+  });
 
   const staticEntries: MetadataRoute.Sitemap = staticPaths.flatMap((path) =>
     locales.map((locale) => ({

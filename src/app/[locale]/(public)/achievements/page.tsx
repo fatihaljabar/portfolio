@@ -37,6 +37,7 @@ export default async function AchievementsPage({
   setRequestLocale(locale);
 
   const rawAchievements = await prisma.achievement.findMany({
+    where: { isPublished: true },
     orderBy: { issuedDate: 'desc' },
     select: {
       id: true,
