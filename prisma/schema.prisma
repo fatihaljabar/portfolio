@@ -57,6 +57,7 @@ model Project {
   @@index([slug])
   @@index([isFeatured])
   @@index([category])
+  @@index([isPublished])
 }
 
 // ========================================
@@ -86,6 +87,7 @@ model Achievement {
   @@index([slug])
   @@index([type])
   @@index([category])
+  @@index([isPublished])
 }
 
 enum AchievementType {

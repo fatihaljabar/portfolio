@@ -29,8 +29,8 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   setRequestLocale(locale);
 
-  const project = await prisma.project.findUnique({
-    where: { slug },
+  const project = await prisma.project.findFirst({
+    where: { slug, isPublished: true },
     select: { titleEn: true, titleId: true, descriptionEn: true, descriptionId: true },
   });
 
@@ -61,8 +61,8 @@ export default async function ProjectDetailPage({
 
   const t = await getTranslations('project_detail');
 
-  const project = await prisma.project.findUnique({
-    where: { slug },
+  const project = await prisma.project.findFirst({
+    where: { slug, isPublished: true },
   });
 
   if (!project) {

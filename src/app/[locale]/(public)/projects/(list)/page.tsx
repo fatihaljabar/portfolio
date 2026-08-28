@@ -37,6 +37,7 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
 
   // Fetch projects directly from Prisma
   const rawProjects = await prisma.project.findMany({
+    where: { isPublished: true },
     orderBy: [{ isFeatured: 'desc' }, { publishedAt: 'desc' }],
     select: {
       slug: true,
