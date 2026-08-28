@@ -7,7 +7,7 @@ import type { CookieOptions } from '@supabase/ssr';
 import { createServerClient } from '@supabase/ssr';
 import { createClient } from '@supabase/supabase-js';
 import { cookies } from 'next/headers';
-import { supabaseAnonKey, supabaseServiceRoleKey, supabaseUrl } from './config';
+import { adminEmails, supabaseAnonKey, supabaseServiceRoleKey, supabaseUrl } from './config';
 
 export async function createSupabaseServerClient() {
   const cookieStore = await cookies();
@@ -39,10 +39,18 @@ export function createSupabaseServiceClient() {
   return createClient(supabaseUrl, supabaseServiceRoleKey);
 }
 
+/**
+ * Returns the authenticated user only if their email is on the admin
+ * allowlist. A valid Supabase session alone is not authorization — this
+ * project has no role table, so any account that can sign in to the
+ * Supabase project would otherwise pass. Every admin Server Action and
+ * proxy.ts route through this.
+ */
 export async function getAdminUser() {
   const supabase = await createSupabaseServerClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  return user;
+  const email = user?.email?.toLowerCase();
+  return email && adminEmails.has(email) ? user : null;
 }
