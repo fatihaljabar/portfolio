@@ -8,7 +8,7 @@ import type { CookieOptions } from '@supabase/ssr';
 import { createServerClient } from '@supabase/ssr';
 import { type NextRequest, NextResponse } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
-import { supabaseAnonKey, supabaseUrl } from '@/lib/auth/config';
+import { adminEmails, supabaseAnonKey, supabaseUrl } from '@/lib/auth/config';
 import { locales } from '@/lib/i18n/config';
 import { routing } from '@/lib/i18n/navigation';
 
@@ -43,7 +43,8 @@ export default async function proxy(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) {
+  const email = user?.email?.toLowerCase();
+  if (!email || !adminEmails.has(email)) {
     const locale = pathname.split('/')[1];
     return NextResponse.redirect(new URL(`/${locale}/admin/login`, request.url));
   }
