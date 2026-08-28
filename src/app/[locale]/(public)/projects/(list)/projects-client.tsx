@@ -182,11 +182,11 @@ export function ProjectsClient({ projects, translations: t, techIconMap }: Proje
                       <ScrollableIconRow>
                         {project.techStack?.map((tech) => (
                           <Tooltip key={tech} label={tech} className="shrink-0">
-                            <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-[#1a1a1a] border border-gray-300 dark:border-white/5 flex items-center justify-center">
+                            <div className="w-8 h-8 flex items-center justify-center">
                               <TechIconGlyph
                                 result={techIconMap[tech] ?? null}
                                 name={tech}
-                                size={16}
+                                size={20}
                               />
                             </div>
                           </Tooltip>
