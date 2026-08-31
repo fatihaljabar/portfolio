@@ -6,10 +6,12 @@
 
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { JsonLd } from '@/components/components/json-ld';
 import { formatDateRange, formatDuration } from '@/lib/format-date-range';
 import type { Locale } from '@/lib/i18n/config';
 import { prisma } from '@/lib/prisma/client';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { buildProfilePageSchema } from '@/lib/seo/structured-data';
 import { getSiteProfile } from '@/lib/site-profile';
 import { AboutClient, type CareerView, type EducationView } from './about-client';
 
@@ -30,10 +32,11 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [careerEntries, educationEntries, profile] = await Promise.all([
+  const [careerEntries, educationEntries, profile, tHome] = await Promise.all([
     prisma.career.findMany({ where: { isPublished: true }, orderBy: { startDate: 'desc' } }),
     prisma.education.findMany({ where: { isPublished: true }, orderBy: { startDate: 'desc' } }),
     getSiteProfile(),
+    getTranslations('home'),
   ]);
   const aboutContent = (locale === 'id' ? profile?.aboutContentId : profile?.aboutContentEn) ?? '';
   const bestRegards = (locale === 'id' ? profile?.bestRegardsId : profile?.bestRegardsEn) ?? '';
@@ -79,12 +82,22 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
     };
   });
 
+  const profilePageSchema = buildProfilePageSchema({
+    locale,
+    jobTitle: tHome('tagline'),
+    photoUrl: profile?.photoUrl ?? null,
+    universities: educationEntries.map((entry) => entry.university),
+  });
+
   return (
-    <AboutClient
-      career={career}
-      education={education}
-      aboutContent={aboutContent}
-      bestRegards={bestRegards}
-    />
+    <>
+      <JsonLd data={profilePageSchema} />
+      <AboutClient
+        career={career}
+        education={education}
+        aboutContent={aboutContent}
+        bestRegards={bestRegards}
+      />
+    </>
   );
 }
