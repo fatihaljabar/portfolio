@@ -8,10 +8,12 @@ import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { JsonLd } from '@/components/components/json-ld';
 import { type SkillCategoryView, SkillsGrid } from '@/components/sections/skills-grid';
 import type { Locale } from '@/lib/i18n/config';
 import { prisma } from '@/lib/prisma/client';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { buildPersonSchema, buildWebSiteSchema } from '@/lib/seo/structured-data';
 import { getSiteProfile } from '@/lib/site-profile';
 import { getTechIcon } from '@/lib/tech-icon';
 
@@ -59,8 +61,18 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
     });
   }
 
+  const personSchema = buildPersonSchema({
+    locale,
+    jobTitle: t('tagline'),
+    description: intro.replace(/\*\*/g, ''),
+    photoUrl: profile?.photoUrl ?? null,
+  });
+
   return (
     <>
+      <JsonLd data={personSchema} />
+      <JsonLd data={buildWebSiteSchema(locale)} />
+
       {/* Intro Section */}
       <section className="mb-20">
         <div className="text-[11px] font-bold text-gray-500 dark:text-[#888] tracking-widest mb-6 uppercase">

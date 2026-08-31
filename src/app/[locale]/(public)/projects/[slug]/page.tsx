@@ -10,12 +10,14 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { ImageWithSkeleton } from '@/components/components/image-with-skeleton';
+import { JsonLd } from '@/components/components/json-ld';
 import { TechIconGlyph } from '@/components/components/tech-icon-glyph';
 import { Tooltip } from '@/components/components/tooltip';
 import type { Locale } from '@/lib/i18n/config';
 import { Link } from '@/lib/i18n/navigation';
 import { prisma } from '@/lib/prisma/client';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { buildBreadcrumbSchema, buildProjectSchema } from '@/lib/seo/structured-data';
 import { getTechIcon } from '@/lib/tech-icon';
 import { ScrollToTopButton } from './scroll-to-top-button';
 
@@ -60,6 +62,8 @@ export default async function ProjectDetailPage({
   setRequestLocale(locale);
 
   const t = await getTranslations('project_detail');
+  const tNav = await getTranslations('nav');
+  const tProjects = await getTranslations('projects');
 
   const project = await prisma.project.findFirst({
     where: { slug, isPublished: true },
@@ -73,8 +77,29 @@ export default async function ProjectDetailPage({
   const description = locale === 'id' ? project.descriptionId : project.descriptionEn;
   const content = locale === 'id' ? project.contentId : project.contentEn;
 
+  const projectSchema = buildProjectSchema({
+    locale,
+    slug,
+    name: title,
+    description,
+    imageUrl: project.imageUrl,
+    githubUrl: project.githubUrl,
+    demoUrl: project.demoUrl,
+    techStack: project.techStack,
+  });
+  const breadcrumbSchema = buildBreadcrumbSchema({
+    locale,
+    items: [
+      { name: tNav('home'), path: '' },
+      { name: tProjects('title'), path: '/projects' },
+      { name: title, path: `/projects/${slug}` },
+    ],
+  });
+
   return (
     <>
+      <JsonLd data={projectSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <Link
         href="/projects"
         className="inline-flex items-center gap-2 text-gray-500 dark:text-[#888] hover:text-gray-900 dark:hover:text-white transition-colors mb-8 group font-medium text-sm"
