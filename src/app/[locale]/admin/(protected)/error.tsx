@@ -1,7 +1,14 @@
 /**
  * Error Boundary — Admin
  * Catches rendering errors within the protected admin dashboard so one
- * broken page doesn't take down the sidebar/shell around it
+ * broken page doesn't take down the sidebar/shell around it.
+ *
+ * Uses `retry`, not `reset`: reset() only clears the client-side error
+ * state and re-renders without re-fetching, so if the original error was
+ * a failed database query (e.g. a Prisma call during a cold Hostinger
+ * process), clicking it hits the exact same stale failure again. retry()
+ * (stable since Next.js 16.3) actually re-fetches and re-renders the
+ * segment, which is what "Try again" should mean for a data error.
  */
 
 'use client';
@@ -12,10 +19,10 @@ import { useEffect } from 'react';
 
 export default function AdminErrorBoundary({
   error,
-  reset,
+  retry,
 }: {
   error: Error & { digest?: string };
-  reset: () => void;
+  retry: () => void;
 }) {
   const t = useTranslations('common');
 
@@ -32,7 +39,7 @@ export default function AdminErrorBoundary({
       </p>
       <button
         type="button"
-        onClick={reset}
+        onClick={retry}
         className="inline-flex items-center gap-2 bg-gray-900 dark:bg-white text-white dark:text-black font-bold text-sm px-6 py-3 rounded-xl hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
       >
         {t('retry')}
