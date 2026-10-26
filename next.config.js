@@ -31,6 +31,9 @@ const nextConfig = {
     ];
   },
   experimental: {
+    // Hostinger caps processes per account; the default (one worker per host CPU, 35 there)
+    // makes Prisma's Rust runtime fail with "can't spawn worker thread" during build.
+    cpus: 2,
     serverActions: {
       bodySizeLimit: '3mb',
     },
